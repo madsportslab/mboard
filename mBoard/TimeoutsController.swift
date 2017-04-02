@@ -33,10 +33,27 @@ class TimeoutsController: UIViewController {
         t5.setFAText(prefixText: "", icon: FAType.FACheck, postfixText: "\t",
                      size: 14, forState: .normal)
         
-        let dtimeouts = defaults.integer(forKey: "mboard.timeouts")
+        loadDefaultSettings()
+        
+    }
+    
+    override func didReceiveMemoryWarning() {
+        super.didReceiveMemoryWarning()
+        // Dispose of any resources that can be recreated.
+    }
+    
+    func loadDefaultSettings() {
+        
+        let dtimeouts = defaults.integer(forKey: Mboard.TIMEOUTS)
         
         if dtimeouts == 0 {
-            defaults.set(3, forKey: "mboard.timeouts")
+            
+            defaults.set(3, forKey: Mboard.TIMEOUTS)
+            
+            t3.setFATitleColor(color: UIColor.black)
+            t4.setFATitleColor(color: UIColor.clear)
+            t5.setFATitleColor(color: UIColor.clear)
+            
         } else {
             
             if dtimeouts == 4 {
@@ -44,7 +61,7 @@ class TimeoutsController: UIViewController {
                 t3.setFATitleColor(color: UIColor.clear)
                 t4.setFATitleColor(color: UIColor.black)
                 t5.setFATitleColor(color: UIColor.clear)
-            
+                
             } else if dtimeouts == 5 {
                 
                 t3.setFATitleColor(color: UIColor.clear)
@@ -56,19 +73,13 @@ class TimeoutsController: UIViewController {
                 t3.setFATitleColor(color: UIColor.black)
                 t4.setFATitleColor(color: UIColor.clear)
                 t5.setFATitleColor(color: UIColor.clear)
-                    
+                
             }
             
         }
-        
-        
-    }
-    
-    override func didReceiveMemoryWarning() {
-        super.didReceiveMemoryWarning()
-        // Dispose of any resources that can be recreated.
-    }
-    
+
+    } // loadDefaultSettings
+
     // MARK: Actions
     
     @IBAction func changeT3(_ sender: Any) {
@@ -77,7 +88,7 @@ class TimeoutsController: UIViewController {
         t4.setFATitleColor(color: UIColor.clear)
         t5.setFATitleColor(color: UIColor.clear)
         
-        defaults.set(3, forKey: "mboard.timeouts")
+        defaults.set(3, forKey: Mboard.TIMEOUTS)
         
     }
     
@@ -87,7 +98,7 @@ class TimeoutsController: UIViewController {
         t4.setFATitleColor(color: UIColor.black)
         t5.setFATitleColor(color: UIColor.clear)
         
-        defaults.set(4, forKey: "mboard.timeouts")
+        defaults.set(4, forKey: Mboard.TIMEOUTS)
         
     }
     
@@ -97,7 +108,7 @@ class TimeoutsController: UIViewController {
         t4.setFATitleColor(color: UIColor.clear)
         t5.setFATitleColor(color: UIColor.black)
         
-        defaults.set(5, forKey: "mboard.timeouts")
+        defaults.set(5, forKey: Mboard.TIMEOUTS)
         
     }
     

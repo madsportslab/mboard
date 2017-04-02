@@ -20,6 +20,7 @@
 		852E6B4C1E8FFF3D002888FB /* PeriodsController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 852E6B4B1E8FFF3D002888FB /* PeriodsController.swift */; };
 		852E6B4E1E8FFF8B002888FB /* FoulsController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 852E6B4D1E8FFF8B002888FB /* FoulsController.swift */; };
 		852E6B501E8FFFB4002888FB /* TimeoutsController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 852E6B4F1E8FFFB4002888FB /* TimeoutsController.swift */; };
+		852E6B521E9147D6002888FB /* mboard.swift in Sources */ = {isa = PBXBuildFile; fileRef = 852E6B511E9147D6002888FB /* mboard.swift */; };
 		8575F1161E8A4B2400EAC50D /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8575F1151E8A4B2400EAC50D /* AppDelegate.swift */; };
 		8575F1181E8A4B2400EAC50D /* FirstViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8575F1171E8A4B2400EAC50D /* FirstViewController.swift */; };
 		8575F11A1E8A4B2400EAC50D /* SecondViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8575F1191E8A4B2400EAC50D /* SecondViewController.swift */; };
@@ -64,6 +65,7 @@
 		852E6B4B1E8FFF3D002888FB /* PeriodsController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PeriodsController.swift; sourceTree = "<group>"; };
 		852E6B4D1E8FFF8B002888FB /* FoulsController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FoulsController.swift; sourceTree = "<group>"; };
 		852E6B4F1E8FFFB4002888FB /* TimeoutsController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TimeoutsController.swift; sourceTree = "<group>"; };
+		852E6B511E9147D6002888FB /* mboard.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = mboard.swift; sourceTree = "<group>"; };
 		8575F1121E8A4B2400EAC50D /* mBoard.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = mBoard.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		8575F1151E8A4B2400EAC50D /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		8575F1171E8A4B2400EAC50D /* FirstViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FirstViewController.swift; sourceTree = "<group>"; };
@@ -169,6 +171,7 @@
 				852E6B4B1E8FFF3D002888FB /* PeriodsController.swift */,
 				852E6B4D1E8FFF8B002888FB /* FoulsController.swift */,
 				852E6B4F1E8FFFB4002888FB /* TimeoutsController.swift */,
+				852E6B511E9147D6002888FB /* mboard.swift */,
 			);
 			path = mBoard;
 			sourceTree = "<group>";
@@ -489,6 +492,7 @@
 				852E6B501E8FFFB4002888FB /* TimeoutsController.swift in Sources */,
 				8575F11A1E8A4B2400EAC50D /* SecondViewController.swift in Sources */,
 				852E6B4A1E8FE7A1002888FB /* MinutesController.swift in Sources */,
+				852E6B521E9147D6002888FB /* mboard.swift in Sources */,
 				852E6B4E1E8FFF8B002888FB /* FoulsController.swift in Sources */,
 				852E6B441E8EA04A002888FB /* GameSettingController.swift in Sources */,
 				852E6B3C1E8D04A9002888FB /* AdViewController.swift in Sources */,

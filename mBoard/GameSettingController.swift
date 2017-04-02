@@ -40,17 +40,6 @@ class GameSettingController: UIViewController {
         cancelBtn.layer.borderWidth = 1
         cancelBtn.layer.cornerRadius = CGFloat(5)
         
-        /*periods.setFAText(prefixText: "4\t", icon: FAType.FAAngleRight,
-            postfixText: "\t", size: 14, forState: .normal, iconSize: 16)
-        minutes.setFAText(prefixText: "12\t", icon: FAType.FAAngleRight,
-                          postfixText: "\t", size: 14, forState: .normal, iconSize: 16)
-        fouls.setFAText(prefixText: "0\t", icon: FAType.FAAngleRight,
-                          postfixText: "\t", size: 14, forState: .normal, iconSize: 16)
-        timeouts.setFAText(prefixText: "3\t", icon: FAType.FAAngleRight,
-                          postfixText: "\t", size: 14, forState: .normal, iconSize: 16)
-        
- */
-        
         loadDefaultSettings()
         
         periods.setFATitleColor(color: UIColor.black)
@@ -67,42 +56,72 @@ class GameSettingController: UIViewController {
     
     func loadDefaultSettings() {
     
-        let dperiods     = defaults.integer(forKey: "mboard.periods")
-        let dminutes     = defaults.integer(forKey: "mboard.minutes")
-        let dfouls       = defaults.integer(forKey: "mboard.fouls")
-        let dtimeouts    = defaults.integer(forKey: "mboard.timeouts")
+        let dperiods     = defaults.integer(forKey: Mboard.PERIODS)
+        let dminutes     = defaults.integer(forKey: Mboard.MINUTES)
+        let dfouls       = defaults.integer(forKey: Mboard.FOULS)
+        let dtimeouts    = defaults.integer(forKey: Mboard.TIMEOUTS)
         
         if dperiods == 0 {
+            
+            defaults.set(4, forKey: Mboard.PERIODS)
+            
             periods.setFAText(prefixText: "4\t", icon: FAType.FAAngleRight,
                 postfixText: "\t", size: 14, forState: .normal, iconSize: 16)
+        
         } else {
-            periods.setFAText(prefixText: "2\t", icon: FAType.FAAngleRight,
+        
+            let str0 = String(dperiods) + "\t"
+            
+            periods.setFAText(prefixText: str0, icon: FAType.FAAngleRight,
                               postfixText: "\t", size: 14, forState: .normal,
                               iconSize: 16)
+            
         }
-        
-        let str1 = String(dminutes) + "\t"
         
         if dminutes == 0 {
-            minutes.setFAText(prefixText: "4\t", icon: FAType.FAAngleRight,
+            
+            defaults.set(12, forKey: Mboard.MINUTES)
+            
+            minutes.setFAText(prefixText: "12\t", icon: FAType.FAAngleRight,
                               postfixText: "\t", size: 14, forState: .normal, iconSize: 16)
+            
         } else {
+
+            let str1 = String(dminutes) + "\t"
+
             minutes.setFAText(prefixText: str1, icon: FAType.FAAngleRight,
                               postfixText: "\t", size: 14, forState: .normal, iconSize: 16)
+            
         }
         
-        let str2 = String(dfouls) + "\t"
         
-        fouls.setFAText(prefixText: str2, icon: FAType.FAAngleRight,
-                              postfixText: "\t", size: 14, forState: .normal, iconSize: 16)
-        
-        let str3 = String(dtimeouts) + "\t"
-        print(str3)
+        if dfouls == 0 {
+            
+            defaults.set(0, forKey: Mboard.FOULS)
+            
+            fouls.setFAText(prefixText: "0\t", icon: FAType.FAAngleRight,
+                            postfixText: "\t", size: 14, forState: .normal, iconSize: 16)
+            
+        } else {
+
+            let str2 = String(dfouls) + "\t"
+            
+            fouls.setFAText(prefixText: str2, icon: FAType.FAAngleRight,
+                            postfixText: "\t", size: 14, forState: .normal, iconSize: 16)
+
+        }
         
         if dtimeouts == 0 {
+            
+            defaults.set(3, forKey: Mboard.TIMEOUTS)
+            
             timeouts.setFAText(prefixText: "3\t", icon: FAType.FAAngleRight,
                                postfixText: "\t", size: 14, forState: .normal, iconSize: 16)
+        
         } else {
+        
+            let str3 = String(dtimeouts) + "\t"
+
             timeouts.setFAText(prefixText: str3, icon: FAType.FAAngleRight,
                                postfixText: "\t", size: 14, forState: .normal, iconSize: 16)
         }

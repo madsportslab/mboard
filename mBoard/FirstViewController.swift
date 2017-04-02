@@ -19,8 +19,9 @@ class FirstViewController: UIViewController {
         super.viewDidLoad()
         // Do any additional setup after loading the view, typically from a nib.
         
-        newGameBtn.setFAIcon(icon: FAType.FASoccerBallO, iconSize: 96,
-            forState: .normal)
+        newGameBtn.layer.borderWidth = 1
+        newGameBtn.layer.borderColor = Mboard.TealColor.cgColor
+        newGameBtn.layer.cornerRadius = 5
         
     }
 
@@ -33,8 +34,6 @@ class FirstViewController: UIViewController {
     // MARK: Actions
     
     @IBAction func newGame(_ sender: Any) {
-        
-        print("fuck yeah")
     }
     
 

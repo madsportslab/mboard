@@ -20,9 +20,10 @@ class GameTabBarController: UITabBarController {
         // Do any additional setup after loading the view, typically from a nib.
         
         tabs.items?[0].setFAIcon(icon: FAType.FASoccerBallO)
-        tabs.items?[1].setFAIcon(icon: FAType.FAList)
-        tabs.items?[2].setFAIcon(icon: FAType.FAVideoCamera)
-        tabs.items?[3].setFAIcon(icon: FAType.FAAdn)
+        tabs.items?[1].setFAIcon(icon: FAType.FAThList)
+        tabs.items?[2].setFAIcon(icon: FAType.FAList)
+        tabs.items?[3].setFAIcon(icon: FAType.FAVideoCamera)
+        tabs.items?[4].setFAIcon(icon: FAType.FAAdn)
         
     }
     

@@ -43,46 +43,64 @@ class GameController: UIViewController {
     @IBOutlet weak var rewBtn: UIButton!
     @IBOutlet weak var fwdBtn: UIButton!
     @IBOutlet weak var endBtn: UIButton!
+    @IBOutlet weak var overtimeBtn: UIButton!
+    @IBOutlet weak var backBtn: UIButton!
     
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view, typically from a nib.
         
+        overtimeBtn.layer.borderWidth = 1
+        overtimeBtn.layer.cornerRadius = 5
+        overtimeBtn.layer.borderColor = Mboard.TealColor.cgColor
+        
+        backBtn.layer.borderWidth = 1
+        backBtn.layer.cornerRadius = 5
+        backBtn.layer.borderColor = Mboard.TealColor.cgColor
+        
         startBtn.setFAIcon(icon: FAType.FAPlay, iconSize: 16, forState: .normal)
         stopBtn.setFAIcon(icon: FAType.FAPause, iconSize: 16, forState: .normal)
-        resetClockBtn.setFAIcon(icon: FAType.FARefresh, iconSize: 16, forState: .normal)
+        
+        //resetClockBtn.setFAText(prefixText: "", icon: FAType.FARefresh,
+            //                    postfixText: " Game", size: 16, forState: .normal)
+        
+        //resetShotClockBtn.setFAText(prefixText: "", icon: FAType.FARefresh,
+          //                      postfixText: " Shot", size: 16, forState: .normal)
+        
+        //resetClockBtn.setFATitleColor(color: Mboard.TealColor,
+           //                               forState: .normal)
+        
+        //resetShotClockBtn.setFATitleColor(color: Mboard.TealColor,
+         //                                 forState: .normal)
+        
+        resetClockBtn.setFAIcon(icon: FAType.FAStop, iconSize: 16, forState: .normal)
         resetShotClockBtn.setFAIcon(icon: FAType.FARefresh, iconSize: 16, forState: .normal)
+        
         rewBtn.setFAIcon(icon: FAType.FABackward, iconSize: 16, forState: .normal)
         fwdBtn.setFAIcon(icon: FAType.FAForward, iconSize: 16, forState: .normal)
         //endBtn.setFAIcon(icon: FAType.FAStop, iconSize: 16, forState: .normal)
         
+        
         startBtn.layer.borderWidth = 1
-        startBtn.layer.borderColor = UIColor(red: 1/255, green: 129/255,
-                                             blue: 186/255, alpha: 1).cgColor
+        startBtn.layer.borderColor = Mboard.TealColor.cgColor
         
         stopBtn.layer.borderWidth = 1
-        stopBtn.layer.borderColor = UIColor(red: 1/255, green: 129/255,
-                                             blue: 186/255, alpha: 1).cgColor
+        stopBtn.layer.borderColor = Mboard.TealColor.cgColor
         
         resetClockBtn.layer.borderWidth = 1
-        resetClockBtn.layer.borderColor = UIColor(red: 1/255, green: 129/255,
-                                             blue: 186/255, alpha: 1).cgColor
+        resetClockBtn.layer.borderColor = Mboard.TealColor.cgColor
         
         resetShotClockBtn.layer.borderWidth = 1
-        resetShotClockBtn.layer.borderColor = UIColor(red: 1/255, green: 129/255,
-                                             blue: 186/255, alpha: 1).cgColor
+        resetShotClockBtn.layer.borderColor = Mboard.TealColor.cgColor
         
         rewBtn.layer.borderWidth = 1
-        rewBtn.layer.borderColor = UIColor(red: 1/255, green: 129/255,
-                                             blue: 186/255, alpha: 1).cgColor
+        rewBtn.layer.borderColor = Mboard.TealColor.cgColor
         
         fwdBtn.layer.borderWidth = 1
-        fwdBtn.layer.borderColor = UIColor(red: 1/255, green: 129/255,
-                                             blue: 186/255, alpha: 1).cgColor
+        fwdBtn.layer.borderColor = Mboard.TealColor.cgColor
         
         endBtn.layer.borderWidth = 1
-        endBtn.layer.borderColor = UIColor(red: 255/255, green: 0/255,
-                                             blue: 0/255, alpha: 1).cgColor
+        endBtn.layer.borderColor = UIColor.red.cgColor
         
         m1AwayBtn.setFAIcon(icon: FAType.FAMinus, iconSize: 16, forState: .normal)
         p1AwayBtn.setFAIcon(icon: FAType.FAPlus, iconSize: 16, forState: .normal)
@@ -111,84 +129,64 @@ class GameController: UIViewController {
         
         
         m1AwayBtn.layer.borderWidth = 1
-        m1AwayBtn.layer.borderColor = UIColor(red: 1/255, green: 129/255,
-                                                      blue: 186/255, alpha: 1).cgColor
+        m1AwayBtn.layer.borderColor = Mboard.TealColor.cgColor
         
         m2AwayBtn.layer.borderWidth = 1
-        m2AwayBtn.layer.borderColor = UIColor(red: 1/255, green: 129/255,
-                                                      blue: 186/255, alpha: 1).cgColor
+        m2AwayBtn.layer.borderColor = Mboard.TealColor.cgColor
         
         m3AwayBtn.layer.borderWidth = 1
-        m3AwayBtn.layer.borderColor = UIColor(red: 1/255, green: 129/255,
-                                                      blue: 186/255, alpha: 1).cgColor
+        m3AwayBtn.layer.borderColor = Mboard.TealColor.cgColor
         
         p1AwayBtn.layer.borderWidth = 1
-        p1AwayBtn.layer.borderColor = UIColor(red: 1/255, green: 129/255,
-                                                      blue: 186/255, alpha: 1).cgColor
+        p1AwayBtn.layer.borderColor = Mboard.TealColor.cgColor
 
         p2AwayBtn.layer.borderWidth = 1
-        p2AwayBtn.layer.borderColor = UIColor(red: 1/255, green: 129/255,
-                                              blue: 186/255, alpha: 1).cgColor
+        p2AwayBtn.layer.borderColor = Mboard.TealColor.cgColor
         
         p3AwayBtn.layer.borderWidth = 1
-        p3AwayBtn.layer.borderColor = UIColor(red: 1/255, green: 129/255,
-                                              blue: 186/255, alpha: 1).cgColor
+        p3AwayBtn.layer.borderColor = Mboard.TealColor.cgColor
         
         mFAwayBtn.layer.borderWidth = 1
-        mFAwayBtn.layer.borderColor = UIColor(red: 1/255, green: 129/255,
-                                                      blue: 186/255, alpha: 1).cgColor
+        mFAwayBtn.layer.borderColor = Mboard.TealColor.cgColor
         
         pFAwayBtn.layer.borderWidth = 1
-        pFAwayBtn.layer.borderColor = UIColor(red: 1/255, green: 129/255,
-                                                      blue: 186/255, alpha: 1).cgColor
+        pFAwayBtn.layer.borderColor = Mboard.TealColor.cgColor
         
         mTAwayBtn.layer.borderWidth = 1
-        mTAwayBtn.layer.borderColor = UIColor(red: 1/255, green: 129/255,
-                                                      blue: 186/255, alpha: 1).cgColor
+        mTAwayBtn.layer.borderColor = Mboard.TealColor.cgColor
         
         pTAwayBtn.layer.borderWidth = 1
-        pTAwayBtn.layer.borderColor = UIColor(red: 1/255, green: 129/255,
-                                                      blue: 186/255, alpha: 1).cgColor
+        pTAwayBtn.layer.borderColor = Mboard.TealColor.cgColor
         
         m1HomeBtn.layer.borderWidth = 1
-        m1HomeBtn.layer.borderColor = UIColor(red: 1/255, green: 129/255,
-                                              blue: 186/255, alpha: 1).cgColor
+        m1HomeBtn.layer.borderColor = Mboard.TealColor.cgColor
         
         m2HomeBtn.layer.borderWidth = 1
-        m2HomeBtn.layer.borderColor = UIColor(red: 1/255, green: 129/255,
-                                              blue: 186/255, alpha: 1).cgColor
+        m2HomeBtn.layer.borderColor = Mboard.TealColor.cgColor
         
         m3HomeBtn.layer.borderWidth = 1
-        m3HomeBtn.layer.borderColor = UIColor(red: 1/255, green: 129/255,
-                                              blue: 186/255, alpha: 1).cgColor
+        m3HomeBtn.layer.borderColor = Mboard.TealColor.cgColor
         
         p1HomeBtn.layer.borderWidth = 1
-        p1HomeBtn.layer.borderColor = UIColor(red: 1/255, green: 129/255,
-                                              blue: 186/255, alpha: 1).cgColor
+        p1HomeBtn.layer.borderColor = Mboard.TealColor.cgColor
         
         p2HomeBtn.layer.borderWidth = 1
-        p2HomeBtn.layer.borderColor = UIColor(red: 1/255, green: 129/255,
-                                              blue: 186/255, alpha: 1).cgColor
+        p2HomeBtn.layer.borderColor = Mboard.TealColor.cgColor
         
         p3HomeBtn.layer.borderWidth = 1
-        p3HomeBtn.layer.borderColor = UIColor(red: 1/255, green: 129/255,
-                                              blue: 186/255, alpha: 1).cgColor
+        p3HomeBtn.layer.borderColor = Mboard.TealColor.cgColor
         
         mFHomeBtn.layer.borderWidth = 1
-        mFHomeBtn.layer.borderColor = UIColor(red: 1/255, green: 129/255,
-                                              blue: 186/255, alpha: 1).cgColor
+        mFHomeBtn.layer.borderColor = Mboard.TealColor.cgColor
         
         pFHomeBtn.layer.borderWidth = 1
-        pFHomeBtn.layer.borderColor = UIColor(red: 1/255, green: 129/255,
-                                              blue: 186/255, alpha: 1).cgColor
+        pFHomeBtn.layer.borderColor = Mboard.TealColor.cgColor
         
         mTHomeBtn.layer.borderWidth = 1
-        mTHomeBtn.layer.borderColor = UIColor(red: 1/255, green: 129/255,
-                                              blue: 186/255, alpha: 1).cgColor
+        mTHomeBtn.layer.borderColor = Mboard.TealColor.cgColor
         
         pTHomeBtn.layer.borderWidth = 1
-        pTHomeBtn.layer.borderColor = UIColor(red: 1/255, green: 129/255,
-                                              blue: 186/255, alpha: 1).cgColor
+        pTHomeBtn.layer.borderColor = Mboard.TealColor.cgColor
         
         
     }
