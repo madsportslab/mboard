@@ -19,5 +19,7 @@ class Mboard {
     static let TealColor     = UIColor(
         red: 1/255, green: 129/255, blue: 186/255, alpha: 1)
     
+    static let NeonGreenColor = UIColor(
+        red: 53/255, green: 255/255, blue: 48/255, alpha: 1)
     
 } // Mboard

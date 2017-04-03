@@ -43,20 +43,22 @@ class GameController: UIViewController {
     @IBOutlet weak var rewBtn: UIButton!
     @IBOutlet weak var fwdBtn: UIButton!
     @IBOutlet weak var endBtn: UIButton!
-    @IBOutlet weak var overtimeBtn: UIButton!
     @IBOutlet weak var backBtn: UIButton!
+    @IBOutlet weak var lastAction: UILabel!
     
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view, typically from a nib.
         
-        overtimeBtn.layer.borderWidth = 1
-        overtimeBtn.layer.cornerRadius = 5
-        overtimeBtn.layer.borderColor = Mboard.TealColor.cgColor
+        lastAction.layer.borderWidth = 1
+        lastAction.layer.cornerRadius = 5
+        lastAction.layer.borderColor = Mboard.NeonGreenColor.cgColor
         
         backBtn.layer.borderWidth = 1
         backBtn.layer.cornerRadius = 5
         backBtn.layer.borderColor = Mboard.TealColor.cgColor
+        
+        //backBtn.setFAIcon(icon: FAType.FAArrowLeft, forState: .normal)
         
         startBtn.setFAIcon(icon: FAType.FAPlay, iconSize: 16, forState: .normal)
         stopBtn.setFAIcon(icon: FAType.FAPause, iconSize: 16, forState: .normal)
@@ -101,6 +103,7 @@ class GameController: UIViewController {
         
         endBtn.layer.borderWidth = 1
         endBtn.layer.borderColor = UIColor.red.cgColor
+        endBtn.layer.cornerRadius = 5
         
         m1AwayBtn.setFAIcon(icon: FAType.FAMinus, iconSize: 16, forState: .normal)
         p1AwayBtn.setFAIcon(icon: FAType.FAPlus, iconSize: 16, forState: .normal)
