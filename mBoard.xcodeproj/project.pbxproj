@@ -20,7 +20,7 @@
 		852E6B4C1E8FFF3D002888FB /* PeriodsController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 852E6B4B1E8FFF3D002888FB /* PeriodsController.swift */; };
 		852E6B4E1E8FFF8B002888FB /* FoulsController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 852E6B4D1E8FFF8B002888FB /* FoulsController.swift */; };
 		852E6B501E8FFFB4002888FB /* TimeoutsController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 852E6B4F1E8FFFB4002888FB /* TimeoutsController.swift */; };
-		852E6B521E9147D6002888FB /* mboard.swift in Sources */ = {isa = PBXBuildFile; fileRef = 852E6B511E9147D6002888FB /* mboard.swift */; };
+		852E6B521E9147D6002888FB /* Mboard.swift in Sources */ = {isa = PBXBuildFile; fileRef = 852E6B511E9147D6002888FB /* Mboard.swift */; };
 		8575F1161E8A4B2400EAC50D /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8575F1151E8A4B2400EAC50D /* AppDelegate.swift */; };
 		8575F1181E8A4B2400EAC50D /* FirstViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8575F1171E8A4B2400EAC50D /* FirstViewController.swift */; };
 		8575F11A1E8A4B2400EAC50D /* SecondViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8575F1191E8A4B2400EAC50D /* SecondViewController.swift */; };
@@ -29,6 +29,8 @@
 		8575F1221E8A4B2400EAC50D /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 8575F1201E8A4B2400EAC50D /* LaunchScreen.storyboard */; };
 		8575F12D1E8A4B2400EAC50D /* mBoardTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8575F12C1E8A4B2400EAC50D /* mBoardTests.swift */; };
 		8575F1381E8A4B2400EAC50D /* mBoardUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8575F1371E8A4B2400EAC50D /* mBoardUITests.swift */; };
+		85828DF51E9E703F006A7C17 /* ClockController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 85828DF41E9E703F006A7C17 /* ClockController.swift */; };
+		85F1433C1E9BC62300088099 /* ShotClockController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 85F1433B1E9BC62300088099 /* ShotClockController.swift */; };
 		CD3CF2E6E5A7A23389C9B7DA /* Pods_mBoardTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 819D57E7DB14AA08605E1E44 /* Pods_mBoardTests.framework */; };
 /* End PBXBuildFile section */
 
@@ -65,7 +67,7 @@
 		852E6B4B1E8FFF3D002888FB /* PeriodsController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PeriodsController.swift; sourceTree = "<group>"; };
 		852E6B4D1E8FFF8B002888FB /* FoulsController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FoulsController.swift; sourceTree = "<group>"; };
 		852E6B4F1E8FFFB4002888FB /* TimeoutsController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TimeoutsController.swift; sourceTree = "<group>"; };
-		852E6B511E9147D6002888FB /* mboard.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = mboard.swift; sourceTree = "<group>"; };
+		852E6B511E9147D6002888FB /* Mboard.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Mboard.swift; sourceTree = "<group>"; };
 		8575F1121E8A4B2400EAC50D /* mBoard.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = mBoard.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		8575F1151E8A4B2400EAC50D /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		8575F1171E8A4B2400EAC50D /* FirstViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FirstViewController.swift; sourceTree = "<group>"; };
@@ -80,6 +82,8 @@
 		8575F1331E8A4B2400EAC50D /* mBoardUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = mBoardUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		8575F1371E8A4B2400EAC50D /* mBoardUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = mBoardUITests.swift; sourceTree = "<group>"; };
 		8575F1391E8A4B2400EAC50D /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		85828DF41E9E703F006A7C17 /* ClockController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ClockController.swift; sourceTree = "<group>"; };
+		85F1433B1E9BC62300088099 /* ShotClockController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ShotClockController.swift; sourceTree = "<group>"; };
 		A712E8CE2508699822681272 /* Pods-mBoard.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-mBoard.debug.xcconfig"; path = "Pods/Target Support Files/Pods-mBoard/Pods-mBoard.debug.xcconfig"; sourceTree = "<group>"; };
 		B1AD9ADD848A5FBFAD5CBC01 /* Pods_mBoard.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_mBoard.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		C6D3DF1103494569151167A8 /* Pods-mBoardUITests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-mBoardUITests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-mBoardUITests/Pods-mBoardUITests.debug.xcconfig"; sourceTree = "<group>"; };
@@ -171,7 +175,9 @@
 				852E6B4B1E8FFF3D002888FB /* PeriodsController.swift */,
 				852E6B4D1E8FFF8B002888FB /* FoulsController.swift */,
 				852E6B4F1E8FFFB4002888FB /* TimeoutsController.swift */,
-				852E6B511E9147D6002888FB /* mboard.swift */,
+				852E6B511E9147D6002888FB /* Mboard.swift */,
+				85F1433B1E9BC62300088099 /* ShotClockController.swift */,
+				85828DF41E9E703F006A7C17 /* ClockController.swift */,
 			);
 			path = mBoard;
 			sourceTree = "<group>";
@@ -490,14 +496,16 @@
 			files = (
 				852E6B421E8DFAD9002888FB /* MainViewController.swift in Sources */,
 				852E6B501E8FFFB4002888FB /* TimeoutsController.swift in Sources */,
+				85F1433C1E9BC62300088099 /* ShotClockController.swift in Sources */,
 				8575F11A1E8A4B2400EAC50D /* SecondViewController.swift in Sources */,
 				852E6B4A1E8FE7A1002888FB /* MinutesController.swift in Sources */,
-				852E6B521E9147D6002888FB /* mboard.swift in Sources */,
+				852E6B521E9147D6002888FB /* Mboard.swift in Sources */,
 				852E6B4E1E8FFF8B002888FB /* FoulsController.swift in Sources */,
 				852E6B441E8EA04A002888FB /* GameSettingController.swift in Sources */,
 				852E6B3C1E8D04A9002888FB /* AdViewController.swift in Sources */,
 				852E6B461E8EA5E0002888FB /* GameController.swift in Sources */,
 				852E6B481E8EBE28002888FB /* GameTabBarController.swift in Sources */,
+				85828DF51E9E703F006A7C17 /* ClockController.swift in Sources */,
 				852E6B401E8DF853002888FB /* MainTabBarController.swift in Sources */,
 				852E6B4C1E8FFF3D002888FB /* PeriodsController.swift in Sources */,
 				8575F1161E8A4B2400EAC50D /* AppDelegate.swift in Sources */,

@@ -8,18 +8,17 @@
 
 import UIKit
 
+import Alamofire
 import Font_Awesome_Swift
+import SwiftWebSocket
+import SwiftyJSON
+
 
 class GameController: UIViewController {
     
+    var ws = WebSocket()
+    
     // MARK: Properties
-    @IBOutlet weak var clock: UILabel!
-    @IBOutlet weak var period: UILabel!
-    @IBOutlet weak var shotClock: UILabel!
-    @IBOutlet weak var startBtn: UIButton!
-    @IBOutlet weak var stopBtn: UIButton!
-    @IBOutlet weak var resetClockBtn: UIButton!
-    @IBOutlet weak var resetShotClockBtn: UIButton!
     @IBOutlet weak var m1AwayBtn: UIButton!
     @IBOutlet weak var p1AwayBtn: UIButton!
     @IBOutlet weak var m1HomeBtn: UIButton!
@@ -40,66 +39,37 @@ class GameController: UIViewController {
     @IBOutlet weak var pTAwayBtn: UIButton!
     @IBOutlet weak var mTHomeBtn: UIButton!
     @IBOutlet weak var pTHomeBtn: UIButton!
-    @IBOutlet weak var rewBtn: UIButton!
-    @IBOutlet weak var fwdBtn: UIButton!
     @IBOutlet weak var endBtn: UIButton!
     @IBOutlet weak var backBtn: UIButton!
-    @IBOutlet weak var lastAction: UILabel!
+    @IBOutlet weak var lastPlay: UILabel!
+    @IBOutlet weak var period: UILabel!
+    @IBOutlet weak var homeScore: UILabel!
+    @IBOutlet weak var awayScore: UILabel!
+    @IBOutlet weak var awayTimeouts: UILabel!
+    @IBOutlet weak var homeTimeouts: UILabel!
+    @IBOutlet weak var awayFouls: UILabel!
+    @IBOutlet weak var homeFouls: UILabel!
+    
+    override func viewDidDisappear(_ animated: Bool) {
+        UIApplication.shared.isIdleTimerDisabled = false
+    }
     
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view, typically from a nib.
+    
+        UIApplication.shared.isIdleTimerDisabled = true
         
-        lastAction.layer.borderWidth = 1
-        lastAction.layer.cornerRadius = 5
-        lastAction.layer.borderColor = Mboard.NeonGreenColor.cgColor
+        awayTimeouts.setFAIcon(icon: FAType.FACircle, iconSize: 12)
+        lastPlay.layer.borderWidth = 1
+        //lastPlay.layer.cornerRadius = 5
+        lastPlay.layer.borderColor = Mboard.YellowColor.cgColor
         
         backBtn.layer.borderWidth = 1
         backBtn.layer.cornerRadius = 5
         backBtn.layer.borderColor = Mboard.TealColor.cgColor
         
         //backBtn.setFAIcon(icon: FAType.FAArrowLeft, forState: .normal)
-        
-        startBtn.setFAIcon(icon: FAType.FAPlay, iconSize: 16, forState: .normal)
-        stopBtn.setFAIcon(icon: FAType.FAPause, iconSize: 16, forState: .normal)
-        
-        //resetClockBtn.setFAText(prefixText: "", icon: FAType.FARefresh,
-            //                    postfixText: " Game", size: 16, forState: .normal)
-        
-        //resetShotClockBtn.setFAText(prefixText: "", icon: FAType.FARefresh,
-          //                      postfixText: " Shot", size: 16, forState: .normal)
-        
-        //resetClockBtn.setFATitleColor(color: Mboard.TealColor,
-           //                               forState: .normal)
-        
-        //resetShotClockBtn.setFATitleColor(color: Mboard.TealColor,
-         //                                 forState: .normal)
-        
-        resetClockBtn.setFAIcon(icon: FAType.FAStop, iconSize: 16, forState: .normal)
-        resetShotClockBtn.setFAIcon(icon: FAType.FARefresh, iconSize: 16, forState: .normal)
-        
-        rewBtn.setFAIcon(icon: FAType.FABackward, iconSize: 16, forState: .normal)
-        fwdBtn.setFAIcon(icon: FAType.FAForward, iconSize: 16, forState: .normal)
-        //endBtn.setFAIcon(icon: FAType.FAStop, iconSize: 16, forState: .normal)
-        
-        
-        startBtn.layer.borderWidth = 1
-        startBtn.layer.borderColor = Mboard.TealColor.cgColor
-        
-        stopBtn.layer.borderWidth = 1
-        stopBtn.layer.borderColor = Mboard.TealColor.cgColor
-        
-        resetClockBtn.layer.borderWidth = 1
-        resetClockBtn.layer.borderColor = Mboard.TealColor.cgColor
-        
-        resetShotClockBtn.layer.borderWidth = 1
-        resetShotClockBtn.layer.borderColor = Mboard.TealColor.cgColor
-        
-        rewBtn.layer.borderWidth = 1
-        rewBtn.layer.borderColor = Mboard.TealColor.cgColor
-        
-        fwdBtn.layer.borderWidth = 1
-        fwdBtn.layer.borderColor = Mboard.TealColor.cgColor
         
         endBtn.layer.borderWidth = 1
         endBtn.layer.borderColor = UIColor.red.cgColor
@@ -191,6 +161,13 @@ class GameController: UIViewController {
         pTHomeBtn.layer.borderWidth = 1
         pTHomeBtn.layer.borderColor = Mboard.TealColor.cgColor
         
+        createGame()
+
+        loadGame()
+        
+        initWS()
+        
+
         
     }
     
@@ -199,6 +176,291 @@ class GameController: UIViewController {
         // Dispose of any resources that can be recreated.
     }
     
+    func changePoints(points: Int) {
+        
+        ws.send(JSON([
+            "cmd": Mboard.WS_SCORE_HOME,
+            "step": points
+            
+        ]));
+        
+    } // changePoints
+    
+    
+    func initWS() {
+    
+        ws = WebSocket(Mboard.GAMESOCKET)
+        
+        ws.event.close = { code, reason, clean in
+          print("close")
+        }
+        
+        ws.event.open = {
+            print("socket connected")
+        }
+        
+        ws.event.error = { error in
+            print(error)
+        }
+        
+        ws.event.message = { message in
+            print(message)
+            
+            if let txt = message as? String {
+                
+                var obj = JSON.parse(txt)
+            
+                switch obj["key"] {
+                case "HOME_SCORE":
+                    self.homeScore.text = obj["val"].string!
+                case "AWAY_SCORE":
+                    self.awayScore.text = obj["val"].string!
+                default:
+                    print("no")
+                }
+                
+            }
+        }
+        
+    } // initWS
+    
+    
+    func loadGame() {
+        
+        Alamofire.request(Mboard.GAMES)
+            .responseJSON{ response in
+        
+            switch response.result {
+            case .failure(let error):
+                
+                let ac = UIAlertController(title: "Connection error",
+                                           message: error.localizedDescription,
+                                           preferredStyle: UIAlertControllerStyle.alert)
+                
+                let OK = UIAlertAction(title: "OK",
+                                       style: UIAlertActionStyle.default,
+                                       handler: nil)
+                
+                ac.addAction(OK)
+                
+                self.present(ac, animated: true, completion: nil)
+                
+            case .success:
+                
+                if let raw = response.result.value {
+                
+                    let j = JSON(raw)
+                    
+                    print(j)
+                    
+                }
+                
+            }
+                
+        }
+        
+    } // loadGame
+    
+    
+    func createGame() {
+        
+        Alamofire.request(Mboard.GAMES, method: .post)
+            .response{ response in
+            
+                if response.error != nil {
+                    
+                    let ac = UIAlertController(title: "Connection error",
+                                               message: response.error?.localizedDescription,
+                                               preferredStyle: UIAlertControllerStyle.alert)
+                    
+                    let OK = UIAlertAction(title: "OK",
+                                           style: UIAlertActionStyle.default,
+                                           handler: nil)
+                    
+                    ac.addAction(OK)
+                    
+                    self.present(ac, animated: true, completion: nil)
+                    
+                }
+                
+        }
+        
+    } // createGame
+    
+    
     // MARK: Actions
+    
+    @IBAction func pt1MadeAway(_ sender: Any) {
+        
+        ws.send(JSON([
+            "cmd": Mboard.WS_SCORE_AWAY,
+            "step": 1
+            ]));
+        
+    }
+    
+    @IBAction func pt1MissAway(_ sender: Any) {
+        
+        ws.send(JSON([
+            "cmd": Mboard.WS_SCORE_AWAY,
+            "step": -1
+            ]));
+        
+    }
+    
+    @IBAction func pt2MadeAway(_ sender: Any) {
+        
+        ws.send(JSON([
+            "cmd": Mboard.WS_SCORE_AWAY,
+            "step": 2
+            ]));
+        
+    }
+    
+    @IBAction func pt2MissAway(_ sender: Any) {
+    
+        ws.send(JSON([
+            "cmd": Mboard.WS_SCORE_AWAY,
+            "step": -2
+            ]));
+        
+    }
+    
+    @IBAction func pt3MadeAway(_ sender: Any) {
+    
+        ws.send(JSON([
+            "cmd": Mboard.WS_SCORE_AWAY,
+            "step": 3
+            ]));
+        
+    }
+    
+    @IBAction func pt3MissAway(_ sender: Any) {
+    
+        ws.send(JSON([
+            "cmd": Mboard.WS_SCORE_AWAY,
+            "step": -3
+            ]));
+        
+    }
+    
+    @IBAction func pt1MadeHome(_ sender: Any) {
+        
+        ws.send(JSON([
+            "cmd": Mboard.WS_SCORE_HOME,
+            "step": 1
+            ]));
+        
+    }
+    
+    @IBAction func pt1MissHome(_ sender: Any) {
+        
+        ws.send(JSON([
+            "cmd": Mboard.WS_SCORE_HOME,
+            "step": -1
+            ]));
+        
+    }
+    
+    @IBAction func pt2MadeHome(_ sender: Any) {
+        
+        ws.send(JSON([
+            "cmd": Mboard.WS_SCORE_HOME,
+            "step": 2
+            ]));
+        
+    }
+    
+    @IBAction func pt2MissHome(_ sender: Any) {
+        
+        ws.send(JSON([
+            "cmd": Mboard.WS_SCORE_HOME,
+            "step": -2
+            ]));
+        
+    }
+    
+    @IBAction func pt3MadeHome(_ sender: Any) {
+        
+        ws.send(JSON([
+            "cmd": Mboard.WS_SCORE_HOME,
+            "step": 3
+            ]));
+        
+    }
+    
+    @IBAction func pt3MissHome(_ sender: Any) {
+    
+        ws.send(JSON([
+            "cmd": Mboard.WS_SCORE_HOME,
+            "step": -3
+            ]));
+        
+    }
+    
+    @IBAction func foulRmAway(_ sender: Any) {
+        
+        ws.send(JSON([
+            "cmd": Mboard.WS_FOUL_AWAY_DOWN
+            ]));
+        
+    }
+    
+    @IBAction func foulAddAway(_ sender: Any) {
+        
+        ws.send(JSON([
+            "cmd": Mboard.WS_FOUL_AWAY_UP
+            ]));
+        
+    }
+    
+    @IBAction func foulRmHome(_ sender: Any) {
+        
+        ws.send(JSON([
+            "cmd": Mboard.WS_FOUL_HOME_DOWN
+            ]));
+        
+    }
+    
+    @IBAction func foulAddHome(_ sender: Any) {
+        
+        ws.send(JSON([
+            "cmd": Mboard.WS_FOUL_HOME_UP
+            ]));
+        
+    }
+    
+    @IBAction func timeRmAway(_ sender: Any) {
+        
+        ws.send(JSON([
+            "cmd": Mboard.WS_TIMEOUT_AWAY_DOWN
+            ]));
+        
+    }
+    
+    @IBAction func timeAddAway(_ sender: Any) {
+        
+        ws.send(JSON([
+            "cmd": Mboard.WS_TIMEOUT_AWAY_UP
+            ]));
+        
+    }
+    
+    @IBAction func timeRmHome(_ sender: Any) {
+        
+        ws.send(JSON([
+            "cmd": Mboard.WS_TIMEOUT_HOME_DOWN
+            ]));
+        
+    }
+    
+    @IBAction func timeAddHome(_ sender: Any) {
+        
+        ws.send(JSON([
+            "cmd": Mboard.WS_TIMEOUT_HOME_UP
+            ]));
+        
+    }
+    
     
 } // GameController

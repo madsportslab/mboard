@@ -19,6 +19,7 @@ class GameSettingController: UIViewController {
     @IBOutlet weak var awayName: UITextField!
     @IBOutlet weak var periods: UIButton!
     @IBOutlet weak var minutes: UIButton!
+    @IBOutlet weak var shotclock: UIButton!
     @IBOutlet weak var fouls: UIButton!
     @IBOutlet weak var timeouts: UIButton!
     @IBOutlet weak var startGameBtn: UIButton!
@@ -46,6 +47,7 @@ class GameSettingController: UIViewController {
         minutes.setFATitleColor(color: UIColor.black)
         fouls.setFATitleColor(color: UIColor.black)
         timeouts.setFATitleColor(color: UIColor.black)
+        shotclock.setFATitleColor(color: UIColor.black)
         
     }
     
@@ -58,6 +60,7 @@ class GameSettingController: UIViewController {
     
         let dperiods     = defaults.integer(forKey: Mboard.PERIODS)
         let dminutes     = defaults.integer(forKey: Mboard.MINUTES)
+        let dshotclock   = defaults.integer(forKey: Mboard.SHOTCLOCK)
         let dfouls       = defaults.integer(forKey: Mboard.FOULS)
         let dtimeouts    = defaults.integer(forKey: Mboard.TIMEOUTS)
         
@@ -94,6 +97,22 @@ class GameSettingController: UIViewController {
             
         }
         
+        
+        if dshotclock == 0 {
+            
+            defaults.set(30, forKey: Mboard.SHOTCLOCK)
+            
+            shotclock.setFAText(prefixText: "30\t", icon: FAType.FAAngleRight,
+                              postfixText: "\t", size: 14, forState: .normal, iconSize: 16)
+            
+        } else {
+            
+            let str1 = String(dshotclock) + "\t"
+            
+            shotclock.setFAText(prefixText: str1, icon: FAType.FAAngleRight,
+                              postfixText: "\t", size: 14, forState: .normal, iconSize: 16)
+            
+        }
         
         if dfouls == 0 {
             
@@ -133,6 +152,8 @@ class GameSettingController: UIViewController {
     
     // MARK: Actions
     @IBAction func startGame(_ sender: Any) {
+        
+        
     } // startGame
     
     @IBAction func changePeriods(_ sender: Any) {
@@ -141,6 +162,10 @@ class GameSettingController: UIViewController {
     
     @IBAction func changeMinutes(_ sender: Any) {
         self.performSegue(withIdentifier: "minutesSegue", sender: self)
+    }
+    
+    @IBAction func changeShotclock(_ sender: Any) {
+        self.performSegue(withIdentifier: "shotclockSegue", sender: self)
     }
     
     @IBAction func changeFouls(_ sender: Any) {
