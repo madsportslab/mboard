@@ -1357,6 +1357,9 @@
                                                                 <state key="normal" title="Button">
                                                                     <color key="titleColor" red="0.0039215686269999999" green="0.50588235290000005" blue="0.72941176470000002" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                                                                 </state>
+                                                                <connections>
+                                                                    <action selector="gcMinusTick:" destination="osI-Rm-tle" eventType="touchUpInside" id="fDf-0z-oyq"/>
+                                                                </connections>
                                                             </button>
                                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="6WZ-BJ-IQo">
                                                                 <rect key="frame" x="59.5" y="0.0" width="58" height="32"/>
@@ -1364,6 +1367,9 @@
                                                                 <state key="normal" title="Button">
                                                                     <color key="titleColor" red="0.0039215686269999999" green="0.50588235290000005" blue="0.72941176470000002" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                                                                 </state>
+                                                                <connections>
+                                                                    <action selector="gcAddTick:" destination="osI-Rm-tle" eventType="touchUpInside" id="BOm-C6-8gi"/>
+                                                                </connections>
                                                             </button>
                                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="characterWrap" translatesAutoresizingMaskIntoConstraints="NO" id="0cB-Pc-XFX">
                                                                 <rect key="frame" x="118.5" y="0.0" width="58.5" height="32"/>
@@ -1371,6 +1377,9 @@
                                                                 <state key="normal" title="Button">
                                                                     <color key="titleColor" red="1" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                                                                 </state>
+                                                                <connections>
+                                                                    <action selector="gcReset:" destination="osI-Rm-tle" eventType="touchUpInside" id="hBj-ks-1Q3"/>
+                                                                </connections>
                                                             </button>
                                                         </subviews>
                                                     </stackView>
@@ -1394,6 +1403,9 @@
                                                                 <state key="normal" title="Button">
                                                                     <color key="titleColor" red="0.0039215686269999999" green="0.50588235290000005" blue="0.72941176470000002" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                                                                 </state>
+                                                                <connections>
+                                                                    <action selector="scMinusTick:" destination="osI-Rm-tle" eventType="touchUpInside" id="ziF-bs-7We"/>
+                                                                </connections>
                                                             </button>
                                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="xxZ-Mc-Mwb">
                                                                 <rect key="frame" x="59.5" y="0.0" width="58" height="32"/>
@@ -1401,6 +1413,9 @@
                                                                 <state key="normal" title="Button">
                                                                     <color key="titleColor" red="0.0039215686269999999" green="0.50588235290000005" blue="0.72941176470000002" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                                                                 </state>
+                                                                <connections>
+                                                                    <action selector="scAddTick:" destination="osI-Rm-tle" eventType="touchUpInside" id="afd-5Q-3SM"/>
+                                                                </connections>
                                                             </button>
                                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="characterWrap" translatesAutoresizingMaskIntoConstraints="NO" id="Z7k-CL-1AG">
                                                                 <rect key="frame" x="118.5" y="0.0" width="58.5" height="32"/>
@@ -1408,6 +1423,9 @@
                                                                 <state key="normal" title="Button">
                                                                     <color key="titleColor" red="1" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                                                                 </state>
+                                                                <connections>
+                                                                    <action selector="scReset:" destination="osI-Rm-tle" eventType="touchUpInside" id="smu-eP-gC9"/>
+                                                                </connections>
                                                             </button>
                                                         </subviews>
                                                     </stackView>
@@ -1419,8 +1437,11 @@
                                         <rect key="frame" x="0.0" y="170.5" width="355" height="32"/>
                                         <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="17"/>
                                         <state key="normal" title="Button">
-                                            <color key="titleColor" red="0.0039215686269999999" green="0.50588235290000005" blue="0.72941176470000002" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+                                            <color key="titleColor" red="0.2087466935" green="1" blue="0.18823374779999999" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                                         </state>
+                                        <connections>
+                                            <action selector="toggleClock:" destination="osI-Rm-tle" eventType="touchUpInside" id="lbc-cg-mav"/>
+                                        </connections>
                                     </button>
                                 </subviews>
                             </stackView>

@@ -17,6 +17,9 @@ class ClockController: UIViewController {
 
     var ws = WebSocket()
     
+    var running = false
+    
+    
     // MARK: Properties
     @IBOutlet weak var gameClock: UILabel!
     @IBOutlet weak var period: UILabel!
@@ -55,9 +58,9 @@ class ClockController: UIViewController {
         resetSCBtn.setFAIcon(icon: FAType.FARefresh, iconSize: 24, forState: .normal)
         
         
-        startBtn.setFATitleColor(color: Mboard.TealColor)
+        startBtn.setFATitleColor(color: Mboard.NeonGreenColor)
         
-        startBtn.layer.borderColor = Mboard.TealColor.cgColor
+        startBtn.layer.borderColor = Mboard.NeonGreenColor.cgColor
         startBtn.layer.borderWidth = 1
         startBtn.layer.cornerRadius = 5
         
@@ -85,9 +88,7 @@ class ClockController: UIViewController {
         resetSCBtn.layer.borderWidth = 1
         resetSCBtn.layer.cornerRadius = 5
         
-        loadClock()
-        
-        initWS()
+        loadGame()
         
     }
     
@@ -96,18 +97,283 @@ class ClockController: UIViewController {
         // Dispose of any resources that can be recreated.
     }
 
-    func loadClock() {
+    func setGameClock(_ j: JSON) {
         
-    } // loadClock
+        var mins = 0
+        
+        if j["settings"].exists() {
+            mins = j["settings"]["minutes"].int!
+        } else {
+            mins = j["minutes"].int!
+        }
+        
+        let delta = mins * 60 - j["game"]["seconds"].int!
+        let ndelta = delta - 1
+        let seconds = delta % 60
+        let minutes = Int(floor(Double(delta)/60.0))
+        let tenths = 10 - j["game"]["tenths"].int!
+        
+        
+        if delta == 60 {
+            
+            if minutes == 1 {
+                
+                if tenths == 10 {
+                    gameClock.text = "\(minutes):00"
+                } else {
+                    gameClock.text = "\(ndelta).\(tenths)"
+                }
+                
+            } else {
+                gameClock.text = "\(minutes):59.\(tenths)"
+            }
+            
+        } else if minutes == 0 {
+            
+            if ndelta == -1 {
+                gameClock.text = "0.0"
+            } else if tenths == 10 {
+                gameClock.text = "\(ndelta).0"
+            } else {
+                gameClock.text = "\(ndelta).\(tenths)"
+            }
+            
+        } else if seconds < 10 {
+            gameClock.text = "\(minutes):0\(ndelta)"
+        } else {
+            gameClock.text = "\(minutes):\(ndelta)"
+        }
+        
+    } // setGameClock
+    
+    func setShotClock(_ j: JSON) {
+        
+        var vio = 0
+        
+        if j["settings"].exists() {
+            vio = j["settings"]["shot"].int!
+        } else {
+            vio = j["shotclock"].int!
+        }
+        
+        let sc = vio - j["shot"]["seconds"].int!
+        
+        self.shotClock.text = "\(sc)"
+        
+    } // setShotClock
+    
+    
+    func loadGame() {
+        
+        
+        Alamofire.request(Mboard.GAMES, method: .get)
+            .responseJSON{ response in
+                
+                switch response.result {
+                case .failure(let error):
+                    
+                    if let status = response.response?.statusCode {
+                        
+                        if status == 404 {
+                            
+                            let ac = UIAlertController(title: "Connection error",
+                                                       message: "No game initialized",
+                                                       preferredStyle: UIAlertControllerStyle.alert)
+                            
+                            let OK = UIAlertAction(title: "OK",
+                                                   style: UIAlertActionStyle.default,
+                                                   handler: nil)
+                            
+                            ac.addAction(OK)
+                            
+                            self.present(ac, animated: true, completion: nil)
+                            
+                        } else {
+                            
+                            let ac = UIAlertController(title: "Connection error",
+                                                       message: error.localizedDescription,
+                                                       preferredStyle: UIAlertControllerStyle.alert)
+                            
+                            let OK = UIAlertAction(title: "OK",
+                                                   style: UIAlertActionStyle.default,
+                                                   handler: nil)
+                            
+                            ac.addAction(OK)
+                            
+                            self.present(ac, animated: true, completion: nil)
+                            
+                        }
+                    }
+                    
+                case .success:
+                    
+                    print(response.result)
+                    
+                    if let raw = response.result.value {
+                        
+                        let j = JSON(raw)
+                        
+                        self.setGameClock(j)
+                        self.setShotClock(j)
+                        
+                        self.initWS()
+                        
+                    }
+                    
+                }
+                
+        }
+        
+    } // loadGame
     
     
     func initWS() {
         
+        ws = WebSocket(Mboard.GAMESOCKET)
+        
+        ws.event.close = { code, reason, clean in
+            print("close")
+        }
+        
+        ws.event.open = {
+            print("socket connected")
+        }
+        
+        ws.event.error = { error in
+            print(error)
+        }
+        
+        ws.event.message = { message in
+            
+            if let txt = message as? String {
+                
+                var obj = JSON.parse(txt)
+                
+                print(obj)
+                
+                switch obj["key"] {
+                case "CLOCK":
+                    
+                    var v = JSON.parse(obj["val"].string!)
+                    
+                    self.setGameClock(v)
+                    self.setShotClock(v)
+                    
+                    
+                case "PERIOD":
+                    print("TODO")
+                default:
+                    print("Unknown message from websocket.")
+                }
+                
+            }
+        }
         
     } // initWS
     
     
     // MARK: Actions
+    @IBAction func gcMinusTick(_ sender: Any) {
+        
+        ws.send(JSON([
+            "cmd": Mboard.WS_CLOCK_STEP,
+            "step": -1
+            ]));
+        
+        running = false
+        
+        startBtn.setFAIcon(icon: FAType.FAPlay, iconSize: 96, forState: .normal)
+        
+    }
+    
+    @IBAction func gcAddTick(_ sender: Any) {
+    
+        ws.send(JSON([
+            "cmd": Mboard.WS_CLOCK_STEP,
+            "step": 1
+            ]));
+
+        running = false
+        
+        startBtn.setFAIcon(icon: FAType.FAPlay, iconSize: 96, forState: .normal)
+        
+    }
+    
+    @IBAction func gcReset(_ sender: Any) {
+    
+        ws.send(JSON([
+            "cmd": Mboard.WS_CLOCK_RESET
+            ]));
+        
+        running = false
+        
+        startBtn.setFAIcon(icon: FAType.FAPlay, iconSize: 96, forState: .normal)
+        
+    }
+    
+    @IBAction func scMinusTick(_ sender: Any) {
+    
+        ws.send(JSON([
+            "cmd": Mboard.WS_SHOT_STEP,
+            "step": -1
+            ]));
+        
+        running = false
+        
+        startBtn.setFAIcon(icon: FAType.FAPlay, iconSize: 96, forState: .normal)
+        
+    }
+    
+    @IBAction func scAddTick(_ sender: Any) {
+    
+        ws.send(JSON([
+            "cmd": Mboard.WS_SHOT_STEP,
+            "step": 1
+            ]));
+        
+        running = false
+        
+        startBtn.setFAIcon(icon: FAType.FAPlay, iconSize: 96, forState: .normal)
+        
+    }
+    
+    @IBAction func scReset(_ sender: Any) {
+    
+        ws.send(JSON([
+            "cmd": Mboard.WS_SHOT_RESET
+            ]));
+        
+        running = false
+        
+        startBtn.setFAIcon(icon: FAType.FAPlay, iconSize: 96, forState: .normal)
+        
+    }
+    
+    @IBAction func toggleClock(_ sender: Any) {
+        
+        if running {
+            
+            ws.send(JSON([
+                "cmd": Mboard.WS_CLOCK_STOP
+                ]));
+            
+            running = false
+            
+            startBtn.setFAIcon(icon: FAType.FAPlay, iconSize: 96, forState: .normal)
+            
+        } else {
+            
+            ws.send(JSON([
+                "cmd": Mboard.WS_CLOCK_START
+                ]));
+            
+            running = true
+            
+            startBtn.setFAIcon(icon: FAType.FAPause, iconSize: 96, forState: .normal)
+            
+        }
+        
+    }
     
     
 } // ClockController

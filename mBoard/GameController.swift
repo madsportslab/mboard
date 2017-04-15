@@ -239,8 +239,12 @@ class GameController: UIViewController {
                     self.setTimeouts(true, data: Int(obj["val"].string!)!)
                 case "AWAY_TIMEOUT":
                     self.setTimeouts(false, data: Int(obj["val"].string!)!)
+                case "POSSESSION_HOME":
+                    print("TODO")
+                case "POSSESSION_AWAY":
+                    print("TODO")
                 default:
-                    print("no")
+                    print("Unknown message from websocket.")
                 }
                 
             }
