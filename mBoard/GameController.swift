@@ -40,13 +40,16 @@ class GameController: UIViewController {
     @IBOutlet weak var mTHomeBtn: UIButton!
     @IBOutlet weak var pTHomeBtn: UIButton!
     @IBOutlet weak var endBtn: UIButton!
-    @IBOutlet weak var backBtn: UIButton!
-    @IBOutlet weak var lastPlay: UILabel!
-    @IBOutlet weak var period: UILabel!
     @IBOutlet weak var homeScore: UILabel!
     @IBOutlet weak var awayScore: UILabel!
-    @IBOutlet weak var awayTimeouts: UILabel!
-    @IBOutlet weak var homeTimeouts: UILabel!
+    @IBOutlet weak var awayT1: UILabel!
+    @IBOutlet weak var awayT2: UILabel!
+    @IBOutlet weak var awayT3: UILabel!
+    @IBOutlet weak var awayT4: UILabel!
+    @IBOutlet weak var homeT1: UILabel!
+    @IBOutlet weak var homeT2: UILabel!
+    @IBOutlet weak var homeT3: UILabel!
+    @IBOutlet weak var homeT4: UILabel!
     @IBOutlet weak var awayFouls: UILabel!
     @IBOutlet weak var homeFouls: UILabel!
     
@@ -60,16 +63,15 @@ class GameController: UIViewController {
     
         UIApplication.shared.isIdleTimerDisabled = true
         
-        awayTimeouts.setFAIcon(icon: FAType.FACircle, iconSize: 12)
-        lastPlay.layer.borderWidth = 1
-        //lastPlay.layer.cornerRadius = 5
-        lastPlay.layer.borderColor = Mboard.YellowColor.cgColor
+        awayT1.setFAIcon(icon: FAType.FACircle, iconSize: 24)
+        awayT2.setFAIcon(icon: FAType.FACircle, iconSize: 24)
+        awayT3.setFAIcon(icon: FAType.FACircle, iconSize: 24)
+        awayT4.setFAIcon(icon: FAType.FACircle, iconSize: 24)
         
-        backBtn.layer.borderWidth = 1
-        backBtn.layer.cornerRadius = 5
-        backBtn.layer.borderColor = Mboard.TealColor.cgColor
-        
-        //backBtn.setFAIcon(icon: FAType.FAArrowLeft, forState: .normal)
+        homeT1.setFAIcon(icon: FAType.FACircle, iconSize: 24)
+        homeT2.setFAIcon(icon: FAType.FACircle, iconSize: 24)
+        homeT3.setFAIcon(icon: FAType.FACircle, iconSize: 24)
+        homeT4.setFAIcon(icon: FAType.FACircle, iconSize: 24)
         
         endBtn.layer.borderWidth = 1
         endBtn.layer.borderColor = UIColor.red.cgColor
@@ -103,71 +105,85 @@ class GameController: UIViewController {
         
         m1AwayBtn.layer.borderWidth = 1
         m1AwayBtn.layer.borderColor = Mboard.TealColor.cgColor
+        m1AwayBtn.layer.cornerRadius = 5
         
         m2AwayBtn.layer.borderWidth = 1
         m2AwayBtn.layer.borderColor = Mboard.TealColor.cgColor
+        m2AwayBtn.layer.cornerRadius = 5
         
         m3AwayBtn.layer.borderWidth = 1
         m3AwayBtn.layer.borderColor = Mboard.TealColor.cgColor
+        m3AwayBtn.layer.cornerRadius = 5
         
         p1AwayBtn.layer.borderWidth = 1
         p1AwayBtn.layer.borderColor = Mboard.TealColor.cgColor
-
+        p1AwayBtn.layer.cornerRadius = 5
+        
         p2AwayBtn.layer.borderWidth = 1
         p2AwayBtn.layer.borderColor = Mboard.TealColor.cgColor
+        p2AwayBtn.layer.cornerRadius = 5
         
         p3AwayBtn.layer.borderWidth = 1
         p3AwayBtn.layer.borderColor = Mboard.TealColor.cgColor
+        p3AwayBtn.layer.cornerRadius = 5
         
         mFAwayBtn.layer.borderWidth = 1
         mFAwayBtn.layer.borderColor = Mboard.TealColor.cgColor
+        mFAwayBtn.layer.cornerRadius = 5
         
         pFAwayBtn.layer.borderWidth = 1
         pFAwayBtn.layer.borderColor = Mboard.TealColor.cgColor
+        pFAwayBtn.layer.cornerRadius = 5
         
         mTAwayBtn.layer.borderWidth = 1
         mTAwayBtn.layer.borderColor = Mboard.TealColor.cgColor
+        mTAwayBtn.layer.cornerRadius = 5
         
         pTAwayBtn.layer.borderWidth = 1
         pTAwayBtn.layer.borderColor = Mboard.TealColor.cgColor
+        pTAwayBtn.layer.cornerRadius = 5
         
         m1HomeBtn.layer.borderWidth = 1
         m1HomeBtn.layer.borderColor = Mboard.TealColor.cgColor
+        m1HomeBtn.layer.cornerRadius = 5
         
         m2HomeBtn.layer.borderWidth = 1
         m2HomeBtn.layer.borderColor = Mboard.TealColor.cgColor
+        m2HomeBtn.layer.cornerRadius = 5
         
         m3HomeBtn.layer.borderWidth = 1
         m3HomeBtn.layer.borderColor = Mboard.TealColor.cgColor
+        m3HomeBtn.layer.cornerRadius = 5
         
         p1HomeBtn.layer.borderWidth = 1
         p1HomeBtn.layer.borderColor = Mboard.TealColor.cgColor
+        p1HomeBtn.layer.cornerRadius = 5
         
         p2HomeBtn.layer.borderWidth = 1
         p2HomeBtn.layer.borderColor = Mboard.TealColor.cgColor
+        p2HomeBtn.layer.cornerRadius = 5
         
         p3HomeBtn.layer.borderWidth = 1
         p3HomeBtn.layer.borderColor = Mboard.TealColor.cgColor
+        p3HomeBtn.layer.cornerRadius = 5
         
         mFHomeBtn.layer.borderWidth = 1
         mFHomeBtn.layer.borderColor = Mboard.TealColor.cgColor
+        mFHomeBtn.layer.cornerRadius = 5
         
         pFHomeBtn.layer.borderWidth = 1
         pFHomeBtn.layer.borderColor = Mboard.TealColor.cgColor
+        pFHomeBtn.layer.cornerRadius = 5
         
         mTHomeBtn.layer.borderWidth = 1
         mTHomeBtn.layer.borderColor = Mboard.TealColor.cgColor
+        mTHomeBtn.layer.cornerRadius = 5
         
         pTHomeBtn.layer.borderWidth = 1
         pTHomeBtn.layer.borderColor = Mboard.TealColor.cgColor
+        pTHomeBtn.layer.cornerRadius = 5
         
         createGame()
-
-        loadGame()
-        
-        initWS()
-        
-
         
     }
     
@@ -215,6 +231,14 @@ class GameController: UIViewController {
                     self.homeScore.text = obj["val"].string!
                 case "AWAY_SCORE":
                     self.awayScore.text = obj["val"].string!
+                case "HOME_FOUL":
+                    self.homeFouls.text = "Fouls: \(obj["val"].string!)"
+                case "AWAY_FOUL":
+                    self.awayFouls.text = "Fouls: \(obj["val"].string!)"
+                case "HOME_TIMEOUT":
+                    self.setTimeouts(true, data: Int(obj["val"].string!)!)
+                case "AWAY_TIMEOUT":
+                    self.setTimeouts(false, data: Int(obj["val"].string!)!)
                 default:
                     print("no")
                 }
@@ -225,33 +249,182 @@ class GameController: UIViewController {
     } // initWS
     
     
+    func setTimeouts(_ home: Bool, data j: Int) {
+    
+        if home {
+        
+            if j == 4 {
+                
+                homeT1.isHidden = false
+                homeT2.isHidden = false
+                homeT3.isHidden = false
+                homeT4.isHidden = false
+                
+            } else if j == 3 {
+                
+                homeT1.isHidden = true
+                homeT2.isHidden = false
+                homeT3.isHidden = false
+                homeT4.isHidden = false
+                
+            } else if j == 2 {
+                
+                homeT1.isHidden = true
+                homeT2.isHidden = true
+                homeT3.isHidden = false
+                homeT4.isHidden = false
+                
+            } else if j == 1 {
+                
+                homeT1.isHidden = true
+                homeT2.isHidden = true
+                homeT3.isHidden = true
+                homeT4.isHidden = false
+                
+            } else if j == 0 {
+                
+                homeT1.isHidden = true
+                homeT2.isHidden = true
+                homeT3.isHidden = true
+                homeT4.isHidden = true
+                
+            }
+            
+        } else {
+            
+            if j == 4 {
+                
+                awayT1.isHidden = false
+                awayT2.isHidden = false
+                awayT3.isHidden = false
+                awayT4.isHidden = false
+                
+            } else if j == 3 {
+                
+                awayT1.isHidden = true
+                awayT2.isHidden = false
+                awayT3.isHidden = false
+                awayT4.isHidden = false
+                
+            } else if j == 2 {
+                
+                awayT1.isHidden = true
+                awayT2.isHidden = true
+                awayT3.isHidden = false
+                awayT4.isHidden = false
+                
+            } else if j == 1 {
+                
+                awayT1.isHidden = true
+                awayT2.isHidden = true
+                awayT3.isHidden = true
+                awayT4.isHidden = false
+                
+            } else if j == 0 {
+                
+                awayT1.isHidden = true
+                awayT2.isHidden = true
+                awayT3.isHidden = true
+                awayT4.isHidden = true
+                
+            }
+            
+        }
+        
+    } // setTimeouts
+    
+    
+    func setFouls(_ home: Bool, data j: Int) {
+        
+        if home {
+            self.homeFouls.text = "Fouls: \(j)"
+        } else {
+            self.awayFouls.text = "Fouls: \(j)"
+        }
+        
+    } // setFouls
+    
+    
+    func setTotalPoints(_ home: Bool, data j: JSON) {
+    
+        var total = 0
+        
+        for (_,v) in j {
+            
+            print(v)
+            
+            total = total + v.int!
+            
+        }
+    
+        if home {
+            self.homeScore.text = "\(total)"
+        } else {
+            self.awayScore.text = "\(total)"
+        }
+        
+    } // totalPoints
+    
     func loadGame() {
         
-        Alamofire.request(Mboard.GAMES)
+        Alamofire.request(Mboard.GAMES, method: .get)
             .responseJSON{ response in
         
             switch response.result {
             case .failure(let error):
                 
-                let ac = UIAlertController(title: "Connection error",
-                                           message: error.localizedDescription,
-                                           preferredStyle: UIAlertControllerStyle.alert)
-                
-                let OK = UIAlertAction(title: "OK",
-                                       style: UIAlertActionStyle.default,
-                                       handler: nil)
-                
-                ac.addAction(OK)
-                
-                self.present(ac, animated: true, completion: nil)
+                if let status = response.response?.statusCode {
+                    
+                    if status == 404 {
+                        
+                        let ac = UIAlertController(title: "Connection error",
+                                                   message: "No game initialized",
+                                                   preferredStyle: UIAlertControllerStyle.alert)
+                        
+                        let OK = UIAlertAction(title: "OK",
+                                               style: UIAlertActionStyle.default,
+                                               handler: nil)
+                        
+                        ac.addAction(OK)
+                        
+                        self.present(ac, animated: true, completion: nil)
+                        
+                    } else {
+                        
+                        let ac = UIAlertController(title: "Connection error",
+                                                   message: error.localizedDescription,
+                                                   preferredStyle: UIAlertControllerStyle.alert)
+                        
+                        let OK = UIAlertAction(title: "OK",
+                                               style: UIAlertActionStyle.default,
+                                               handler: nil)
+                        
+                        ac.addAction(OK)
+                        
+                        self.present(ac, animated: true, completion: nil)
+                        
+                    }
+                }
                 
             case .success:
+                
+                print(response.result)
                 
                 if let raw = response.result.value {
                 
                     let j = JSON(raw)
                     
                     print(j)
+                    
+                    self.setTotalPoints(false, data: j["away"]["points"])
+                    self.setFouls(false, data: j["away"]["fouls"].int!)
+                    self.setTimeouts(false, data: j["away"]["timeouts"].int!)
+                    
+                    self.setTotalPoints(true, data: j["home"]["points"])
+                    self.setFouls(true, data: j["home"]["fouls"].int!)
+                    self.setTimeouts(true, data: j["home"]["timeouts"].int!)
+                    
+                    self.initWS()
                     
                 }
                 
@@ -264,7 +437,7 @@ class GameController: UIViewController {
     
     func createGame() {
         
-        Alamofire.request(Mboard.GAMES, method: .post)
+        Alamofire.request(Mboard.GAMES, method: .post, parameters: ["test": "true"])
             .response{ response in
             
                 if response.error != nil {
@@ -281,6 +454,8 @@ class GameController: UIViewController {
                     
                     self.present(ac, animated: true, completion: nil)
                     
+                } else {
+                    self.loadGame()
                 }
                 
         }
