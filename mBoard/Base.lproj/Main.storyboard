@@ -1310,8 +1310,8 @@
                                 </attributedString>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="10" translatesAutoresizingMaskIntoConstraints="NO" id="O8v-vR-3ZZ">
-                                <rect key="frame" x="10" y="10" width="355" height="202.5"/>
+                            <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="5" translatesAutoresizingMaskIntoConstraints="NO" id="O8v-vR-3ZZ">
+                                <rect key="frame" x="10" y="10" width="355" height="229.5"/>
                                 <subviews>
                                     <stackView opaque="NO" contentMode="scaleToFill" distribution="fillProportionally" spacing="5" translatesAutoresizingMaskIntoConstraints="NO" id="03K-uT-8au">
                                         <rect key="frame" x="0.0" y="0.0" width="355" height="97"/>
@@ -1337,7 +1337,7 @@
                                         </subviews>
                                     </stackView>
                                     <stackView opaque="NO" contentMode="scaleToFill" distribution="fillEqually" spacing="1" translatesAutoresizingMaskIntoConstraints="NO" id="DU3-QS-060">
-                                        <rect key="frame" x="0.0" y="107" width="355" height="53.5"/>
+                                        <rect key="frame" x="0.0" y="102" width="355" height="53.5"/>
                                         <subviews>
                                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="5" translatesAutoresizingMaskIntoConstraints="NO" id="PQp-qf-fN1">
                                                 <rect key="frame" x="0.0" y="0.0" width="177" height="53.5"/>
@@ -1433,14 +1433,30 @@
                                             </stackView>
                                         </subviews>
                                     </stackView>
-                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="dPT-FK-8cJ">
-                                        <rect key="frame" x="0.0" y="170.5" width="355" height="32"/>
+                                    <stackView opaque="NO" contentMode="scaleToFill" alignment="center" translatesAutoresizingMaskIntoConstraints="NO" id="bfR-aV-tF6">
+                                        <rect key="frame" x="0.0" y="160.5" width="355" height="32"/>
+                                        <subviews>
+                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="dPT-FK-8cJ">
+                                                <rect key="frame" x="0.0" y="0.0" width="355" height="32"/>
+                                                <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="17"/>
+                                                <state key="normal" title="Button">
+                                                    <color key="titleColor" red="0.2087466935" green="1" blue="0.18823374779999999" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+                                                </state>
+                                                <connections>
+                                                    <action selector="toggleClock:" destination="osI-Rm-tle" eventType="touchUpInside" id="lbc-cg-mav"/>
+                                                </connections>
+                                            </button>
+                                        </subviews>
+                                    </stackView>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="tqV-nD-lZd">
+                                        <rect key="frame" x="0.0" y="197.5" width="355" height="32"/>
+                                        <color key="backgroundColor" red="1" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                                         <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="17"/>
-                                        <state key="normal" title="Button">
-                                            <color key="titleColor" red="0.2087466935" green="1" blue="0.18823374779999999" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+                                        <state key="normal" title="Start next period">
+                                            <color key="titleColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                         </state>
                                         <connections>
-                                            <action selector="toggleClock:" destination="osI-Rm-tle" eventType="touchUpInside" id="lbc-cg-mav"/>
+                                            <action selector="changePeriod:" destination="osI-Rm-tle" eventType="touchUpInside" id="49M-7I-8aK"/>
                                         </connections>
                                     </button>
                                 </subviews>
@@ -1464,6 +1480,7 @@
                         <outlet property="fwdSCBtn" destination="xxZ-Mc-Mwb" id="f6j-ie-gdC"/>
                         <outlet property="gameClock" destination="IsS-ja-0dQ" id="uib-4f-cKU"/>
                         <outlet property="gameLabel" destination="gvA-6K-trH" id="l5h-HP-37h"/>
+                        <outlet property="nextPeriodBtn" destination="tqV-nD-lZd" id="SxT-19-zqE"/>
                         <outlet property="period" destination="wBi-0P-qK1" id="MPU-87-KCA"/>
                         <outlet property="resetGCBtn" destination="0cB-Pc-XFX" id="M3L-fs-Qs6"/>
                         <outlet property="resetSCBtn" destination="Z7k-CL-1AG" id="HHr-lA-tHL"/>

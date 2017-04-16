@@ -19,8 +19,8 @@ class ClockController: UIViewController {
     
     var running = false
     
-    
     // MARK: Properties
+    @IBOutlet weak var nextPeriodBtn: UIButton!
     @IBOutlet weak var gameClock: UILabel!
     @IBOutlet weak var period: UILabel!
     @IBOutlet weak var shotClock: UILabel!
@@ -44,8 +44,11 @@ class ClockController: UIViewController {
         
         UIApplication.shared.isIdleTimerDisabled = true
         
+        clockPause()
         
-        startBtn.setFAIcon(icon: FAType.FAPlay, iconSize: 96, forState: .normal)
+        nextPeriodBtn.layer.cornerRadius = 5
+        
+        //startBtn.setFAIcon(icon: FAType.FAPlay, iconSize: 96, forState: .normal)
         
         resetGCBtn.setFAIcon(icon: FAType.FARefresh, iconSize: 24, forState: .normal)
         
@@ -56,7 +59,6 @@ class ClockController: UIViewController {
         fwdSCBtn.setFAIcon(icon: FAType.FAForward, iconSize: 24, forState: .normal)
         
         resetSCBtn.setFAIcon(icon: FAType.FARefresh, iconSize: 24, forState: .normal)
-        
         
         startBtn.setFATitleColor(color: Mboard.NeonGreenColor)
         
@@ -87,6 +89,8 @@ class ClockController: UIViewController {
         resetSCBtn.layer.borderColor = UIColor.red.cgColor
         resetSCBtn.layer.borderWidth = 1
         resetSCBtn.layer.cornerRadius = 5
+        
+        nextPeriodBtn.isHidden = true
         
         loadGame()
         
@@ -132,8 +136,9 @@ class ClockController: UIViewController {
             
             if ndelta == -1 {
                 gameClock.text = "0.0"
+                nextPeriodBtn.isHidden = false
             } else if tenths == 10 {
-                gameClock.text = "\(ndelta).0"
+                gameClock.text = "\(delta).0"
             } else {
                 gameClock.text = "\(ndelta).\(tenths)"
             }
@@ -162,6 +167,22 @@ class ClockController: UIViewController {
         
     } // setShotClock
     
+    
+    func clockPause() {
+        
+        running = false
+        
+        startBtn.setFAIcon(icon: FAType.FAPlay, iconSize: 96, forState: .normal)
+        
+    } // clockPause
+
+    func clockUnpause() {
+        
+        running = true
+        
+        startBtn.setFAIcon(icon: FAType.FAPause, iconSize: 96, forState: .normal)
+        
+    } // clockPause
     
     func loadGame() {
         
@@ -254,14 +275,24 @@ class ClockController: UIViewController {
                 switch obj["key"] {
                 case "CLOCK":
                     
-                    var v = JSON.parse(obj["val"].string!)
+                    let v = JSON.parse(obj["val"].string!)
                     
                     self.setGameClock(v)
                     self.setShotClock(v)
                     
+                case "SHOT_VIOLATION":
                     
+                    self.clockPause()
+                
+                case "END_PERIOD":
+                    
+                    self.nextPeriodBtn.isHidden = false
+                    self.clockPause()
+                
                 case "PERIOD":
-                    print("TODO")
+                    
+                    self.period.text = obj["val"].string!
+                    
                 default:
                     print("Unknown message from websocket.")
                 }
@@ -280,9 +311,7 @@ class ClockController: UIViewController {
             "step": -1
             ]));
         
-        running = false
-        
-        startBtn.setFAIcon(icon: FAType.FAPlay, iconSize: 96, forState: .normal)
+        clockPause()
         
     }
     
@@ -293,9 +322,7 @@ class ClockController: UIViewController {
             "step": 1
             ]));
 
-        running = false
-        
-        startBtn.setFAIcon(icon: FAType.FAPlay, iconSize: 96, forState: .normal)
+        clockPause()
         
     }
     
@@ -305,9 +332,7 @@ class ClockController: UIViewController {
             "cmd": Mboard.WS_CLOCK_RESET
             ]));
         
-        running = false
-        
-        startBtn.setFAIcon(icon: FAType.FAPlay, iconSize: 96, forState: .normal)
+        clockPause()
         
     }
     
@@ -318,9 +343,7 @@ class ClockController: UIViewController {
             "step": -1
             ]));
         
-        running = false
-        
-        startBtn.setFAIcon(icon: FAType.FAPlay, iconSize: 96, forState: .normal)
+        clockPause()
         
     }
     
@@ -331,9 +354,7 @@ class ClockController: UIViewController {
             "step": 1
             ]));
         
-        running = false
-        
-        startBtn.setFAIcon(icon: FAType.FAPlay, iconSize: 96, forState: .normal)
+        clockPause()
         
     }
     
@@ -343,9 +364,7 @@ class ClockController: UIViewController {
             "cmd": Mboard.WS_SHOT_RESET
             ]));
         
-        running = false
-        
-        startBtn.setFAIcon(icon: FAType.FAPlay, iconSize: 96, forState: .normal)
+        clockPause()
         
     }
     
@@ -357,9 +376,7 @@ class ClockController: UIViewController {
                 "cmd": Mboard.WS_CLOCK_STOP
                 ]));
             
-            running = false
-            
-            startBtn.setFAIcon(icon: FAType.FAPlay, iconSize: 96, forState: .normal)
+            clockPause()
             
         } else {
             
@@ -367,11 +384,17 @@ class ClockController: UIViewController {
                 "cmd": Mboard.WS_CLOCK_START
                 ]));
             
-            running = true
-            
-            startBtn.setFAIcon(icon: FAType.FAPause, iconSize: 96, forState: .normal)
+            clockUnpause()
             
         }
+        
+    }
+    
+    @IBAction func changePeriod(_ sender: Any) {
+        
+        ws.send(JSON([
+            "cmd": Mboard.WS_PERIOD_UP
+            ]));
         
     }
     
