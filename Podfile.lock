@@ -1,7 +1,6 @@
 PODS:
   - Alamofire (4.4.0)
   - CryptoSwift (0.6.7)
-  - EasyTipView (1.0.2)
   - Font-Awesome-Swift (1.6.1)
   - KeychainSwift (7.0.0)
   - Kingfisher (3.2.4)
@@ -11,7 +10,6 @@ PODS:
 DEPENDENCIES:
   - Alamofire (~> 4.4)
   - CryptoSwift (~> 0.6.7)
-  - EasyTipView (~> 1.0.2)
   - Font-Awesome-Swift (~> 1.6.1)
   - KeychainSwift (~> 7.0.0)
   - Kingfisher (~> 3.2.4)
@@ -21,13 +19,12 @@ DEPENDENCIES:
 SPEC CHECKSUMS:
   Alamofire: dc44b1600b800eb63da6a19039a0083d62a6a62d
   CryptoSwift: 685ae257941e5447474348a2b545583e1a16b573
-  EasyTipView: b93a19be981cc2221d6d7191d49872f547e0bebf
   Font-Awesome-Swift: 70ab020f6749d7048bb49807c3e78b702d78afca
   KeychainSwift: b6947435dd78cc442c64a84ae648dd0e871cf448
   Kingfisher: 8d80f39da403cd9c9ee11984e1655f4d6a566cdb
   SwiftWebSocket: 1ef8a0efb023544643bdf480c1ec4a62b204f293
   SwiftyJSON: 38a8ea2006779c0fc4c310cb2ee8195327740faf
 
-PODFILE CHECKSUM: 21d4f2fc0abca2c6431927911f01d6a9c236618f
+PODFILE CHECKSUM: f998bc74671fe78b031b7287f0c8432361e137af
 
-COCOAPODS: 1.2.0
+COCOAPODS: 1.2.1

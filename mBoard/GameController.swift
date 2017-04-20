@@ -18,6 +18,10 @@ class GameController: UIViewController {
     
     var ws = WebSocket()
     
+    var server:String?
+    
+    let defaults = UserDefaults.standard
+    
     // MARK: Properties
     @IBOutlet weak var m1AwayBtn: UIButton!
     @IBOutlet weak var p1AwayBtn: UIButton!
@@ -62,6 +66,8 @@ class GameController: UIViewController {
         // Do any additional setup after loading the view, typically from a nib.
     
         UIApplication.shared.isIdleTimerDisabled = true
+    
+        server = (defaults.object(forKey: Mboard.SERVER) as? String)!
         
         awayT1.setFAIcon(icon: FAType.FACircle, iconSize: 24)
         awayT2.setFAIcon(icon: FAType.FACircle, iconSize: 24)
@@ -187,6 +193,10 @@ class GameController: UIViewController {
         
     }
     
+    override func viewDidAppear(_ animated: Bool) {
+        loadGame()
+    }
+    
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
@@ -205,7 +215,9 @@ class GameController: UIViewController {
     
     func initWS() {
     
-        ws = WebSocket(Mboard.GAMESOCKET)
+        let url = "\(Mboard.WS)\(server!)/ws/game"
+        
+        ws = WebSocket(url)
         
         ws.event.close = { code, reason, clean in
           print("close")
@@ -371,8 +383,12 @@ class GameController: UIViewController {
     
     func loadGame() {
         
-        Alamofire.request(Mboard.GAMES, method: .get)
-            .responseJSON{ response in
+        //Alamofire.request(Mboard.GAMES, method: .get)
+        
+        let url = "\(Mboard.HTTP)\(server!)/api/games"
+        
+        Alamofire.request(url, method: .get)
+          .responseJSON{ response in
         
             switch response.result {
             case .failure(let error):
@@ -441,7 +457,9 @@ class GameController: UIViewController {
     
     func createGame() {
         
-        Alamofire.request(Mboard.GAMES, method: .post, parameters: ["test": "true"])
+        let url = "\(Mboard.HTTP)\(server!)/api/games"
+        
+        Alamofire.request(url, method: .post, parameters: ["test": "true"])
             .response{ response in
             
                 if response.error != nil {

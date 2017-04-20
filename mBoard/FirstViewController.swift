@@ -19,6 +19,8 @@ class FirstViewController: UIViewController {
     // MARK: Properties
     @IBOutlet weak var newGameBtn: UIButton!
     
+    let defaults = UserDefaults.standard
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view, typically from a nib.
@@ -26,6 +28,8 @@ class FirstViewController: UIViewController {
         newGameBtn.layer.borderWidth = 1
         newGameBtn.layer.borderColor = Mboard.TealColor.cgColor
         newGameBtn.layer.cornerRadius = 15
+        
+        print(defaults.object(forKey: Mboard.SERVER) as? String)
         
     }
 

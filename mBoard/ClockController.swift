@@ -17,7 +17,11 @@ class ClockController: UIViewController {
 
     var ws = WebSocket()
     
+    var server:String?
+    
     var running = false
+    
+    let defaults = UserDefaults.standard
     
     // MARK: Properties
     @IBOutlet weak var nextPeriodBtn: UIButton!
@@ -38,11 +42,17 @@ class ClockController: UIViewController {
         UIApplication.shared.isIdleTimerDisabled = false
     }
     
+    override func viewDidAppear(_ animated: Bool) {
+        //loadGame()
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view, typically from a nib.
         
         UIApplication.shared.isIdleTimerDisabled = true
+        
+        server = (defaults.object(forKey: Mboard.SERVER) as? String)!
         
         clockPause()
         
@@ -186,8 +196,9 @@ class ClockController: UIViewController {
     
     func loadGame() {
         
+        let url = "\(Mboard.HTTP)\(server!)/api/games"
         
-        Alamofire.request(Mboard.GAMES, method: .get)
+        Alamofire.request(url, method: .get)
             .responseJSON{ response in
                 
                 switch response.result {
@@ -250,10 +261,17 @@ class ClockController: UIViewController {
     
     func initWS() {
         
-        ws = WebSocket(Mboard.GAMESOCKET)
+        //ws = WebSocket(Mboard.GAMESOCKET)
+        
+        let url = "\(Mboard.WS)\(server!)/ws/game"
+        
+        ws = WebSocket(url)
         
         ws.event.close = { code, reason, clean in
-            print("close")
+            print("the mother fucker closed on me, shit, bitch!")
+            
+            //self.ws = WebSocket(url)
+            
         }
         
         ws.event.open = {
@@ -395,6 +413,8 @@ class ClockController: UIViewController {
         ws.send(JSON([
             "cmd": Mboard.WS_PERIOD_UP
             ]));
+        
+        nextPeriodBtn.isHidden = true
         
     }
     

@@ -10,6 +10,9 @@ import UIKit
 
 class Mboard {
     
+    static let HTTP             = "http://"
+    static let WS               = "ws://"
+    
     static let SOCKET           = "ws://127.0.0.1:8000/ws"
     static let GAMESOCKET       = SOCKET + "/game"
     
@@ -23,6 +26,7 @@ class Mboard {
     static let SHOTCLOCK        = MBOARD + "shotclock"
     static let FOULS            = MBOARD + "fouls"
     static let TIMEOUTS         = MBOARD + "timeouts"
+    static let SERVER           = MBOARD + "server"
     
     // ws commands
     

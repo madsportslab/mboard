@@ -27,7 +27,7 @@
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                             </activityIndicatorView>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="9EB-jR-51T">
-                                <rect key="frame" x="117.5" y="30" width="140" height="34"/>
+                                <rect key="frame" x="117.5" y="50" width="140" height="34"/>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="140" id="yEt-Ny-Mb1"/>
@@ -151,7 +151,7 @@
                                 <nil key="highlightedColor"/>
                             </label>
                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="1" translatesAutoresizingMaskIntoConstraints="NO" id="2lE-Xv-zhq">
-                                <rect key="frame" x="30" y="50" width="315" height="61"/>
+                                <rect key="frame" x="30" y="70" width="315" height="61"/>
                                 <subviews>
                                     <stackView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="UhD-Lz-WBy">
                                         <rect key="frame" x="0.0" y="0.0" width="315" height="30"/>
@@ -248,6 +248,60 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="0l8-yA-PyZ" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="1524" y="676"/>
+        </scene>
+        <!--Scan Controller-->
+        <scene sceneID="iEo-zm-hqj">
+            <objects>
+                <viewController id="84c-if-9Ka" customClass="ScanController" customModule="mBoard" customModuleProvider="target" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="nD1-Jc-Vf8"/>
+                        <viewControllerLayoutGuide type="bottom" id="jpH-XP-0Jq"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="Q3D-Ge-Q5u">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <label opaque="NO" userInteractionEnabled="NO" alpha="0.5" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" usesAttributedText="YES" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="SuP-xY-fbd">
+                                <rect key="frame" x="135" y="617" width="105" height="20"/>
+                                <attributedString key="attributedText">
+                                    <fragment content="madsports">
+                                        <attributes>
+                                            <color key="NSColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                            <font key="NSFont" size="17" name="HelveticaNeue"/>
+                                        </attributes>
+                                    </fragment>
+                                    <fragment content="lab">
+                                        <attributes>
+                                            <color key="NSColor" red="0.30931556761468149" green="0.65708652525502442" blue="1" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+                                            <font key="NSFont" size="17" name="HelveticaNeue"/>
+                                        </attributes>
+                                    </fragment>
+                                </attributedString>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Scan QR Code" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="yif-Gi-V3B">
+                                <rect key="frame" x="130.5" y="30" width="114" height="20"/>
+                                <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="17"/>
+                                <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                        </subviews>
+                        <color key="backgroundColor" red="0.050980392159999999" green="0.21960784310000001" blue="0.35686274509999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                        <constraints>
+                            <constraint firstItem="jpH-XP-0Jq" firstAttribute="top" secondItem="SuP-xY-fbd" secondAttribute="bottom" constant="30" id="Ajr-Pm-qh0"/>
+                            <constraint firstItem="SuP-xY-fbd" firstAttribute="centerX" secondItem="Q3D-Ge-Q5u" secondAttribute="centerX" id="cwH-Mu-ahz"/>
+                            <constraint firstItem="yif-Gi-V3B" firstAttribute="top" secondItem="nD1-Jc-Vf8" secondAttribute="bottom" constant="30" id="izg-Ia-aOm"/>
+                            <constraint firstItem="yif-Gi-V3B" firstAttribute="centerX" secondItem="Q3D-Ge-Q5u" secondAttribute="centerX" id="sY7-uY-jLK"/>
+                        </constraints>
+                    </view>
+                    <connections>
+                        <outlet property="address" destination="yif-Gi-V3B" id="Iah-1H-6oD"/>
+                        <segue destination="49e-Tb-3d3" kind="show" identifier="connectedSegue" id="gDi-VB-TSQ"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="LlI-N9-OJU" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-1505" y="506"/>
         </scene>
         <!--Ads-->
         <scene sceneID="4aM-2e-ie7">
@@ -411,7 +465,7 @@
                                 <nil key="highlightedColor"/>
                             </label>
                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="1" translatesAutoresizingMaskIntoConstraints="NO" id="Bkj-Pv-r0S">
-                                <rect key="frame" x="30" y="50" width="315" height="123"/>
+                                <rect key="frame" x="30" y="70" width="315" height="123"/>
                                 <subviews>
                                     <stackView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="26m-pd-OwH">
                                         <rect key="frame" x="0.0" y="0.0" width="315" height="30"/>
@@ -611,7 +665,7 @@
                                 </items>
                             </navigationBar>
                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="1" translatesAutoresizingMaskIntoConstraints="NO" id="SyB-aj-W65">
-                                <rect key="frame" x="30" y="50" width="315" height="92"/>
+                                <rect key="frame" x="30" y="70" width="315" height="92"/>
                                 <subviews>
                                     <stackView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="1a7-f8-EPP">
                                         <rect key="frame" x="0.0" y="0.0" width="315" height="30"/>
@@ -755,7 +809,7 @@
                                             <color key="titleColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                         </state>
                                         <connections>
-                                            <segue destination="49e-Tb-3d3" kind="show" id="iTE-Qu-V3c"/>
+                                            <segue destination="84c-if-9Ka" kind="show" id="Txo-SF-MGP"/>
                                         </connections>
                                     </button>
                                 </subviews>
@@ -1841,7 +1895,7 @@
                                 <nil key="highlightedColor"/>
                             </label>
                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="1" translatesAutoresizingMaskIntoConstraints="NO" id="wA7-3f-dKx">
-                                <rect key="frame" x="46" y="50" width="283" height="216"/>
+                                <rect key="frame" x="46" y="70" width="283" height="216"/>
                                 <subviews>
                                     <stackView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="5rn-19-seh">
                                         <rect key="frame" x="0.0" y="0.0" width="283" height="30"/>
@@ -2131,7 +2185,7 @@
                                 </items>
                             </navigationBar>
                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="1" translatesAutoresizingMaskIntoConstraints="NO" id="kuz-jF-Ace">
-                                <rect key="frame" x="30" y="30" width="315" height="92"/>
+                                <rect key="frame" x="30" y="50" width="315" height="92"/>
                                 <subviews>
                                     <stackView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="hk3-Y9-MeI">
                                         <rect key="frame" x="0.0" y="0.0" width="315" height="30"/>
@@ -2337,7 +2391,7 @@
         </scene>
     </scenes>
     <inferredMetricsTieBreakers>
-        <segue reference="k0e-f3-2Cb"/>
         <segue reference="Vrh-Tl-igz"/>
+        <segue reference="gDi-VB-TSQ"/>
     </inferredMetricsTieBreakers>
 </document>

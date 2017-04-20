@@ -13,7 +13,6 @@ target 'mBoard' do
   pod "SwiftWebSocket", "~> 2.6.5"
   pod "CryptoSwift", "~> 0.6.7"
   pod "Kingfisher", "~> 3.2.4"
-  pod "EasyTipView", "~> 1.0.2"
 
   target 'mBoardTests' do
     inherit! :search_paths
