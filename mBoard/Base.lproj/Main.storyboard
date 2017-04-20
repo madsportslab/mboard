@@ -1583,7 +1583,7 @@
                                                 <color key="tintColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                 <nil key="textColor"/>
                                                 <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="14"/>
-                                                <textInputTraits key="textInputTraits" autocorrectionType="no" spellCheckingType="no" keyboardType="alphabet"/>
+                                                <textInputTraits key="textInputTraits" autocorrectionType="no" spellCheckingType="no" keyboardType="alphabet" returnKeyType="next"/>
                                             </textField>
                                         </subviews>
                                         <color key="backgroundColor" red="0.0039215686269999999" green="0.50588235290000005" blue="0.72941176470000002" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
@@ -1608,9 +1608,9 @@
                                                 <rect key="frame" x="100" y="0.0" width="215" height="30"/>
                                                 <color key="backgroundColor" red="0.0039215686269999999" green="0.50588235290000005" blue="0.72941176470000002" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                                                 <color key="tintColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                                <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                <nil key="textColor"/>
                                                 <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="14"/>
-                                                <textInputTraits key="textInputTraits" autocorrectionType="no" spellCheckingType="no" keyboardType="alphabet"/>
+                                                <textInputTraits key="textInputTraits" autocorrectionType="no" spellCheckingType="no" keyboardType="alphabet" returnKeyType="next"/>
                                             </textField>
                                         </subviews>
                                         <color key="backgroundColor" red="0.0039215686269999999" green="0.50588235290000005" blue="0.72941176470000002" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
@@ -1803,7 +1803,6 @@
                                         </state>
                                         <connections>
                                             <action selector="startGame:" destination="ERW-SA-p4w" eventType="touchUpInside" id="BGw-jg-jbp"/>
-                                            <segue destination="0W1-ld-m8d" kind="show" id="Z95-ie-4CV"/>
                                         </connections>
                                     </button>
                                 </subviews>
@@ -1839,6 +1838,7 @@
                         <segue destination="Y2I-MY-9Lb" kind="show" identifier="minutesSegue" id="5gL-cU-BDL"/>
                         <segue destination="p76-oa-yG3" kind="show" identifier="foulsSegue" id="0uL-AW-3DJ"/>
                         <segue destination="0kD-IU-nMc" kind="show" identifier="timeoutsSegue" id="tPQ-Om-1cf"/>
+                        <segue destination="0W1-ld-m8d" kind="show" identifier="gameSegue" id="1O1-J4-pdX"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="vJr-wM-wSB" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -2391,7 +2391,7 @@
         </scene>
     </scenes>
     <inferredMetricsTieBreakers>
+        <segue reference="k0e-f3-2Cb"/>
         <segue reference="Vrh-Tl-igz"/>
-        <segue reference="gDi-VB-TSQ"/>
     </inferredMetricsTieBreakers>
 </document>

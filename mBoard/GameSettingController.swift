@@ -10,7 +10,7 @@ import UIKit
 
 import Font_Awesome_Swift
 
-class GameSettingController: UIViewController {
+class GameSettingController: UIViewController, UITextFieldDelegate {
     
     let defaults = UserDefaults.standard
     
@@ -49,11 +49,32 @@ class GameSettingController: UIViewController {
         timeouts.setFATitleColor(color: UIColor.black)
         shotclock.setFATitleColor(color: UIColor.black)
         
+        homeName.delegate = self
+        awayName.delegate = self
+        
+        homeName.becomeFirstResponder()
+        
     }
     
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
+    }
+    
+    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
+
+        textField.resignFirstResponder()
+        
+        if textField == homeName {
+            
+            awayName.becomeFirstResponder()
+            
+        } else {
+            homeName.becomeFirstResponder()
+        }
+
+        return true
+        
     }
     
     func loadDefaultSettings() {
@@ -153,7 +174,27 @@ class GameSettingController: UIViewController {
     // MARK: Actions
     @IBAction func startGame(_ sender: Any) {
         
+        if (homeName.text?.isEmpty)! || (awayName.text?.isEmpty)! {
+            
+            let ac = UIAlertController(title: "Setup error",
+                                       message: "Team names cannot be empty.",
+                                       preferredStyle: UIAlertControllerStyle.alert)
+            
+            let OK = UIAlertAction(title: "OK",
+                                   style: UIAlertActionStyle.default,
+                                   handler: nil)
+            
+            ac.addAction(OK)
+            
+            self.present(ac, animated: true, completion: nil)
+            
+        } else {
+
+            self.performSegue(withIdentifier: "gameSegue", sender: self)
+
+        }
         
+    
     } // startGame
     
     @IBAction func changePeriods(_ sender: Any) {

@@ -220,7 +220,10 @@ class GameController: UIViewController {
         ws = WebSocket(url)
         
         ws.event.close = { code, reason, clean in
+          
           print("close")
+          self.ws.open()
+            
         }
         
         ws.event.open = {

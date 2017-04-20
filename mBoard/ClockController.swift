@@ -270,7 +270,7 @@ class ClockController: UIViewController {
         ws.event.close = { code, reason, clean in
             print("the mother fucker closed on me, shit, bitch!")
             
-            //self.ws = WebSocket(url)
+            self.ws.open()
             
         }
         
