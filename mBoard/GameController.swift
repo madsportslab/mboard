@@ -61,6 +61,10 @@ class GameController: UIViewController {
         UIApplication.shared.isIdleTimerDisabled = false
     }
     
+    override func viewWillAppear(_ animated: Bool) {
+        loadGame()
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view, typically from a nib.
@@ -188,8 +192,6 @@ class GameController: UIViewController {
         pTHomeBtn.layer.borderWidth = 1
         pTHomeBtn.layer.borderColor = Mboard.TealColor.cgColor
         pTHomeBtn.layer.cornerRadius = 5
-        
-        createGame()
         
     }
     
@@ -458,16 +460,19 @@ class GameController: UIViewController {
     } // loadGame
     
     
-    func createGame() {
+    
+    func storeGame() {
         
-        let url = "\(Mboard.HTTP)\(server!)/api/games"
+        let ed = defaults.object(forKey: Mboard.SERVER) as? String
         
-        Alamofire.request(url, method: .post, parameters: ["test": "true"])
+        let url = "\(Mboard.HTTP)\(ed!)/api/games"
+        
+        Alamofire.request(url, method: .put)
             .response{ response in
-            
+                
                 if response.error != nil {
                     
-                    let ac = UIAlertController(title: "Connection error",
+                    let ac = UIAlertController(title: "End game error",
                                                message: response.error?.localizedDescription,
                                                preferredStyle: UIAlertControllerStyle.alert)
                     
@@ -480,13 +485,12 @@ class GameController: UIViewController {
                     self.present(ac, animated: true, completion: nil)
                     
                 } else {
-                    self.loadGame()
+                    self.performSegue(withIdentifier: "endGameSegue", sender: self)
                 }
                 
         }
         
-    } // createGame
-    
+    } // storeGame
     
     // MARK: Actions
     
@@ -661,6 +665,30 @@ class GameController: UIViewController {
             ]));
         
     }
+    
+    @IBAction func endGame(_ sender: Any) {
+        
+        let ac = UIAlertController(title: "End game",
+                                   message: "Changes cannot be made after you've ended the game. Are you sure you want to end the game?",
+                                   preferredStyle: UIAlertControllerStyle.alert)
+        
+        let OK = UIAlertAction(title: "OK",
+                               style: UIAlertActionStyle.default,
+                               handler: { (action: UIAlertAction!) in
+                                self.storeGame()
+        })
+        
+        let CancelAction = UIAlertAction(title: "Cancel",
+                               style: UIAlertActionStyle.default,
+                               handler: nil)
+        
+        ac.addAction(OK)
+        ac.addAction(CancelAction)
+        
+        self.present(ac, animated: true, completion: nil)
+        
+    }
+    
     
     
 } // GameController

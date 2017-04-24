@@ -9,6 +9,8 @@
 import AVFoundation
 import UIKit
 
+import Alamofire
+
 class ScanController: UIViewController, AVCaptureMetadataOutputObjectsDelegate {
     
     var session:AVCaptureSession?
@@ -19,10 +21,20 @@ class ScanController: UIViewController, AVCaptureMetadataOutputObjectsDelegate {
     
     // MARK: Properties
     @IBOutlet weak var address: UILabel!
+    @IBOutlet weak var cancelBtn: UIButton!
     
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view, typically from a nib.
+        
+        cancelBtn.layer.borderColor = UIColor.white.cgColor
+        cancelBtn.layer.borderWidth = 1
+        cancelBtn.layer.cornerRadius = 5
+    
+        qr = UIView()
+        qr?.layer.borderColor = UIColor.green.cgColor
+        qr?.layer.borderWidth = 2
+        //qr?.frame = self.view.layer.bounds
         
         let device = AVCaptureDevice.defaultDevice(
             withMediaType: AVMediaTypeVideo)
@@ -44,7 +56,6 @@ class ScanController: UIViewController, AVCaptureMetadataOutputObjectsDelegate {
             session?.addOutput(output)
             
             output.metadataObjectTypes = [AVMetadataObjectTypeQRCode]
-
             
             preview = AVCaptureVideoPreviewLayer(session: session)
             
@@ -53,26 +64,20 @@ class ScanController: UIViewController, AVCaptureMetadataOutputObjectsDelegate {
             
             self.view.layer.addSublayer(preview!)
             
-            qr = UIView()
-            qr?.layer.borderColor = UIColor.green.cgColor
-            qr?.layer.borderWidth = 2
-            
-            self.view.addSubview(qr!)
-            
-            self.view.bringSubview(toFront: address)
-            self.view.bringSubview(toFront: qr!)
-            
             session?.startRunning()
             
-            
+            output.rectOfInterest = (preview?.metadataOutputRectOfInterest(
+                for: (preview?.bounds)!))!
             
         } catch {
             print(error)
             return
         }
         
-        
-        
+        self.view.bringSubview(toFront: address)
+        self.view.bringSubview(toFront: cancelBtn)
+        self.view.bringSubview(toFront: qr!)
+        self.view.addSubview(qr!)
         
     }
     
@@ -99,21 +104,58 @@ class ScanController: UIViewController, AVCaptureMetadataOutputObjectsDelegate {
                 
                 defaults.set(obj!.stringValue, forKey: Mboard.SERVER)
                 
-                //address.text = obj!.stringValue
-                
                 session?.stopRunning()
+                
                 //preview?.removeFromSuperlayer()
+                
                 preview = nil
                 session = nil
                 
-                self.performSegue(withIdentifier: "connectedSegue",
-                                  sender: self)
+                // TODO: test if connection is good
+                self.getVersion()
+                
+                
                 
             }
             
         }
         
     }
+    
+    func getVersion() {
+        
+        let ed = defaults.object(forKey: Mboard.SERVER) as? String
+        
+        let url = "\(Mboard.HTTP)\(ed!)/api/games"
+        
+        Alamofire.request(url, method: .get)
+            .response{ response in
+                
+                if response.error != nil {
+                    
+                    let ac = UIAlertController(title: "Connection error",
+                                               message: response.error?.localizedDescription,
+                                               preferredStyle: UIAlertControllerStyle.alert)
+                    
+                    let OK = UIAlertAction(title: "OK",
+                                           style: UIAlertActionStyle.default,
+                                           handler: nil)
+                    
+                    ac.addAction(OK)
+                    
+                    self.present(ac, animated: true, completion: nil)
+                    
+                    
+                    
+                } else {
+                    self.performSegue(withIdentifier: "connectedSegue",
+                                      sender: self)
+                }
+                
+        }
+        
+    } // getVersion
+    
 
     // MARK: Actions
     

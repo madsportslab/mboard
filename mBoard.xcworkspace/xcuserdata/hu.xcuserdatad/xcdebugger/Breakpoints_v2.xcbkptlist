@@ -26,11 +26,27 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "mBoard/ScanController.swift"
-            timestampString = "514219940.334302"
+            timestampString = "514718341.343075"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "42"
-            endingLineNumber = "42"
+            startingLineNumber = "54"
+            endingLineNumber = "54"
+            landmarkName = "viewDidLoad()"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "mBoard/ScanController.swift"
+            timestampString = "514718341.343075"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "40"
+            endingLineNumber = "40"
             landmarkName = "viewDidLoad()"
             landmarkType = "7">
          </BreakpointContent>

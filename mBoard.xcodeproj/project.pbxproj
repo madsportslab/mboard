@@ -31,6 +31,7 @@
 		8575F1381E8A4B2400EAC50D /* mBoardUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8575F1371E8A4B2400EAC50D /* mBoardUITests.swift */; };
 		85828DF51E9E703F006A7C17 /* ClockController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 85828DF41E9E703F006A7C17 /* ClockController.swift */; };
 		85828DF71EA5FCBC006A7C17 /* ScanController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 85828DF61EA5FCBC006A7C17 /* ScanController.swift */; };
+		85EE534C1EADEBAA006F3345 /* GameViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 85EE534B1EADEBAA006F3345 /* GameViewCell.swift */; };
 		85F1433C1E9BC62300088099 /* ShotClockController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 85F1433B1E9BC62300088099 /* ShotClockController.swift */; };
 		CD3CF2E6E5A7A23389C9B7DA /* Pods_mBoardTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 819D57E7DB14AA08605E1E44 /* Pods_mBoardTests.framework */; };
 /* End PBXBuildFile section */
@@ -85,6 +86,7 @@
 		8575F1391E8A4B2400EAC50D /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		85828DF41E9E703F006A7C17 /* ClockController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ClockController.swift; sourceTree = "<group>"; };
 		85828DF61EA5FCBC006A7C17 /* ScanController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ScanController.swift; sourceTree = "<group>"; };
+		85EE534B1EADEBAA006F3345 /* GameViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GameViewCell.swift; sourceTree = "<group>"; };
 		85F1433B1E9BC62300088099 /* ShotClockController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ShotClockController.swift; sourceTree = "<group>"; };
 		A712E8CE2508699822681272 /* Pods-mBoard.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-mBoard.debug.xcconfig"; path = "Pods/Target Support Files/Pods-mBoard/Pods-mBoard.debug.xcconfig"; sourceTree = "<group>"; };
 		B1AD9ADD848A5FBFAD5CBC01 /* Pods_mBoard.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_mBoard.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -181,6 +183,7 @@
 				85F1433B1E9BC62300088099 /* ShotClockController.swift */,
 				85828DF41E9E703F006A7C17 /* ClockController.swift */,
 				85828DF61EA5FCBC006A7C17 /* ScanController.swift */,
+				85EE534B1EADEBAA006F3345 /* GameViewCell.swift */,
 			);
 			path = mBoard;
 			sourceTree = "<group>";
@@ -500,6 +503,7 @@
 				852E6B421E8DFAD9002888FB /* MainViewController.swift in Sources */,
 				852E6B501E8FFFB4002888FB /* TimeoutsController.swift in Sources */,
 				85F1433C1E9BC62300088099 /* ShotClockController.swift in Sources */,
+				85EE534C1EADEBAA006F3345 /* GameViewCell.swift in Sources */,
 				8575F11A1E8A4B2400EAC50D /* SecondViewController.swift in Sources */,
 				852E6B4A1E8FE7A1002888FB /* MinutesController.swift in Sources */,
 				852E6B521E9147D6002888FB /* Mboard.swift in Sources */,

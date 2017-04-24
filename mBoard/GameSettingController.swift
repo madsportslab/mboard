@@ -8,6 +8,7 @@
 
 import UIKit
 
+import Alamofire
 import Font_Awesome_Swift
 
 class GameSettingController: UIViewController, UITextFieldDelegate {
@@ -170,6 +171,37 @@ class GameSettingController: UIViewController, UITextFieldDelegate {
         
     } // loadDefaultSettings
     
+    func createGame() {
+        
+        let ed = defaults.object(forKey: Mboard.SERVER) as? String
+        
+        let url = "\(Mboard.HTTP)\(ed!)/api/games"
+        
+        Alamofire.request(url, method: .post, parameters: ["test": "true"])
+            .response{ response in
+                
+                if response.error != nil {
+                    
+                    let ac = UIAlertController(title: "Connection error",
+                                               message: response.error?.localizedDescription,
+                                               preferredStyle: UIAlertControllerStyle.alert)
+                    
+                    let OK = UIAlertAction(title: "OK",
+                                           style: UIAlertActionStyle.default,
+                                           handler: nil)
+                    
+                    ac.addAction(OK)
+                    
+                    self.present(ac, animated: true, completion: nil)
+                    
+                } else {
+                    self.performSegue(withIdentifier: "gameSegue", sender: self)
+                }
+                
+        }
+        
+    } // createGame
+
     
     // MARK: Actions
     @IBAction func startGame(_ sender: Any) {
@@ -189,9 +221,7 @@ class GameSettingController: UIViewController, UITextFieldDelegate {
             self.present(ac, animated: true, completion: nil)
             
         } else {
-
-            self.performSegue(withIdentifier: "gameSegue", sender: self)
-
+            createGame()
         }
         
     

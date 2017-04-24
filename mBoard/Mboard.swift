@@ -18,6 +18,7 @@ class Mboard {
     
     static let WWW              = "http://127.0.0.1:8000"
     static let GAMES            = WWW + "/api/games"
+    static let SCORES           = WWW + "/api/scores"
     
     
     static let MBOARD           = "mboard."
