@@ -27,6 +27,8 @@ class Mboard {
     static let SHOTCLOCK        = MBOARD + "shotclock"
     static let FOULS            = MBOARD + "fouls"
     static let TIMEOUTS         = MBOARD + "timeouts"
+    static let HOMENAME         = MBOARD + "home"
+    static let AWAYNAME         = MBOARD + "away"
     static let SERVER           = MBOARD + "server"
     
     // ws commands

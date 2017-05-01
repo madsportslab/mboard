@@ -8,11 +8,15 @@
 
 import AVKit
 
-class GameViewCell: UITableViewCell {
+class GameViewCell: UICollectionViewCell {
     
     // MARK: Properties
-    @IBOutlet weak var title: UILabel!
-    @IBOutlet weak var status: UILabel!
+    @IBOutlet weak var homeTeam: UILabel!
+    @IBOutlet weak var homeLogo: UILabel!
+    @IBOutlet weak var homeScore: UILabel!
+    @IBOutlet weak var awayTeam: UILabel!
+    @IBOutlet weak var awayLogo: UILabel!
+    @IBOutlet weak var awayScore: UILabel!
     
     
     // MARK: Actions

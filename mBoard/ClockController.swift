@@ -153,10 +153,12 @@ class ClockController: UIViewController {
                 gameClock.text = "\(ndelta).\(tenths)"
             }
             
-        } else if seconds < 10 {
-            gameClock.text = "\(minutes):0\(ndelta)"
+        } else if seconds == 0 {
+            gameClock.text = "\(minutes):00"
+        } else if seconds < 10 && seconds >= 0 {
+            gameClock.text = "\(minutes):0\(seconds)"
         } else {
-            gameClock.text = "\(minutes):\(ndelta)"
+            gameClock.text = "\(minutes):\(seconds)"
         }
         
     } // setGameClock
@@ -268,7 +270,6 @@ class ClockController: UIViewController {
         ws = WebSocket(url)
         
         ws.event.close = { code, reason, clean in
-            print("the mother fucker closed on me, shit, bitch!")
             
             self.ws.open()
             

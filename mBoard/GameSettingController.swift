@@ -171,13 +171,32 @@ class GameSettingController: UIViewController, UITextFieldDelegate {
         
     } // loadDefaultSettings
     
+    
+    func collectSettings() -> [String: String] {
+    
+        let p    = defaults.integer(forKey: Mboard.PERIODS)
+        let m    = defaults.integer(forKey: Mboard.MINUTES)
+        let s    = defaults.integer(forKey: Mboard.SHOTCLOCK)
+        let f    = defaults.integer(forKey: Mboard.FOULS)
+        let t    = defaults.integer(forKey: Mboard.TIMEOUTS)
+        
+        return [
+          "home": homeName.text!, "away": awayName.text!, "periods": String(p),
+          "minutes": String(m), "shot": String(s),
+          "fouls": String(f), "timeouts": String(t)]
+        
+    } // collectSettings
+    
+    
     func createGame() {
         
         let ed = defaults.object(forKey: Mboard.SERVER) as? String
         
         let url = "\(Mboard.HTTP)\(ed!)/api/games"
         
-        Alamofire.request(url, method: .post, parameters: ["test": "true"])
+        let params = collectSettings()
+        
+        Alamofire.request(url, method: .post, parameters: params)
             .response{ response in
                 
                 if response.error != nil {
