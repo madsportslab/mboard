@@ -6,4 +6,9 @@
 //  Copyright © 2017 madsportslab. All rights reserved.
 //
 
-import Foundation
+import AVKit
+
+class GamesHeaderView: UICollectionReusableView {
+    
+    
+} // GamesHeaderView
