@@ -8,7 +8,7 @@
 
 import AVKit
 
-class GameViewCell: UICollectionViewCell {
+class GameViewCell: UITableViewCell {
     
     // MARK: Properties
     @IBOutlet weak var homeTeam: UILabel!

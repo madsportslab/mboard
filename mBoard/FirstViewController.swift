@@ -13,7 +13,7 @@ import Font_Awesome_Swift
 import SwiftWebSocket
 import SwiftyJSON
 
-class FirstViewController: UIViewController, UICollectionViewDelegate, UICollectionViewDataSource {
+class FirstViewController: UIViewController, UITableViewDelegate, UITableViewDataSource {
 
     var ws = WebSocket()
     var gameInfo = [[String]]()
@@ -23,29 +23,21 @@ class FirstViewController: UIViewController, UICollectionViewDelegate, UICollect
     
     // MARK: Properties
     @IBOutlet weak var newGameBtn: UIButton!
-    @IBOutlet weak var gamesCollection: UICollectionView!
-    
-
+    @IBOutlet weak var gamesTable: UITableView!
+    @IBOutlet weak var progress: UIActivityIndicatorView!
     
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view, typically from a nib.
         
-        //newGameBtn.layer.borderWidth = 1
-        //newGameBtn.layer.borderColor = Mboard.TealColor.cgColor
-        //newGameBtn.layer.cornerRadius = 15
+        newGameBtn.layer.borderWidth = 1
+        newGameBtn.layer.borderColor = Mboard.TealColor.cgColor
+        newGameBtn.layer.cornerRadius = 5
 
         getScores()
 
-        //newGameBtn.setFAIcon(icon: FAType.FASoccerBallO, iconSize: 72, forState: .normal)
-        //newGameBtn.setFATitleColor(color: UIColor.white)
-        newGameBtn.setTitleColor(UIColor.white, for: .normal)
-        
-        //gamesTable.layer.borderWidth = 1
-        //gamesTable.layer.borderColor = UIColor.white.cgColor
-        
-        gamesCollection.delegate = self
-        gamesCollection.dataSource = self
+        gamesTable.delegate = self
+        gamesTable.dataSource = self
         
         // try defaults IP address, if failed then connect server btn needs to appear
     }
@@ -55,24 +47,15 @@ class FirstViewController: UIViewController, UICollectionViewDelegate, UICollect
         // Dispose of any resources that can be recreated.
     }
     
-    /*func numberOfSections(in tableView: UITableView) -> Int {
-        return 1
-    }*/
-    
-    func numberOfSections(in collectionView: UICollectionView) -> Int {
+    func numberOfSections(in tableView: UITableView) -> Int {
         return 1
     }
     
-    func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return gameInfo.count
     }
     
-    /*func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        print(gameInfo.count)
-        return gameInfo.count
-    }*/
-    
-    func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
+    /*func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
     
         let cell = gamesCollection.dequeueReusableCell(withReuseIdentifier: "cell",
                                                   for: indexPath) as! GameViewCell
@@ -85,18 +68,36 @@ class FirstViewController: UIViewController, UICollectionViewDelegate, UICollect
         cell.homeLogo.setFAIcon(icon: FAType.FAPictureO, iconSize: 48)
         cell.homeScore.text = gameInfo[indexPath.item][3]
         
-        cell.backgroundColor = Mboard.TealColor
+        //cell.backgroundColor = Mboard.TealColor
+        cell.layer.borderColor = Mboard.TealColor.cgColor
+        cell.layer.borderWidth = 1
         cell.layer.cornerRadius = 5
         
         return cell
     
     }
     
-    /*
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        
+        defaults.set(gameInfo[indexPath.item][4], forKey: Mboard.GAME)
+        self.performSegue(withIdentifier: "summarySegue", sender: self)
+        
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, viewForSupplementaryElementOfKind kind: String, at indexPath: IndexPath) -> UICollectionReusableView {
+
+        let header = gamesCollection.dequeueReusableSupplementaryView(
+            ofKind: kind, withReuseIdentifier: "headerCell", for: indexPath) as! GameHeaderView
+        
+        header.name.text = "Previous games"
+        
+        return header
+    }*/
+    
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         
         let cell = gamesTable.dequeueReusableCell(withIdentifier: "cell",
-            for: indexPath) as! GameViewCell
+                for: indexPath) as! GameViewCell
         
         cell.awayTeam.text = gameInfo[indexPath.item][0]
         cell.awayLogo.setFAIcon(icon: FAType.FAPictureO, iconSize: 48)
@@ -106,15 +107,19 @@ class FirstViewController: UIViewController, UICollectionViewDelegate, UICollect
         cell.homeLogo.setFAIcon(icon: FAType.FAPictureO, iconSize: 48)
         cell.homeScore.text = gameInfo[indexPath.item][3]
         
-        cell.backgroundColor = Mboard.TealColor
+        //cell.backgroundColor = Mboard.TealColor
+        //cell.layer.borderColor = Mboard.TealColor.cgColor
         //cell.layer.borderWidth = 1
-        cell.layer.cornerRadius = 5
+        //cell.layer.cornerRadius = 5
         
         return cell
         
-    }*/
+    }
     
-    /*func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        
+        defaults.set(gameInfo[indexPath.item][4], forKey: Mboard.GAME)
+        self.performSegue(withIdentifier: "summarySegue", sender: self)
         
     }
     
@@ -122,12 +127,10 @@ class FirstViewController: UIViewController, UICollectionViewDelegate, UICollect
         return self.thead[section]
     }
     
-    func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
+    /*func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
         
         let v = UIView(frame: CGRect(x: 0, y:0, width: view.frame.size.width,
                                      height: 32))
-        
-        v.backgroundColor = Mboard.TealColor
         
         let l = UILabel(frame: CGRect(x: 10, y: 7, width: view.frame.size.width,
                                       height: 24))
@@ -139,6 +142,60 @@ class FirstViewController: UIViewController, UICollectionViewDelegate, UICollect
         return v
         
     }*/
+    
+    func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCellEditingStyle, forRowAt indexPath: IndexPath) {
+        
+        if editingStyle == .delete {
+        
+            let ed = defaults.object(forKey: Mboard.SERVER) as? String
+            
+            let url = "\(Mboard.HTTP)\(ed!)/api/scores/\(gameInfo[indexPath.item][4])"
+            
+            self.progress.startAnimating()
+            
+            Alamofire.request(url, method: .delete)
+                .response{ response in
+                    
+                    if response.error != nil {
+                        
+                        let ac = UIAlertController(title: "Connection error",
+                                                   message: response.error?.localizedDescription,
+                                                   preferredStyle: UIAlertControllerStyle.alert)
+                        
+                        let OK = UIAlertAction(title: "OK",
+                                               style: UIAlertActionStyle.default,
+                                               handler: nil)
+                        
+                        ac.addAction(OK)
+                        
+                        self.present(ac, animated: true, completion: nil)
+                        
+                    } else if let status = response.response?.statusCode {
+                     
+                        if status == 404 {
+                            
+                            print("not found")
+
+                            
+                        } else {
+                        
+                            self.gameInfo.remove(at: indexPath.item)
+                            
+                            self.gamesTable.deleteRows(at: [indexPath], with: .fade)
+                            
+                            self.gamesTable.reloadData()
+                            
+                        }
+                        
+                    }
+                    
+                    self.progress.stopAnimating()
+                    
+            }
+            
+        }
+        
+    }
     
     func totalScore(_ j:JSON) -> String {
         
@@ -174,6 +231,8 @@ class FirstViewController: UIViewController, UICollectionViewDelegate, UICollect
         let ed = defaults.object(forKey: Mboard.SERVER) as? String
         
         let url = "\(Mboard.HTTP)\(ed!)/api/scores"
+        
+        self.progress.startAnimating()
         
         Alamofire.request(url, method: .get)
             .responseJSON{ response in
@@ -225,6 +284,7 @@ class FirstViewController: UIViewController, UICollectionViewDelegate, UICollect
                                     
                                     row.append(self.totalScore(data["home"]["points"]))
                                     
+                                    row.append(v["id"].string!)
                                     
                                 } else {
                                 
@@ -232,7 +292,8 @@ class FirstViewController: UIViewController, UICollectionViewDelegate, UICollect
                                     row.append("0")
                                     row.append("Home")
                                     row.append("0")
-
+                                    row.append(v["id"].string!)
+                                    
                                 }
                                 
                                 let now = Date()
@@ -253,23 +314,8 @@ class FirstViewController: UIViewController, UICollectionViewDelegate, UICollect
                                 f.maximumUnitCount = 1
                                 
                                 let s = f.string(from: d!, to: now)
-                                    
-                                print(s!)
-                                
-                                //print(now)
-                                //print(d?.timeIntervalSinceNow)
-                                
-                                //let since = now - d
-                                
-                                //print(since)
-                                
-                                //row.append(String(since))
                                 
                                 row.append(s!)
-                                
-                                //row.append("shit")
-                                //row.append(d?.timeIntervalSinceNow)
-                                //row.append(v[""].String!)
 
                                 tbody.append(row)
 
@@ -280,9 +326,11 @@ class FirstViewController: UIViewController, UICollectionViewDelegate, UICollect
                         
                         self.gameInfo = tbody
                         
-                        self.gamesCollection.reloadData()
+                        self.gamesTable.reloadData()
                         
                     }
+                    
+                    self.progress.stopAnimating()
                     
                 }
                 
@@ -316,16 +364,17 @@ class FirstViewController: UIViewController, UICollectionViewDelegate, UICollect
                         
                 } else if let status = response.response?.statusCode {
                     
+                    print(status)
                     if status == 404 {
                         
                         self.performSegue(withIdentifier: "gameSettingsSegue",
                                           sender: self)
                         
+                    } else {
+                        self.performSegue(withIdentifier: "currentGameSegue",
+                                          sender: self)
                     }
                     
-                } else {
-                    self.performSegue(withIdentifier: "currentGameSegue",
-                                      sender: self)
                 }
                 
         }

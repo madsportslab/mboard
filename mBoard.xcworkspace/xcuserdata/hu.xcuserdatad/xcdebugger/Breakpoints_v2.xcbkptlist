@@ -58,11 +58,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "mBoard/ClockController.swift"
-            timestampString = "515335754.678314"
+            timestampString = "515601818.958672"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "183"
-            endingLineNumber = "183"
+            startingLineNumber = "195"
+            endingLineNumber = "195"
             landmarkName = "clockPause()"
             landmarkType = "7">
          </BreakpointContent>

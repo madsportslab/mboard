@@ -16,12 +16,14 @@ import SwiftyJSON
 class ClockController: UIViewController {
 
     var ws = WebSocket()
+    var errorCount = 0
     
     var server:String?
-    
     var running = false
     
+    
     let defaults = UserDefaults.standard
+    let verbosePeriods = ["1st", "2nd", "3rd", "4th"]
     
     // MARK: Properties
     @IBOutlet weak var nextPeriodBtn: UIButton!
@@ -37,6 +39,8 @@ class ClockController: UIViewController {
     @IBOutlet weak var resetSCBtn: UIButton!
     @IBOutlet weak var gameLabel: UILabel!
     @IBOutlet weak var shotLabel: UILabel!
+    @IBOutlet weak var awayPos: UIButton!
+    @IBOutlet weak var homePos: UIButton!
     
     override func viewDidDisappear(_ animated: Bool) {
         UIApplication.shared.isIdleTimerDisabled = false
@@ -60,15 +64,15 @@ class ClockController: UIViewController {
         
         //startBtn.setFAIcon(icon: FAType.FAPlay, iconSize: 96, forState: .normal)
         
-        resetGCBtn.setFAIcon(icon: FAType.FARefresh, iconSize: 24, forState: .normal)
+        resetGCBtn.setFAIcon(icon: FAType.FARefresh, iconSize: 32, forState: .normal)
         
-        rewBtn.setFAIcon(icon: FAType.FABackward, iconSize: 24, forState: .normal)
-        fwdBtn.setFAIcon(icon: FAType.FAForward, iconSize: 24, forState: .normal)
+        rewBtn.setFAIcon(icon: FAType.FAPlus, iconSize: 32, forState: .normal)
+        fwdBtn.setFAIcon(icon: FAType.FAMinus, iconSize: 32, forState: .normal)
         
-        rewSCBtn.setFAIcon(icon: FAType.FABackward, iconSize: 24, forState: .normal)
-        fwdSCBtn.setFAIcon(icon: FAType.FAForward, iconSize: 24, forState: .normal)
+        rewSCBtn.setFAIcon(icon: FAType.FAPlus, iconSize: 32, forState: .normal)
+        fwdSCBtn.setFAIcon(icon: FAType.FAMinus, iconSize: 32, forState: .normal)
         
-        resetSCBtn.setFAIcon(icon: FAType.FARefresh, iconSize: 24, forState: .normal)
+        resetSCBtn.setFAIcon(icon: FAType.FARefresh, iconSize: 32, forState: .normal)
         
         startBtn.setFATitleColor(color: Mboard.NeonGreenColor)
         
@@ -99,6 +103,14 @@ class ClockController: UIViewController {
         resetSCBtn.layer.borderColor = UIColor.red.cgColor
         resetSCBtn.layer.borderWidth = 1
         resetSCBtn.layer.cornerRadius = 5
+        
+        awayPos.layer.borderColor = Mboard.TealColor.cgColor
+        awayPos.layer.borderWidth = 1
+        awayPos.layer.cornerRadius = 5
+
+        homePos.layer.borderColor = Mboard.TealColor.cgColor
+        homePos.layer.borderWidth = 1
+        homePos.layer.cornerRadius = 5
         
         nextPeriodBtn.isHidden = true
         
@@ -247,8 +259,13 @@ class ClockController: UIViewController {
                         
                         let j = JSON(raw)
                         
+                        print(j)
+                        
                         self.setGameClock(j)
                         self.setShotClock(j)
+                        
+                        self.awayPos.setTitle(j["away"]["name"].string!, for: .normal)
+                        self.homePos.setTitle(j["home"]["name"].string!, for: .normal)
                         
                         self.initWS()
                         
@@ -270,7 +287,7 @@ class ClockController: UIViewController {
         ws = WebSocket(url)
         
         ws.event.close = { code, reason, clean in
-            
+        
             self.ws.open()
             
         }
@@ -310,7 +327,24 @@ class ClockController: UIViewController {
                 
                 case "PERIOD":
                     
-                    self.period.text = obj["val"].string!
+                    self.period.text = self.verbosePeriods[
+                        obj["val"].int!]
+                    
+                case "POSSESSION_HOME":
+
+                    self.homePos.backgroundColor = Mboard.TealColor
+                    self.homePos.setTitleColor(UIColor.white, for: .normal)
+                    
+                    self.awayPos.backgroundColor = UIColor.clear
+                    self.awayPos.setTitleColor(Mboard.TealColor, for: .normal)
+                    
+                case "POSSESSION_AWAY":
+                    
+                    self.awayPos.backgroundColor = Mboard.TealColor
+                    self.awayPos.setTitleColor(UIColor.white, for: .normal)
+                    
+                    self.homePos.backgroundColor = UIColor.clear
+                    self.homePos.setTitleColor(Mboard.TealColor, for: .normal)
                     
                 default:
                     print("Unknown message from websocket.")
@@ -328,7 +362,7 @@ class ClockController: UIViewController {
         ws.send(JSON([
             "cmd": Mboard.WS_CLOCK_STEP,
             "step": -1
-            ]));
+            ]))
         
         clockPause()
         
@@ -339,7 +373,7 @@ class ClockController: UIViewController {
         ws.send(JSON([
             "cmd": Mboard.WS_CLOCK_STEP,
             "step": 1
-            ]));
+            ]))
 
         clockPause()
         
@@ -349,7 +383,7 @@ class ClockController: UIViewController {
     
         ws.send(JSON([
             "cmd": Mboard.WS_CLOCK_RESET
-            ]));
+            ]))
         
         clockPause()
         
@@ -360,7 +394,7 @@ class ClockController: UIViewController {
         ws.send(JSON([
             "cmd": Mboard.WS_SHOT_STEP,
             "step": -1
-            ]));
+            ]))
         
         clockPause()
         
@@ -371,7 +405,7 @@ class ClockController: UIViewController {
         ws.send(JSON([
             "cmd": Mboard.WS_SHOT_STEP,
             "step": 1
-            ]));
+            ]))
         
         clockPause()
         
@@ -381,7 +415,7 @@ class ClockController: UIViewController {
     
         ws.send(JSON([
             "cmd": Mboard.WS_SHOT_RESET
-            ]));
+            ]))
         
         clockPause()
         
@@ -393,7 +427,7 @@ class ClockController: UIViewController {
             
             ws.send(JSON([
                 "cmd": Mboard.WS_CLOCK_STOP
-                ]));
+                ]))
             
             clockPause()
             
@@ -401,7 +435,7 @@ class ClockController: UIViewController {
             
             ws.send(JSON([
                 "cmd": Mboard.WS_CLOCK_START
-                ]));
+                ]))
             
             clockUnpause()
             
@@ -413,11 +447,29 @@ class ClockController: UIViewController {
         
         ws.send(JSON([
             "cmd": Mboard.WS_PERIOD_UP
-            ]));
+            ]))
         
         nextPeriodBtn.isHidden = true
         
     }
+    
+    @IBAction func awayPosChange(_ sender: Any) {
+        
+        ws.send(JSON([
+            "cmd": Mboard.WS_POSSESSION_AWAY
+            ]))
+        
+    }
+    
+    @IBAction func homePosChange(_ sender: Any) {
+
+        ws.send(JSON([
+            "cmd": Mboard.WS_POSSESSION_HOME
+            ]))
+        
+    }
+    
+    
     
     
 } // ClockController

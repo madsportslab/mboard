@@ -30,7 +30,7 @@ class Mboard {
     static let HOMENAME         = MBOARD + "home"
     static let AWAYNAME         = MBOARD + "away"
     static let SERVER           = MBOARD + "server"
-    
+    static let GAME             = MBOARD + "game"
     // ws commands
     
     static let WS_CLOCK_START       = "CLOCK_START"
@@ -55,6 +55,8 @@ class Mboard {
     static let WS_TIMEOUT_HOME_DOWN = "TIMEOUT_HOME_DOWN"
     static let WS_TIMEOUT_AWAY_UP   = "TIMEOUT_AWAY_UP"
     static let WS_TIMEOUT_AWAY_DOWN = "TIMEOUT_AWAY_DOWN"
+    
+    static let MAX_WS_ERRORS        = 20
     
     
     static let TealColor     = UIColor(

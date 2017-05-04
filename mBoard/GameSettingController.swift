@@ -68,10 +68,15 @@ class GameSettingController: UIViewController, UITextFieldDelegate {
         
         if textField == homeName {
             
+            defaults.set(textField.text!, forKey: Mboard.HOMENAME)
+            
             awayName.becomeFirstResponder()
             
         } else {
+            
+            defaults.set(textField.text!, forKey: Mboard.AWAYNAME)
             homeName.becomeFirstResponder()
+            
         }
 
         return true
@@ -85,6 +90,15 @@ class GameSettingController: UIViewController, UITextFieldDelegate {
         let dshotclock   = defaults.integer(forKey: Mboard.SHOTCLOCK)
         let dfouls       = defaults.integer(forKey: Mboard.FOULS)
         let dtimeouts    = defaults.integer(forKey: Mboard.TIMEOUTS)
+        
+        
+        if let an = defaults.object(forKey: Mboard.AWAYNAME) as? String {
+            awayName.text = an
+        }
+        
+        if let hn = defaults.object(forKey: Mboard.HOMENAME) as? String {
+            homeName.text = hn
+        }
         
         if dperiods == 0 {
             
@@ -214,6 +228,10 @@ class GameSettingController: UIViewController, UITextFieldDelegate {
                     self.present(ac, animated: true, completion: nil)
                     
                 } else {
+                    
+                    self.defaults.removeObject(forKey: Mboard.AWAYNAME)
+                    self.defaults.removeObject(forKey: Mboard.HOMENAME)
+                    
                     self.performSegue(withIdentifier: "gameSegue", sender: self)
                 }
                 
@@ -221,6 +239,12 @@ class GameSettingController: UIViewController, UITextFieldDelegate {
         
     } // createGame
 
+    func saveTeams() {
+        
+        defaults.set(homeName.text!, forKey: Mboard.HOMENAME)
+        defaults.set(awayName.text!, forKey: Mboard.AWAYNAME)
+        
+    } // saveTeams
     
     // MARK: Actions
     @IBAction func startGame(_ sender: Any) {
@@ -247,22 +271,27 @@ class GameSettingController: UIViewController, UITextFieldDelegate {
     } // startGame
     
     @IBAction func changePeriods(_ sender: Any) {
+        saveTeams()
         self.performSegue(withIdentifier: "periodsSegue", sender: self)
     } // changePeriods
     
     @IBAction func changeMinutes(_ sender: Any) {
+        saveTeams()
         self.performSegue(withIdentifier: "minutesSegue", sender: self)
     }
     
     @IBAction func changeShotclock(_ sender: Any) {
+        saveTeams()
         self.performSegue(withIdentifier: "shotclockSegue", sender: self)
     }
     
     @IBAction func changeFouls(_ sender: Any) {
+        saveTeams()
         self.performSegue(withIdentifier: "foulsSegue", sender: self)
     }
     
     @IBAction func changeTimeouts(_ sender: Any) {
+        saveTeams()
         self.performSegue(withIdentifier: "timeoutsSegue", sender: self)
     }
     

@@ -56,6 +56,8 @@ class GameController: UIViewController {
     @IBOutlet weak var homeT4: UILabel!
     @IBOutlet weak var awayFouls: UILabel!
     @IBOutlet weak var homeFouls: UILabel!
+    @IBOutlet weak var awayName: UILabel!
+    @IBOutlet weak var homeName: UILabel!
     
     override func viewDidDisappear(_ animated: Bool) {
         UIApplication.shared.isIdleTimerDisabled = false
@@ -86,6 +88,17 @@ class GameController: UIViewController {
         endBtn.layer.borderWidth = 1
         endBtn.layer.borderColor = UIColor.red.cgColor
         endBtn.layer.cornerRadius = 5
+        
+        //awayPos.setFAIcon(icon: FAType.FAAngleDoubleLeft, iconSize: 32, forState: .normal)
+        //homePos.setFAIcon(icon: FAType.FAAngleDoubleRight, iconSize: 32, forState: .normal)
+        
+        //awayPos.layer.borderWidth = 1
+        //awayPos.layer.borderColor = Mboard.TealColor.cgColor
+        //awayPos.layer.cornerRadius = 5
+        
+        //homePos.layer.borderWidth = 1
+        //homePos.layer.borderColor = Mboard.TealColor.cgColor
+        //homePos.layer.cornerRadius = 5
         
         m1AwayBtn.setFAIcon(icon: FAType.FAMinus, iconSize: 16, forState: .normal)
         p1AwayBtn.setFAIcon(icon: FAType.FAPlus, iconSize: 16, forState: .normal)
@@ -256,11 +269,9 @@ class GameController: UIViewController {
                     self.setTimeouts(true, data: Int(obj["val"].string!)!)
                 case "AWAY_TIMEOUT":
                     self.setTimeouts(false, data: Int(obj["val"].string!)!)
-                case "POSSESSION_HOME":
-                    print("TODO")
-                case "POSSESSION_AWAY":
-                    print("TODO")
+                    
                 default:
+                    print(obj["key"])
                     print("Unknown message from websocket.")
                 }
                 
@@ -441,6 +452,9 @@ class GameController: UIViewController {
                     
                     print(j)
                     
+                    self.awayName.text = j["away"]["name"].string!
+                    self.homeName.text = j["home"]["name"].string!
+                    
                     self.setTotalPoints(false, data: j["away"]["points"])
                     self.setFouls(false, data: j["away"]["fouls"].int!)
                     self.setTimeouts(false, data: j["away"]["timeouts"].int!)
@@ -499,7 +513,7 @@ class GameController: UIViewController {
         ws.send(JSON([
             "cmd": Mboard.WS_SCORE_AWAY,
             "step": 1
-            ]));
+            ]))
         
     }
     
@@ -508,7 +522,7 @@ class GameController: UIViewController {
         ws.send(JSON([
             "cmd": Mboard.WS_SCORE_AWAY,
             "step": -1
-            ]));
+            ]))
         
     }
     
@@ -517,7 +531,7 @@ class GameController: UIViewController {
         ws.send(JSON([
             "cmd": Mboard.WS_SCORE_AWAY,
             "step": 2
-            ]));
+            ]))
         
     }
     
@@ -526,7 +540,7 @@ class GameController: UIViewController {
         ws.send(JSON([
             "cmd": Mboard.WS_SCORE_AWAY,
             "step": -2
-            ]));
+            ]))
         
     }
     
@@ -535,7 +549,7 @@ class GameController: UIViewController {
         ws.send(JSON([
             "cmd": Mboard.WS_SCORE_AWAY,
             "step": 3
-            ]));
+            ]))
         
     }
     
@@ -544,7 +558,7 @@ class GameController: UIViewController {
         ws.send(JSON([
             "cmd": Mboard.WS_SCORE_AWAY,
             "step": -3
-            ]));
+            ]))
         
     }
     
@@ -553,7 +567,7 @@ class GameController: UIViewController {
         ws.send(JSON([
             "cmd": Mboard.WS_SCORE_HOME,
             "step": 1
-            ]));
+            ]))
         
     }
     
@@ -562,7 +576,7 @@ class GameController: UIViewController {
         ws.send(JSON([
             "cmd": Mboard.WS_SCORE_HOME,
             "step": -1
-            ]));
+            ]))
         
     }
     
@@ -571,7 +585,7 @@ class GameController: UIViewController {
         ws.send(JSON([
             "cmd": Mboard.WS_SCORE_HOME,
             "step": 2
-            ]));
+            ]))
         
     }
     
@@ -580,7 +594,7 @@ class GameController: UIViewController {
         ws.send(JSON([
             "cmd": Mboard.WS_SCORE_HOME,
             "step": -2
-            ]));
+            ]))
         
     }
     
@@ -589,7 +603,7 @@ class GameController: UIViewController {
         ws.send(JSON([
             "cmd": Mboard.WS_SCORE_HOME,
             "step": 3
-            ]));
+            ]))
         
     }
     
@@ -598,7 +612,7 @@ class GameController: UIViewController {
         ws.send(JSON([
             "cmd": Mboard.WS_SCORE_HOME,
             "step": -3
-            ]));
+            ]))
         
     }
     
@@ -606,7 +620,7 @@ class GameController: UIViewController {
         
         ws.send(JSON([
             "cmd": Mboard.WS_FOUL_AWAY_DOWN
-            ]));
+            ]))
         
     }
     
@@ -614,7 +628,7 @@ class GameController: UIViewController {
         
         ws.send(JSON([
             "cmd": Mboard.WS_FOUL_AWAY_UP
-            ]));
+            ]))
         
     }
     
@@ -622,7 +636,7 @@ class GameController: UIViewController {
         
         ws.send(JSON([
             "cmd": Mboard.WS_FOUL_HOME_DOWN
-            ]));
+            ]))
         
     }
     
@@ -630,7 +644,7 @@ class GameController: UIViewController {
         
         ws.send(JSON([
             "cmd": Mboard.WS_FOUL_HOME_UP
-            ]));
+            ]))
         
     }
     
@@ -638,7 +652,7 @@ class GameController: UIViewController {
         
         ws.send(JSON([
             "cmd": Mboard.WS_TIMEOUT_AWAY_DOWN
-            ]));
+            ]))
         
     }
     
@@ -646,7 +660,7 @@ class GameController: UIViewController {
         
         ws.send(JSON([
             "cmd": Mboard.WS_TIMEOUT_AWAY_UP
-            ]));
+            ]))
         
     }
     
@@ -654,7 +668,7 @@ class GameController: UIViewController {
         
         ws.send(JSON([
             "cmd": Mboard.WS_TIMEOUT_HOME_DOWN
-            ]));
+            ]))
         
     }
     
@@ -662,7 +676,7 @@ class GameController: UIViewController {
         
         ws.send(JSON([
             "cmd": Mboard.WS_TIMEOUT_HOME_UP
-            ]));
+            ]))
         
     }
     
@@ -688,6 +702,8 @@ class GameController: UIViewController {
         self.present(ac, animated: true, completion: nil)
         
     }
+
+    
     
     
     
