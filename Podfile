@@ -9,7 +9,7 @@ target 'mBoard' do
   pod "Alamofire", "~> 4.4"
   pod "Font-Awesome-Swift", "~> 1.6.1"
   pod "SwiftyJSON", "~> 3.1.3"
-  pod "KeychainSwift", "~> 7.0.0"
+#  pod "KeychainSwift", "~> 7.0.0"
   pod "SwiftWebSocket", "~> 2.6.5"
   pod "CryptoSwift", "~> 0.6.7"
   pod "Kingfisher", "~> 3.2.4"

@@ -22,17 +22,17 @@ class FirstViewController: UIViewController, UITableViewDelegate, UITableViewDat
     let thead    = ["Previous Games"]
     
     // MARK: Properties
-    @IBOutlet weak var newGameBtn: UIButton!
     @IBOutlet weak var gamesTable: UITableView!
     @IBOutlet weak var progress: UIActivityIndicatorView!
+    @IBOutlet weak var playGameBtn: UIBarButtonItem!
     
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view, typically from a nib.
         
-        newGameBtn.layer.borderWidth = 1
-        newGameBtn.layer.borderColor = Mboard.TealColor.cgColor
-        newGameBtn.layer.cornerRadius = 5
+        //newGameBtn.layer.borderWidth = 1
+        //newGameBtn.layer.borderColor = Mboard.TealColor.cgColor
+        //newGameBtn.layer.cornerRadius = 5
 
         getScores()
 
@@ -123,11 +123,11 @@ class FirstViewController: UIViewController, UITableViewDelegate, UITableViewDat
         
     }
     
-    func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
+    /*func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
         return self.thead[section]
-    }
+    }*/
     
-    /*func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
+    func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
         
         let v = UIView(frame: CGRect(x: 0, y:0, width: view.frame.size.width,
                                      height: 32))
@@ -141,7 +141,7 @@ class FirstViewController: UIViewController, UITableViewDelegate, UITableViewDat
         
         return v
         
-    }*/
+    }
     
     func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCellEditingStyle, forRowAt indexPath: IndexPath) {
         
@@ -385,10 +385,9 @@ class FirstViewController: UIViewController, UITableViewDelegate, UITableViewDat
     
     // MARK: Actions
     
-    @IBAction func newGame(_ sender: Any) {
+    @IBAction func playGame(_ sender: Any) {
         checkActiveGame()
     }
-    
 
 }
 

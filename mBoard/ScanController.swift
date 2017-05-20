@@ -61,7 +61,9 @@ class ScanController: UIViewController, AVCaptureMetadataOutputObjectsDelegate {
             
             preview?.videoGravity = AVLayerVideoGravityResizeAspectFill
             preview?.frame = self.view.layer.bounds
-            
+            //preview?.frame = CGRect(x: self.view.layer.bounds.width/2,
+            //                        y: self.view.layer.bounds.height/2 ,
+            //                        width: 200, height: 200)
             self.view.layer.addSublayer(preview!)
             
             session?.startRunning()
@@ -95,6 +97,8 @@ class ScanController: UIViewController, AVCaptureMetadataOutputObjectsDelegate {
         let obj = metadataObjects[0] as? AVMetadataMachineReadableCodeObject
         
         if obj?.type == AVMetadataObjectTypeQRCode {
+            
+            print("fuck you scum")
             
             let code = preview?.transformedMetadataObject(for: obj) as! AVMetadataMachineReadableCodeObject
             
