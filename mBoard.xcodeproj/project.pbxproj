@@ -9,6 +9,8 @@
 /* Begin PBXBuildFile section */
 		2145A073F057336AEAEF6CE2 /* Pods_mBoardUITests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F805473CAFCCDC735618A222 /* Pods_mBoardUITests.framework */; };
 		7E34FBC5CD974179A1B5A202 /* Pods_mBoard.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B1AD9ADD848A5FBFAD5CBC01 /* Pods_mBoard.framework */; };
+		851236741F0F2C1900532779 /* SelectMboardController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 851236731F0F2C1900532779 /* SelectMboardController.swift */; };
+		851236761F0F2E3000532779 /* ServerViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 851236751F0F2E3000532779 /* ServerViewCell.swift */; };
 		852E6B3C1E8D04A9002888FB /* AdViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 852E6B3B1E8D04A9002888FB /* AdViewController.swift */; };
 		852E6B3E1E8D04C0002888FB /* AboutViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 852E6B3D1E8D04C0002888FB /* AboutViewController.swift */; };
 		852E6B401E8DF853002888FB /* MainTabBarController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 852E6B3F1E8DF853002888FB /* MainTabBarController.swift */; };
@@ -21,6 +23,7 @@
 		852E6B4E1E8FFF8B002888FB /* FoulsController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 852E6B4D1E8FFF8B002888FB /* FoulsController.swift */; };
 		852E6B501E8FFFB4002888FB /* TimeoutsController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 852E6B4F1E8FFFB4002888FB /* TimeoutsController.swift */; };
 		852E6B521E9147D6002888FB /* Mboard.swift in Sources */ = {isa = PBXBuildFile; fileRef = 852E6B511E9147D6002888FB /* Mboard.swift */; };
+		85368C161F09F5E900842086 /* AdvancedConnectView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 85368C151F09F5E900842086 /* AdvancedConnectView.swift */; };
 		8575F1161E8A4B2400EAC50D /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8575F1151E8A4B2400EAC50D /* AppDelegate.swift */; };
 		8575F1181E8A4B2400EAC50D /* FirstViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8575F1171E8A4B2400EAC50D /* FirstViewController.swift */; };
 		8575F11A1E8A4B2400EAC50D /* SecondViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8575F1191E8A4B2400EAC50D /* SecondViewController.swift */; };
@@ -59,6 +62,8 @@
 		6D7E2535424B11B71CC38E40 /* Pods-mBoardUITests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-mBoardUITests.release.xcconfig"; path = "Pods/Target Support Files/Pods-mBoardUITests/Pods-mBoardUITests.release.xcconfig"; sourceTree = "<group>"; };
 		7F31E2DCD55A6D2606D44186 /* Pods-mBoardTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-mBoardTests.release.xcconfig"; path = "Pods/Target Support Files/Pods-mBoardTests/Pods-mBoardTests.release.xcconfig"; sourceTree = "<group>"; };
 		819D57E7DB14AA08605E1E44 /* Pods_mBoardTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_mBoardTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		851236731F0F2C1900532779 /* SelectMboardController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SelectMboardController.swift; sourceTree = "<group>"; };
+		851236751F0F2E3000532779 /* ServerViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ServerViewCell.swift; sourceTree = "<group>"; };
 		852E6B3B1E8D04A9002888FB /* AdViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AdViewController.swift; sourceTree = "<group>"; };
 		852E6B3D1E8D04C0002888FB /* AboutViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AboutViewController.swift; sourceTree = "<group>"; };
 		852E6B3F1E8DF853002888FB /* MainTabBarController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MainTabBarController.swift; sourceTree = "<group>"; };
@@ -71,6 +76,7 @@
 		852E6B4D1E8FFF8B002888FB /* FoulsController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FoulsController.swift; sourceTree = "<group>"; };
 		852E6B4F1E8FFFB4002888FB /* TimeoutsController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TimeoutsController.swift; sourceTree = "<group>"; };
 		852E6B511E9147D6002888FB /* Mboard.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Mboard.swift; sourceTree = "<group>"; };
+		85368C151F09F5E900842086 /* AdvancedConnectView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AdvancedConnectView.swift; sourceTree = "<group>"; };
 		8575F1121E8A4B2400EAC50D /* mBoard.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = mBoard.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		8575F1151E8A4B2400EAC50D /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		8575F1171E8A4B2400EAC50D /* FirstViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FirstViewController.swift; sourceTree = "<group>"; };
@@ -187,6 +193,9 @@
 				85828DF61EA5FCBC006A7C17 /* ScanController.swift */,
 				85EE534B1EADEBAA006F3345 /* GameViewCell.swift */,
 				85B59EFD1EB8369100E72F72 /* SummaryController.swift */,
+				85368C151F09F5E900842086 /* AdvancedConnectView.swift */,
+				851236731F0F2C1900532779 /* SelectMboardController.swift */,
+				851236751F0F2E3000532779 /* ServerViewCell.swift */,
 			);
 			path = mBoard;
 			sourceTree = "<group>";
@@ -509,15 +518,18 @@
 				85EE534C1EADEBAA006F3345 /* GameViewCell.swift in Sources */,
 				85B59EFE1EB8369100E72F72 /* SummaryController.swift in Sources */,
 				8575F11A1E8A4B2400EAC50D /* SecondViewController.swift in Sources */,
+				851236761F0F2E3000532779 /* ServerViewCell.swift in Sources */,
 				852E6B4A1E8FE7A1002888FB /* MinutesController.swift in Sources */,
 				852E6B521E9147D6002888FB /* Mboard.swift in Sources */,
 				852E6B4E1E8FFF8B002888FB /* FoulsController.swift in Sources */,
 				852E6B441E8EA04A002888FB /* GameSettingController.swift in Sources */,
 				852E6B3C1E8D04A9002888FB /* AdViewController.swift in Sources */,
+				85368C161F09F5E900842086 /* AdvancedConnectView.swift in Sources */,
 				852E6B461E8EA5E0002888FB /* GameController.swift in Sources */,
 				85828DF71EA5FCBC006A7C17 /* ScanController.swift in Sources */,
 				852E6B481E8EBE28002888FB /* GameTabBarController.swift in Sources */,
 				85828DF51E9E703F006A7C17 /* ClockController.swift in Sources */,
+				851236741F0F2C1900532779 /* SelectMboardController.swift in Sources */,
 				852E6B401E8DF853002888FB /* MainTabBarController.swift in Sources */,
 				852E6B4C1E8FFF3D002888FB /* PeriodsController.swift in Sources */,
 				8575F1161E8A4B2400EAC50D /* AppDelegate.swift in Sources */,

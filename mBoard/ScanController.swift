@@ -16,6 +16,7 @@ class ScanController: UIViewController, AVCaptureMetadataOutputObjectsDelegate {
     var session:AVCaptureSession?
     var preview:AVCaptureVideoPreviewLayer?
     var qr:UIView?
+    var servers = [String]()
     
     let defaults = UserDefaults.standard
     
@@ -98,8 +99,6 @@ class ScanController: UIViewController, AVCaptureMetadataOutputObjectsDelegate {
         
         if obj?.type == AVMetadataObjectTypeQRCode {
             
-            print("fuck you scum")
-            
             let code = preview?.transformedMetadataObject(for: obj) as! AVMetadataMachineReadableCodeObject
             
             qr?.frame = code.bounds
@@ -107,6 +106,37 @@ class ScanController: UIViewController, AVCaptureMetadataOutputObjectsDelegate {
             if obj?.stringValue != nil {
                 
                 defaults.set(obj!.stringValue, forKey: Mboard.SERVER)
+                
+                let saved = defaults.array(forKey: Mboard.SAVED_SERVERS) as? [String]
+                
+                var save = true
+                
+                if saved != nil {
+                
+                    for s in saved! {
+                        
+                        if s == obj!.stringValue {
+                            save = false
+                        }
+                        
+                    }
+                    
+                    if save {
+                        
+                        servers.append(obj!.stringValue)
+                        
+                        defaults.set(servers, forKey: Mboard.SAVED_SERVERS)
+                        
+                    }
+                    
+                } else {
+                    
+                    servers.append(obj!.stringValue)
+                    
+                    defaults.set(servers, forKey: Mboard.SAVED_SERVERS)
+                    
+                }
+                
                 
                 session?.stopRunning()
                 

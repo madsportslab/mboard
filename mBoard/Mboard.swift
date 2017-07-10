@@ -11,7 +11,9 @@ import UIKit
 class Mboard {
     
     static let HTTP             = "http://"
+    static let HTTPS            = "https://"
     static let WS               = "ws://"
+    static let WSS              = "wss://"
     
     static let SOCKET           = "ws://127.0.0.1:8000/ws"
     static let GAMESOCKET       = SOCKET + "/game"
@@ -30,7 +32,9 @@ class Mboard {
     static let HOMENAME         = MBOARD + "home"
     static let AWAYNAME         = MBOARD + "away"
     static let SERVER           = MBOARD + "server"
+    static let SAVED_SERVERS    = MBOARD + "savedservers"
     static let GAME             = MBOARD + "game"
+
     // ws commands
     
     static let WS_CLOCK_START       = "CLOCK_START"

@@ -55,45 +55,6 @@ class FirstViewController: UIViewController, UITableViewDelegate, UITableViewDat
         return gameInfo.count
     }
     
-    /*func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-    
-        let cell = gamesCollection.dequeueReusableCell(withReuseIdentifier: "cell",
-                                                  for: indexPath) as! GameViewCell
-        
-        cell.awayTeam.text = gameInfo[indexPath.item][0]
-        cell.awayLogo.setFAIcon(icon: FAType.FAPictureO, iconSize: 48)
-        cell.awayScore.text = gameInfo[indexPath.item][1]
-        
-        cell.homeTeam.text = gameInfo[indexPath.item][2]
-        cell.homeLogo.setFAIcon(icon: FAType.FAPictureO, iconSize: 48)
-        cell.homeScore.text = gameInfo[indexPath.item][3]
-        
-        //cell.backgroundColor = Mboard.TealColor
-        cell.layer.borderColor = Mboard.TealColor.cgColor
-        cell.layer.borderWidth = 1
-        cell.layer.cornerRadius = 5
-        
-        return cell
-    
-    }
-    
-    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        
-        defaults.set(gameInfo[indexPath.item][4], forKey: Mboard.GAME)
-        self.performSegue(withIdentifier: "summarySegue", sender: self)
-        
-    }
-    
-    func collectionView(_ collectionView: UICollectionView, viewForSupplementaryElementOfKind kind: String, at indexPath: IndexPath) -> UICollectionReusableView {
-
-        let header = gamesCollection.dequeueReusableSupplementaryView(
-            ofKind: kind, withReuseIdentifier: "headerCell", for: indexPath) as! GameHeaderView
-        
-        header.name.text = "Previous games"
-        
-        return header
-    }*/
-    
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         
         let cell = gamesTable.dequeueReusableCell(withIdentifier: "cell",
@@ -240,7 +201,17 @@ class FirstViewController: UIViewController, UITableViewDelegate, UITableViewDat
                 switch response.result {
                 case .failure(let error):
                     
-                    print(error)
+                    let ac = UIAlertController(title: "Connection error",
+                                               message: error.localizedDescription,
+                                               preferredStyle: UIAlertControllerStyle.alert)
+                    
+                    let OK = UIAlertAction(title: "OK",
+                                           style: UIAlertActionStyle.default,
+                                           handler: nil)
+                    
+                    ac.addAction(OK)
+                    
+                    self.present(ac, animated: true, completion: nil)
                     
                     
                 case .success:
@@ -249,15 +220,12 @@ class FirstViewController: UIViewController, UITableViewDelegate, UITableViewDat
                         
                         let j = JSON(raw)
                         
-                        print(j)
-                        
                         var tbody = [[String]]()
                         
                         //tbody.append(self.thead)
                         
                         for (_, v) in j {
 
-                            print("shit")
                             print(v)
                             
                             if v["status"].int == 1 {
@@ -330,9 +298,11 @@ class FirstViewController: UIViewController, UITableViewDelegate, UITableViewDat
                         
                     }
                     
-                    self.progress.stopAnimating()
+                    
                     
                 }
+                
+                self.progress.stopAnimating()
                 
         }
         
