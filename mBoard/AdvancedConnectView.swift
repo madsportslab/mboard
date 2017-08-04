@@ -13,8 +13,7 @@ class AdvancedConnectView: UIViewController {
     let defaults = UserDefaults.standard
     
     // MARK: Properties
-    @IBOutlet weak var connectBtn: UIButton!
-    @IBOutlet weak var cancelBtn: UIButton!
+    @IBOutlet weak var saveBtn: UIBarButtonItem!
     @IBOutlet weak var address: UITextField!
     
     override func viewDidLoad() {
@@ -70,8 +69,6 @@ class AdvancedConnectView: UIViewController {
                     
                     servers?.append(address.text!)
                     
-                    print(servers)
-                    
                     defaults.set(servers, forKey: Mboard.SAVED_SERVERS)
                     
                 }
@@ -82,14 +79,11 @@ class AdvancedConnectView: UIViewController {
                 
                 newServers.append(address.text!)
                 
-                print("new")
-                print(newServers)
-                
                 defaults.set(newServers, forKey: Mboard.SAVED_SERVERS)
                 
             }
             
-            self.performSegue(withIdentifier: "connectedSegue",
+            self.performSegue(withIdentifier: "addedSegue",
                               sender: self)
             
         }

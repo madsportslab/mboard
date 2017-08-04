@@ -58,6 +58,11 @@ class GameController: UIViewController {
     @IBOutlet weak var homeFouls: UILabel!
     @IBOutlet weak var awayName: UILabel!
     @IBOutlet weak var homeName: UILabel!
+    @IBOutlet weak var m1Label: UILabel!
+    @IBOutlet weak var m2Label: UILabel!
+    @IBOutlet weak var m3Label: UILabel!
+    @IBOutlet weak var foulLabel: UILabel!
+    @IBOutlet weak var timeoutLabel: UILabel!
     
     override func viewDidDisappear(_ animated: Bool) {
         UIApplication.shared.isIdleTimerDisabled = false
@@ -205,6 +210,26 @@ class GameController: UIViewController {
         pTHomeBtn.layer.borderWidth = 1
         pTHomeBtn.layer.borderColor = Mboard.TealColor.cgColor
         pTHomeBtn.layer.cornerRadius = 5
+        
+        m1Label.layer.cornerRadius = 5
+        m1Label.layer.borderColor = UIColor.white.cgColor
+        m1Label.layer.masksToBounds = true
+        
+        m2Label.layer.cornerRadius = 5
+        m2Label.layer.borderColor = UIColor.white.cgColor
+        m2Label.layer.masksToBounds = true
+        
+        m3Label.layer.cornerRadius = 5
+        m3Label.layer.borderColor = UIColor.white.cgColor
+        m3Label.layer.masksToBounds = true
+        
+        foulLabel.layer.cornerRadius = 5
+        foulLabel.layer.borderColor = UIColor.white.cgColor
+        foulLabel.layer.masksToBounds = true
+        
+        timeoutLabel.layer.cornerRadius = 5
+        timeoutLabel.layer.borderColor = UIColor.white.cgColor
+        timeoutLabel.layer.masksToBounds = true
         
     }
     

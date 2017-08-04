@@ -8,6 +8,8 @@
 
 import UIKit
 
+import Font_Awesome_Swift
+
 class SelectMboardController: UIViewController, UITableViewDelegate, UITableViewDataSource {
 
     let defaults = UserDefaults.standard
@@ -15,6 +17,7 @@ class SelectMboardController: UIViewController, UITableViewDelegate, UITableView
     
     // MARK: Properties
     @IBOutlet weak var boards: UITableView!
+    @IBOutlet weak var addDevice: UIBarButtonItem!
     
     override func viewDidAppear(_ animated: Bool) {
         
@@ -31,9 +34,9 @@ class SelectMboardController: UIViewController, UITableViewDelegate, UITableView
         
         let saved = (defaults.object(forKey: Mboard.SAVED_SERVERS) as? [String])!
         
-        self.servers = saved
+        addDevice.setFAIcon(icon: FAType.FAPlus, iconSize: 24)
         
-        print(self.servers)
+        self.servers = saved
         
         self.boards.reloadData()
         

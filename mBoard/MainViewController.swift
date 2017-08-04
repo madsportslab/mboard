@@ -18,19 +18,13 @@ class MainViewController: UIViewController {
     // MARK: Properties
     @IBOutlet weak var scanQR: UIButton!
     @IBOutlet weak var status: UILabel!
-    @IBOutlet weak var currentBtn: UIButton!
+    @IBOutlet weak var advanced: UIButton!
     
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view, typically from a nib.
         
         let ed = defaults.object(forKey: Mboard.SERVER) as? String
-        
-        if ed == nil {
-            currentBtn.isHidden = true
-        } else {
-            currentBtn.isHidden = false
-        }
         
         scanQR.setFAIcon(icon: FAType.FACamera, iconSize: 128, forState: .normal)
     
