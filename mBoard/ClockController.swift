@@ -181,6 +181,13 @@ class ClockController: UIViewController {
         
         if j["settings"].exists() {
             vio = j["settings"]["shot"].int!
+            
+            if vio == -1 {
+                self.shotClock.isHidden = true
+            } else {
+                self.shotClock.isHidden = false
+            }
+            
         } else {
             vio = j["shotclock"].int!
         }

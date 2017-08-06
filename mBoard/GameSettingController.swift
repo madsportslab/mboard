@@ -136,9 +136,9 @@ class GameSettingController: UIViewController, UITextFieldDelegate {
         
         if dshotclock == 0 {
             
-            defaults.set(30, forKey: Mboard.SHOTCLOCK)
+            defaults.set(0, forKey: Mboard.SHOTCLOCK)
             
-            shotclock.setFAText(prefixText: "30\t", icon: FAType.FAAngleRight,
+            shotclock.setFAText(prefixText: "0\t", icon: FAType.FAAngleRight,
                               postfixText: "\t", size: 14, forState: .normal, iconSize: 16)
             
         } else {

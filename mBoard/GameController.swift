@@ -91,7 +91,7 @@ class GameController: UIViewController {
         homeT4.setFAIcon(icon: FAType.FACircle, iconSize: 24)
         
         endBtn.layer.borderWidth = 1
-        endBtn.layer.borderColor = UIColor.red.cgColor
+        endBtn.layer.borderColor = Mboard.TealColor.cgColor
         endBtn.layer.cornerRadius = 5
         
         //awayPos.setFAIcon(icon: FAType.FAAngleDoubleLeft, iconSize: 32, forState: .normal)
