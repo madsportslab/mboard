@@ -323,19 +323,25 @@ class ClockController: UIViewController {
                     self.setGameClock(v)
                     self.setShotClock(v)
                     
+                    
                 case "SHOT_VIOLATION":
                     
                     self.clockPause()
-                
+                    
+                    // play sound on server side
+                    
+                    
                 case "END_PERIOD":
                     
                     self.nextPeriodBtn.isHidden = false
                     self.clockPause()
-                
+                    
+                    
                 case "PERIOD":
                     
                     self.period.text = self.verbosePeriods[
                         obj["val"].int!]
+                    
                     
                 case "POSSESSION_HOME":
 
@@ -345,6 +351,7 @@ class ClockController: UIViewController {
                     self.awayPos.backgroundColor = UIColor.clear
                     self.awayPos.setTitleColor(Mboard.TealColor, for: .normal)
                     
+                    
                 case "POSSESSION_AWAY":
                     
                     self.awayPos.backgroundColor = Mboard.TealColor
@@ -353,8 +360,10 @@ class ClockController: UIViewController {
                     self.homePos.backgroundColor = UIColor.clear
                     self.homePos.setTitleColor(Mboard.TealColor, for: .normal)
                     
+                    
                 default:
                     print("Unknown message from websocket.")
+
                 }
                 
             }

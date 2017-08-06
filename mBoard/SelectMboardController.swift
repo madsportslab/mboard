@@ -32,11 +32,13 @@ class SelectMboardController: UIViewController, UITableViewDelegate, UITableView
         self.boards.delegate = self
         self.boards.dataSource = self
         
-        let saved = (defaults.object(forKey: Mboard.SAVED_SERVERS) as? [String])!
+        let saved = (defaults.object(
+            forKey: Mboard.SAVED_SERVERS) as? [String])!
+        
+        self.servers = saved
         
         addDevice.setFAIcon(icon: FAType.FAPlus, iconSize: 24)
         
-        self.servers = saved
         
         self.boards.reloadData()
         
