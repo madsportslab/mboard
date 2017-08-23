@@ -36,6 +36,8 @@
 		85828DF71EA5FCBC006A7C17 /* ScanController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 85828DF61EA5FCBC006A7C17 /* ScanController.swift */; };
 		85B59EFE1EB8369100E72F72 /* SummaryController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 85B59EFD1EB8369100E72F72 /* SummaryController.swift */; };
 		85BC43EB1F2AFE20006EE87C /* help-screen1.png in Resources */ = {isa = PBXBuildFile; fileRef = 85BC43EA1F2AFE20006EE87C /* help-screen1.png */; };
+		85D2EBB01F3ECAED004D801A /* LogViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 85D2EBAF1F3ECAED004D801A /* LogViewCell.swift */; };
+		85D2EBB21F3EE94D004D801A /* LogViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 85D2EBB11F3EE94D004D801A /* LogViewController.swift */; };
 		85EE534C1EADEBAA006F3345 /* GameViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 85EE534B1EADEBAA006F3345 /* GameViewCell.swift */; };
 		85F1433C1E9BC62300088099 /* ShotClockController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 85F1433B1E9BC62300088099 /* ShotClockController.swift */; };
 		CD3CF2E6E5A7A23389C9B7DA /* Pods_mBoardTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 819D57E7DB14AA08605E1E44 /* Pods_mBoardTests.framework */; };
@@ -96,6 +98,8 @@
 		85828DF61EA5FCBC006A7C17 /* ScanController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ScanController.swift; sourceTree = "<group>"; };
 		85B59EFD1EB8369100E72F72 /* SummaryController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SummaryController.swift; sourceTree = "<group>"; };
 		85BC43EA1F2AFE20006EE87C /* help-screen1.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "help-screen1.png"; path = "../../../../Downloads/help-screen1.png"; sourceTree = "<group>"; };
+		85D2EBAF1F3ECAED004D801A /* LogViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LogViewCell.swift; sourceTree = "<group>"; };
+		85D2EBB11F3EE94D004D801A /* LogViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LogViewController.swift; sourceTree = "<group>"; };
 		85EE534B1EADEBAA006F3345 /* GameViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GameViewCell.swift; sourceTree = "<group>"; };
 		85F1433B1E9BC62300088099 /* ShotClockController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ShotClockController.swift; sourceTree = "<group>"; };
 		A712E8CE2508699822681272 /* Pods-mBoard.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-mBoard.debug.xcconfig"; path = "Pods/Target Support Files/Pods-mBoard/Pods-mBoard.debug.xcconfig"; sourceTree = "<group>"; };
@@ -199,6 +203,8 @@
 				85368C151F09F5E900842086 /* AdvancedConnectView.swift */,
 				851236731F0F2C1900532779 /* SelectMboardController.swift */,
 				851236751F0F2E3000532779 /* ServerViewCell.swift */,
+				85D2EBAF1F3ECAED004D801A /* LogViewCell.swift */,
+				85D2EBB11F3EE94D004D801A /* LogViewController.swift */,
 			);
 			path = mBoard;
 			sourceTree = "<group>";
@@ -532,7 +538,9 @@
 				852E6B461E8EA5E0002888FB /* GameController.swift in Sources */,
 				85828DF71EA5FCBC006A7C17 /* ScanController.swift in Sources */,
 				852E6B481E8EBE28002888FB /* GameTabBarController.swift in Sources */,
+				85D2EBB21F3EE94D004D801A /* LogViewController.swift in Sources */,
 				85828DF51E9E703F006A7C17 /* ClockController.swift in Sources */,
+				85D2EBB01F3ECAED004D801A /* LogViewCell.swift in Sources */,
 				851236741F0F2C1900532779 /* SelectMboardController.swift in Sources */,
 				852E6B401E8DF853002888FB /* MainTabBarController.swift in Sources */,
 				852E6B4C1E8FFF3D002888FB /* PeriodsController.swift in Sources */,

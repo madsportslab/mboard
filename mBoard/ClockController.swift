@@ -41,13 +41,14 @@ class ClockController: UIViewController {
     @IBOutlet weak var shotLabel: UILabel!
     @IBOutlet weak var awayPos: UIButton!
     @IBOutlet weak var homePos: UIButton!
+    @IBOutlet weak var posLabel: UILabel!
     
     override func viewDidDisappear(_ animated: Bool) {
         UIApplication.shared.isIdleTimerDisabled = false
     }
     
     override func viewDidAppear(_ animated: Bool) {
-        //loadGame()
+        
     }
     
     override func viewDidLoad() {
@@ -59,6 +60,9 @@ class ClockController: UIViewController {
         server = (defaults.object(forKey: Mboard.SERVER) as? String)!
         
         clockPause()
+        
+        posLabel.layer.masksToBounds = true
+        posLabel.layer.cornerRadius = 5
         
         nextPeriodBtn.layer.cornerRadius = 5
         
@@ -74,9 +78,9 @@ class ClockController: UIViewController {
         
         resetSCBtn.setFAIcon(icon: FAType.FARefresh, iconSize: 32, forState: .normal)
         
-        startBtn.setFATitleColor(color: Mboard.NeonGreenColor)
+        //startBtn.setFATitleColor(color: Mboard.NeonGreenColor)
         
-        startBtn.layer.borderColor = Mboard.NeonGreenColor.cgColor
+        //startBtn.layer.borderColor = Mboard.NeonGreenColor.cgColor
         startBtn.layer.borderWidth = 1
         startBtn.layer.cornerRadius = 5
         
@@ -203,7 +207,7 @@ class ClockController: UIViewController {
         
         running = false
         
-        startBtn.setFAIcon(icon: FAType.FAPlay, iconSize: 96, forState: .normal)
+        startBtn.setFAIcon(icon: FAType.FAPlay, iconSize: 36, forState: .normal)
         
     } // clockPause
 
@@ -211,7 +215,7 @@ class ClockController: UIViewController {
         
         running = true
         
-        startBtn.setFAIcon(icon: FAType.FAPause, iconSize: 96, forState: .normal)
+        startBtn.setFAIcon(icon: FAType.FAPause, iconSize: 36, forState: .normal)
         
     } // clockPause
     
@@ -328,6 +332,8 @@ class ClockController: UIViewController {
                     
                     self.clockPause()
                     
+                    
+                    
                     // play sound on server side
                     
                     
@@ -339,26 +345,32 @@ class ClockController: UIViewController {
                     
                 case "PERIOD":
                     
-                    self.period.text = self.verbosePeriods[
-                        obj["val"].int!]
+                    let p = obj["val"].string!
+                    
+                    self.period.text = self.verbosePeriods[Int(p)!]
+                    
+                    //self.period.text = self.verbosePeriods[
+                      //  obj["val"].int!]
                     
                     
                 case "POSSESSION_HOME":
 
-                    self.homePos.backgroundColor = Mboard.TealColor
-                    self.homePos.setTitleColor(UIColor.white, for: .normal)
+                    self.homePos.layer.borderColor = UIColor.white.cgColor
+                    self.awayPos.layer.borderColor = Mboard.TealColor.cgColor
                     
-                    self.awayPos.backgroundColor = UIColor.clear
-                    self.awayPos.setTitleColor(Mboard.TealColor, for: .normal)
+                    //self.homePos.setTitleColor(UIColor.white, for: .normal)
+                    
+                    //self.awayPos.setTitleColor(Mboard.TealColor, for: .normal)
                     
                     
                 case "POSSESSION_AWAY":
                     
-                    self.awayPos.backgroundColor = Mboard.TealColor
-                    self.awayPos.setTitleColor(UIColor.white, for: .normal)
+                    self.awayPos.layer.borderColor = UIColor.white.cgColor
+                    self.homePos.layer.borderColor = Mboard.TealColor.cgColor
                     
-                    self.homePos.backgroundColor = UIColor.clear
-                    self.homePos.setTitleColor(Mboard.TealColor, for: .normal)
+                    //self.awayPos.setTitleColor(UIColor.white, for: .normal)
+                    
+                    //self.homePos.setTitleColor(Mboard.TealColor, for: .normal)
                     
                     
                 default:
@@ -472,15 +484,19 @@ class ClockController: UIViewController {
     @IBAction func awayPosChange(_ sender: Any) {
         
         ws.send(JSON([
-            "cmd": Mboard.WS_POSSESSION_AWAY
-            ]))
+            "cmd": Mboard.WS_POSSESSION_AWAY,
+            "meta": ["stop": !running]
+        ]))
+        
+        
         
     }
     
     @IBAction func homePosChange(_ sender: Any) {
 
         ws.send(JSON([
-            "cmd": Mboard.WS_POSSESSION_HOME
+            "cmd": Mboard.WS_POSSESSION_HOME,
+            "meta": ["stop": !running]
             ]))
         
     }

@@ -80,18 +80,18 @@ class GameController: UIViewController {
     
         server = (defaults.object(forKey: Mboard.SERVER) as? String)!
         
-        awayT1.setFAIcon(icon: FAType.FACircle, iconSize: 24)
-        awayT2.setFAIcon(icon: FAType.FACircle, iconSize: 24)
-        awayT3.setFAIcon(icon: FAType.FACircle, iconSize: 24)
-        awayT4.setFAIcon(icon: FAType.FACircle, iconSize: 24)
+        awayT1.setFAIcon(icon: FAType.FACircle, iconSize: 18)
+        awayT2.setFAIcon(icon: FAType.FACircle, iconSize: 18)
+        awayT3.setFAIcon(icon: FAType.FACircle, iconSize: 18)
+        awayT4.setFAIcon(icon: FAType.FACircle, iconSize: 18)
         
-        homeT1.setFAIcon(icon: FAType.FACircle, iconSize: 24)
-        homeT2.setFAIcon(icon: FAType.FACircle, iconSize: 24)
-        homeT3.setFAIcon(icon: FAType.FACircle, iconSize: 24)
-        homeT4.setFAIcon(icon: FAType.FACircle, iconSize: 24)
+        homeT1.setFAIcon(icon: FAType.FACircle, iconSize: 18)
+        homeT2.setFAIcon(icon: FAType.FACircle, iconSize: 18)
+        homeT3.setFAIcon(icon: FAType.FACircle, iconSize: 18)
+        homeT4.setFAIcon(icon: FAType.FACircle, iconSize: 18)
         
         endBtn.layer.borderWidth = 1
-        endBtn.layer.borderColor = Mboard.TealColor.cgColor
+        //endBtn.layer.borderColor = Mboard.TealColor.cgColor
         endBtn.layer.cornerRadius = 5
         
         //awayPos.setFAIcon(icon: FAType.FAAngleDoubleLeft, iconSize: 32, forState: .normal)
@@ -312,38 +312,38 @@ class GameController: UIViewController {
         
             if j == 4 {
                 
-                homeT1.isHidden = false
-                homeT2.isHidden = false
-                homeT3.isHidden = false
-                homeT4.isHidden = false
+                homeT1.isEnabled = false
+                homeT2.isEnabled = false
+                homeT3.isEnabled = false
+                homeT4.isEnabled = false
                 
             } else if j == 3 {
                 
-                homeT1.isHidden = true
-                homeT2.isHidden = false
-                homeT3.isHidden = false
-                homeT4.isHidden = false
+                homeT1.isEnabled = true
+                homeT2.isEnabled = false
+                homeT3.isEnabled = false
+                homeT4.isEnabled = false
                 
             } else if j == 2 {
                 
-                homeT1.isHidden = true
-                homeT2.isHidden = true
-                homeT3.isHidden = false
-                homeT4.isHidden = false
+                homeT1.isEnabled = true
+                homeT2.isEnabled = true
+                homeT3.isEnabled = false
+                homeT4.isEnabled = false
                 
             } else if j == 1 {
                 
-                homeT1.isHidden = true
-                homeT2.isHidden = true
-                homeT3.isHidden = true
-                homeT4.isHidden = false
+                homeT1.isEnabled = true
+                homeT2.isEnabled = true
+                homeT3.isEnabled = true
+                homeT4.isEnabled = false
                 
             } else if j == 0 {
                 
-                homeT1.isHidden = true
-                homeT2.isHidden = true
-                homeT3.isHidden = true
-                homeT4.isHidden = true
+                homeT1.isEnabled = true
+                homeT2.isEnabled = true
+                homeT3.isEnabled = true
+                homeT4.isEnabled = true
                 
             }
             
@@ -351,38 +351,38 @@ class GameController: UIViewController {
             
             if j == 4 {
                 
-                awayT1.isHidden = false
-                awayT2.isHidden = false
-                awayT3.isHidden = false
-                awayT4.isHidden = false
+                awayT1.isEnabled = false
+                awayT2.isEnabled = false
+                awayT3.isEnabled = false
+                awayT4.isEnabled = false
                 
             } else if j == 3 {
                 
-                awayT1.isHidden = true
-                awayT2.isHidden = false
-                awayT3.isHidden = false
-                awayT4.isHidden = false
+                awayT1.isEnabled = true
+                awayT2.isEnabled = false
+                awayT3.isEnabled = false
+                awayT4.isEnabled = false
                 
             } else if j == 2 {
                 
-                awayT1.isHidden = true
-                awayT2.isHidden = true
-                awayT3.isHidden = false
-                awayT4.isHidden = false
+                awayT1.isEnabled = true
+                awayT2.isEnabled = true
+                awayT3.isEnabled = false
+                awayT4.isEnabled = false
                 
             } else if j == 1 {
                 
-                awayT1.isHidden = true
-                awayT2.isHidden = true
-                awayT3.isHidden = true
-                awayT4.isHidden = false
+                awayT1.isEnabled = true
+                awayT2.isEnabled = true
+                awayT3.isEnabled = true
+                awayT4.isEnabled = false
                 
             } else if j == 0 {
                 
-                awayT1.isHidden = true
-                awayT2.isHidden = true
-                awayT3.isHidden = true
-                awayT4.isHidden = true
+                awayT1.isEnabled = true
+                awayT2.isEnabled = true
+                awayT3.isEnabled = true
+                awayT4.isEnabled = true
                 
             }
             

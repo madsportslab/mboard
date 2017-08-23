@@ -6,7 +6,7 @@
 //  Copyright © 2017 madsportslab. All rights reserved.
 //
 
-import AVKit
+import UIKit
 
 class GameViewCell: UITableViewCell {
     
