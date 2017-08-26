@@ -14,6 +14,7 @@ class SelectMboardController: UIViewController, UITableViewDelegate, UITableView
 
     let defaults = UserDefaults.standard
     var servers = [String]()
+    var saved = [String]()
     
     // MARK: Properties
     @IBOutlet weak var boards: UITableView!
@@ -32,10 +33,9 @@ class SelectMboardController: UIViewController, UITableViewDelegate, UITableView
         self.boards.delegate = self
         self.boards.dataSource = self
         
-        let saved = (defaults.object(
-            forKey: Mboard.SAVED_SERVERS) as? [String])!
-        
-        self.servers = saved
+        if let s = defaults.object(forKey: Mboard.SAVED_SERVERS) as? [String] {
+            self.servers = s
+        }
         
         addDevice.setFAIcon(icon: FAType.FAPlus, iconSize: 24)
         

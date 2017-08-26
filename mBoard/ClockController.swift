@@ -65,49 +65,61 @@ class ClockController: UIViewController {
         posLabel.layer.cornerRadius = 5
         
         nextPeriodBtn.layer.cornerRadius = 5
+        nextPeriodBtn.layer.borderColor = UIColor.red.cgColor
+        nextPeriodBtn.layer.borderWidth = 1
+        nextPeriodBtn.isEnabled = false
         
-        //startBtn.setFAIcon(icon: FAType.FAPlay, iconSize: 96, forState: .normal)
         
-        resetGCBtn.setFAIcon(icon: FAType.FARefresh, iconSize: 32, forState: .normal)
+        resetGCBtn.setFAIcon(icon: FAType.FARefresh, iconSize: 16, forState: .normal)
         
-        rewBtn.setFAIcon(icon: FAType.FAPlus, iconSize: 32, forState: .normal)
-        fwdBtn.setFAIcon(icon: FAType.FAMinus, iconSize: 32, forState: .normal)
+        rewBtn.setFAIcon(icon: FAType.FAPlus, iconSize: 16, forState: .normal)
+        fwdBtn.setFAIcon(icon: FAType.FAMinus, iconSize: 16, forState: .normal)
         
-        rewSCBtn.setFAIcon(icon: FAType.FAPlus, iconSize: 32, forState: .normal)
-        fwdSCBtn.setFAIcon(icon: FAType.FAMinus, iconSize: 32, forState: .normal)
+        rewSCBtn.setFAIcon(icon: FAType.FAPlus, iconSize: 16, forState: .normal)
+        fwdSCBtn.setFAIcon(icon: FAType.FAMinus, iconSize: 16, forState: .normal)
         
-        resetSCBtn.setFAIcon(icon: FAType.FARefresh, iconSize: 32, forState: .normal)
+        resetSCBtn.setFAIcon(icon: FAType.FARefresh, iconSize: 16, forState: .normal)
         
         //startBtn.setFATitleColor(color: Mboard.NeonGreenColor)
         
-        //startBtn.layer.borderColor = Mboard.NeonGreenColor.cgColor
+        startBtn.layer.borderColor = Mboard.NeonGreenColor.cgColor
         startBtn.layer.borderWidth = 1
-        startBtn.layer.cornerRadius = 5
+        startBtn.layer.cornerRadius = startBtn.bounds.size.width/2
+        
+        startBtn.layer.masksToBounds = true
+
         
         rewBtn.layer.borderColor = Mboard.TealColor.cgColor
         rewBtn.layer.borderWidth = 1
-        rewBtn.layer.cornerRadius = 5
+        rewBtn.layer.cornerRadius = rewBtn.bounds.size.width/2
+        rewBtn.layer.masksToBounds = true
         
         fwdBtn.layer.borderColor = Mboard.TealColor.cgColor
         fwdBtn.layer.borderWidth = 1
-        fwdBtn.layer.cornerRadius = 5
+        fwdBtn.layer.cornerRadius = fwdBtn.bounds.size.width/2
+        fwdBtn.layer.masksToBounds = true
         
         rewSCBtn.layer.borderColor = Mboard.TealColor.cgColor
         rewSCBtn.layer.borderWidth = 1
-        rewSCBtn.layer.cornerRadius = 5
+        rewSCBtn.layer.cornerRadius = rewSCBtn.bounds.size.width/2
+        rewSCBtn.layer.masksToBounds = true
         
         fwdSCBtn.layer.borderColor = Mboard.TealColor.cgColor
         fwdSCBtn.layer.borderWidth = 1
-        fwdSCBtn.layer.cornerRadius = 5
+        fwdSCBtn.layer.cornerRadius = fwdSCBtn.bounds.size.width/2
+        fwdSCBtn.layer.masksToBounds = true
         
         resetGCBtn.layer.borderColor = UIColor.red.cgColor
         resetGCBtn.layer.borderWidth = 1
-        resetGCBtn.layer.cornerRadius = 5
+        resetGCBtn.layer.cornerRadius = fwdBtn.bounds.size.width/2
+        resetGCBtn.layer.masksToBounds = true
+
         
         resetSCBtn.layer.borderColor = UIColor.red.cgColor
         resetSCBtn.layer.borderWidth = 1
-        resetSCBtn.layer.cornerRadius = 5
-        
+        resetSCBtn.layer.cornerRadius = fwdBtn.bounds.size.width/2
+        resetSCBtn.layer.masksToBounds = true
+
         awayPos.layer.borderColor = Mboard.TealColor.cgColor
         awayPos.layer.borderWidth = 1
         awayPos.layer.cornerRadius = 5
@@ -116,7 +128,7 @@ class ClockController: UIViewController {
         homePos.layer.borderWidth = 1
         homePos.layer.cornerRadius = 5
         
-        nextPeriodBtn.isHidden = true
+        
         
         loadGame()
         
@@ -162,7 +174,7 @@ class ClockController: UIViewController {
             
             if ndelta == -1 {
                 gameClock.text = "0.0"
-                nextPeriodBtn.isHidden = false
+                nextPeriodBtn.isEnabled = true
             } else if tenths == 10 {
                 gameClock.text = "\(delta).0"
             } else {
@@ -207,7 +219,7 @@ class ClockController: UIViewController {
         
         running = false
         
-        startBtn.setFAIcon(icon: FAType.FAPlay, iconSize: 36, forState: .normal)
+        startBtn.setFAIcon(icon: FAType.FAPlay, iconSize: 48, forState: .normal)
         
     } // clockPause
 
@@ -215,7 +227,7 @@ class ClockController: UIViewController {
         
         running = true
         
-        startBtn.setFAIcon(icon: FAType.FAPause, iconSize: 36, forState: .normal)
+        startBtn.setFAIcon(icon: FAType.FAPause, iconSize: 48, forState: .normal)
         
     } // clockPause
     
@@ -339,7 +351,7 @@ class ClockController: UIViewController {
                     
                 case "END_PERIOD":
                     
-                    self.nextPeriodBtn.isHidden = false
+                    self.nextPeriodBtn.isEnabled = true
                     self.clockPause()
                     
                     
@@ -355,8 +367,10 @@ class ClockController: UIViewController {
                     
                 case "POSSESSION_HOME":
 
-                    self.homePos.layer.borderColor = UIColor.white.cgColor
-                    self.awayPos.layer.borderColor = Mboard.TealColor.cgColor
+                    //self.homePos.layer.borderColor = UIColor.green.cgColor
+                    //self.awayPos.layer.borderColor = Mboard.TealColor.cgColor
+                    self.homePos.layer.backgroundColor = Mboard.TealColor.cgColor
+                    self.awayPos.layer.backgroundColor = UIColor.clear.cgColor
                     
                     //self.homePos.setTitleColor(UIColor.white, for: .normal)
                     
@@ -365,8 +379,8 @@ class ClockController: UIViewController {
                     
                 case "POSSESSION_AWAY":
                     
-                    self.awayPos.layer.borderColor = UIColor.white.cgColor
-                    self.homePos.layer.borderColor = Mboard.TealColor.cgColor
+                    self.homePos.layer.backgroundColor = UIColor.clear.cgColor
+                    self.awayPos.layer.backgroundColor = Mboard.TealColor.cgColor
                     
                     //self.awayPos.setTitleColor(UIColor.white, for: .normal)
                     
@@ -477,7 +491,7 @@ class ClockController: UIViewController {
             "cmd": Mboard.WS_PERIOD_UP
             ]))
         
-        nextPeriodBtn.isHidden = true
+        nextPeriodBtn.isEnabled = false
         
     }
     

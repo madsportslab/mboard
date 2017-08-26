@@ -133,83 +133,103 @@ class GameController: UIViewController {
         
         m1AwayBtn.layer.borderWidth = 1
         m1AwayBtn.layer.borderColor = Mboard.TealColor.cgColor
-        m1AwayBtn.layer.cornerRadius = 5
+        m1AwayBtn.layer.cornerRadius = m1AwayBtn.bounds.size.width/2
+        m1AwayBtn.layer.masksToBounds = true
         
         m2AwayBtn.layer.borderWidth = 1
         m2AwayBtn.layer.borderColor = Mboard.TealColor.cgColor
-        m2AwayBtn.layer.cornerRadius = 5
+        m2AwayBtn.layer.cornerRadius = m2AwayBtn.bounds.size.width/2
+        m2AwayBtn.layer.masksToBounds = true
         
         m3AwayBtn.layer.borderWidth = 1
         m3AwayBtn.layer.borderColor = Mboard.TealColor.cgColor
-        m3AwayBtn.layer.cornerRadius = 5
+        m3AwayBtn.layer.cornerRadius = m3AwayBtn.bounds.size.width/2
+        m3AwayBtn.layer.masksToBounds = true
         
         p1AwayBtn.layer.borderWidth = 1
         p1AwayBtn.layer.borderColor = Mboard.TealColor.cgColor
-        p1AwayBtn.layer.cornerRadius = 5
+        p1AwayBtn.layer.cornerRadius = p1AwayBtn.bounds.size.width/2
+        p1AwayBtn.layer.masksToBounds = true
         
         p2AwayBtn.layer.borderWidth = 1
         p2AwayBtn.layer.borderColor = Mboard.TealColor.cgColor
-        p2AwayBtn.layer.cornerRadius = 5
+        p2AwayBtn.layer.cornerRadius = p2AwayBtn.bounds.size.width/2
+        p2AwayBtn.layer.masksToBounds = true
         
         p3AwayBtn.layer.borderWidth = 1
         p3AwayBtn.layer.borderColor = Mboard.TealColor.cgColor
-        p3AwayBtn.layer.cornerRadius = 5
+        p3AwayBtn.layer.cornerRadius = p3AwayBtn.bounds.size.width/2
+        p3AwayBtn.layer.masksToBounds = true
         
         mFAwayBtn.layer.borderWidth = 1
         mFAwayBtn.layer.borderColor = Mboard.TealColor.cgColor
-        mFAwayBtn.layer.cornerRadius = 5
+        mFAwayBtn.layer.cornerRadius = mFAwayBtn.bounds.size.width/2
+        mFAwayBtn.layer.masksToBounds = true
         
         pFAwayBtn.layer.borderWidth = 1
         pFAwayBtn.layer.borderColor = Mboard.TealColor.cgColor
-        pFAwayBtn.layer.cornerRadius = 5
+        pFAwayBtn.layer.cornerRadius = pFAwayBtn.bounds.size.width/2
+        pFAwayBtn.layer.masksToBounds = true
         
         mTAwayBtn.layer.borderWidth = 1
         mTAwayBtn.layer.borderColor = Mboard.TealColor.cgColor
-        mTAwayBtn.layer.cornerRadius = 5
+        mTAwayBtn.layer.cornerRadius = mTAwayBtn.bounds.size.width/2
+        mTAwayBtn.layer.masksToBounds = true
         
         pTAwayBtn.layer.borderWidth = 1
         pTAwayBtn.layer.borderColor = Mboard.TealColor.cgColor
-        pTAwayBtn.layer.cornerRadius = 5
+        pTAwayBtn.layer.cornerRadius = pTAwayBtn.bounds.size.width/2
+        pTAwayBtn.layer.masksToBounds = true
         
         m1HomeBtn.layer.borderWidth = 1
         m1HomeBtn.layer.borderColor = Mboard.TealColor.cgColor
-        m1HomeBtn.layer.cornerRadius = 5
+        m1HomeBtn.layer.cornerRadius = m1HomeBtn.bounds.size.width/2
+        m1HomeBtn.layer.masksToBounds = true
         
         m2HomeBtn.layer.borderWidth = 1
         m2HomeBtn.layer.borderColor = Mboard.TealColor.cgColor
-        m2HomeBtn.layer.cornerRadius = 5
+        m2HomeBtn.layer.cornerRadius = m2HomeBtn.bounds.size.width/2
+        m2HomeBtn.layer.masksToBounds = true
         
         m3HomeBtn.layer.borderWidth = 1
         m3HomeBtn.layer.borderColor = Mboard.TealColor.cgColor
-        m3HomeBtn.layer.cornerRadius = 5
+        m3HomeBtn.layer.cornerRadius = m3HomeBtn.bounds.size.width/2
+        m3HomeBtn.layer.masksToBounds = true
         
         p1HomeBtn.layer.borderWidth = 1
         p1HomeBtn.layer.borderColor = Mboard.TealColor.cgColor
-        p1HomeBtn.layer.cornerRadius = 5
+        p1HomeBtn.layer.cornerRadius = p1HomeBtn.bounds.size.width/2
+        p1HomeBtn.layer.masksToBounds = true
         
         p2HomeBtn.layer.borderWidth = 1
         p2HomeBtn.layer.borderColor = Mboard.TealColor.cgColor
-        p2HomeBtn.layer.cornerRadius = 5
+        p2HomeBtn.layer.cornerRadius = p2HomeBtn.bounds.size.width/2
+        p2HomeBtn.layer.masksToBounds = true
         
         p3HomeBtn.layer.borderWidth = 1
         p3HomeBtn.layer.borderColor = Mboard.TealColor.cgColor
-        p3HomeBtn.layer.cornerRadius = 5
+        p3HomeBtn.layer.cornerRadius = p3HomeBtn.bounds.size.width/2
+        p3HomeBtn.layer.masksToBounds = true
         
         mFHomeBtn.layer.borderWidth = 1
         mFHomeBtn.layer.borderColor = Mboard.TealColor.cgColor
-        mFHomeBtn.layer.cornerRadius = 5
+        mFHomeBtn.layer.cornerRadius = mFHomeBtn.bounds.size.width/2
+        mFHomeBtn.layer.masksToBounds = true
         
         pFHomeBtn.layer.borderWidth = 1
         pFHomeBtn.layer.borderColor = Mboard.TealColor.cgColor
-        pFHomeBtn.layer.cornerRadius = 5
+        pFHomeBtn.layer.cornerRadius = pFHomeBtn.bounds.size.width/2
+        pFHomeBtn.layer.masksToBounds = true
         
         mTHomeBtn.layer.borderWidth = 1
         mTHomeBtn.layer.borderColor = Mboard.TealColor.cgColor
-        mTHomeBtn.layer.cornerRadius = 5
+        mTHomeBtn.layer.cornerRadius = mTHomeBtn.bounds.size.width/2
+        mTHomeBtn.layer.masksToBounds = true
         
         pTHomeBtn.layer.borderWidth = 1
         pTHomeBtn.layer.borderColor = Mboard.TealColor.cgColor
-        pTHomeBtn.layer.cornerRadius = 5
+        pTHomeBtn.layer.cornerRadius = pTHomeBtn.bounds.size.width/2
+        pTHomeBtn.layer.masksToBounds = true
         
         m1Label.layer.cornerRadius = 5
         m1Label.layer.borderColor = UIColor.white.cgColor
