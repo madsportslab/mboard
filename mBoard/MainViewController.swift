@@ -49,8 +49,25 @@ class MainViewController: UIViewController {
                     
                     if response.error == nil {
                         
-                        self.performSegue(withIdentifier: "skipScanSegue",
-                                          sender: self)
+                        let ac = UIAlertController(title: "Stay connected to \(ed!)?",
+                                                   message: response.error?.localizedDescription,
+                                                   preferredStyle: UIAlertControllerStyle.alert)
+                        
+                        let YES = UIAlertAction(title: "Yes",
+                            style: UIAlertActionStyle.default,
+                            handler: { action in self.performSegue(withIdentifier: "skipScanSegue",
+                            sender: self)
+                        })
+                        
+                        let NO = UIAlertAction(title: "No",
+                                               style: UIAlertActionStyle.default,
+                                               handler: nil)
+                        
+                        ac.addAction(YES)
+                        ac.addAction(NO)
+                        
+                        self.present(ac, animated: true, completion: nil)
+                        
 
                     }
                     
