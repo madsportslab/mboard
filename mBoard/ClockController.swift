@@ -42,6 +42,7 @@ class ClockController: UIViewController {
     @IBOutlet weak var awayPos: UIButton!
     @IBOutlet weak var homePos: UIButton!
     @IBOutlet weak var posLabel: UILabel!
+    @IBOutlet weak var shotclockStack: UIStackView!
     
     override func viewDidDisappear(_ animated: Bool) {
         UIApplication.shared.isIdleTimerDisabled = false
@@ -200,8 +201,10 @@ class ClockController: UIViewController {
             
             if vio == -1 {
                 self.shotClock.isHidden = true
+                self.shotclockStack.isHidden = true
             } else {
                 self.shotClock.isHidden = false
+                self.shotclockStack.isHidden = false
             }
             
         } else {
@@ -360,9 +363,6 @@ class ClockController: UIViewController {
                     let p = obj["val"].string!
                     
                     self.period.text = self.verbosePeriods[Int(p)!]
-                    
-                    //self.period.text = self.verbosePeriods[
-                      //  obj["val"].int!]
                     
                     
                 case "POSSESSION_HOME":

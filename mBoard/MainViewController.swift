@@ -28,6 +28,7 @@ class MainViewController: UIViewController {
         
         scanQR.setFAIcon(icon: FAType.FACamera, iconSize: 128, forState: .normal)
     
+        getVersion()
     }
     
     override func didReceiveMemoryWarning() {
@@ -46,25 +47,11 @@ class MainViewController: UIViewController {
             Alamofire.request(url, method: .get)
                 .response{ response in
                     
-                    if response.error != nil {
+                    if response.error == nil {
                         
-                        let ac = UIAlertController(title: "Connection error",
-                                                   message: response.error?.localizedDescription,
-                                                   preferredStyle: UIAlertControllerStyle.alert)
-                        
-                        let OK = UIAlertAction(title: "OK",
-                                               style: UIAlertActionStyle.default,
-                                               handler: nil)
-                        
-                        ac.addAction(OK)
-                        
-                        self.present(ac, animated: true, completion: nil)
-                        
-                    } else {
                         self.performSegue(withIdentifier: "skipScanSegue",
                                           sender: self)
-                        
-                        //self.currentBtn.setTitle("\(ed!)", for: .normal)
+
                     }
                     
             }
