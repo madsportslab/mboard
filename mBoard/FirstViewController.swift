@@ -34,6 +34,9 @@ class FirstViewController: UIViewController, UITableViewDelegate, UITableViewDat
         //newGameBtn.layer.borderColor = Mboard.TealColor.cgColor
         //newGameBtn.layer.cornerRadius = 5
 
+        progress.clipsToBounds = true
+        progress.layer.cornerRadius = 10
+        
         getScores()
 
         gamesTable.delegate = self

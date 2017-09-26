@@ -35,17 +35,31 @@ class SummaryController: UIViewController, UITableViewDelegate, UITableViewDataS
     @IBOutlet weak var hot: UILabel!
     @IBOutlet weak var ht: UILabel!
     @IBOutlet weak var logsTable: UITableView!
+    @IBOutlet weak var homeLg: UILabel!
+    @IBOutlet weak var awayLg: UILabel!
+    @IBOutlet weak var homeScore: UILabel!
+    @IBOutlet weak var awayScore: UILabel!
+    @IBOutlet weak var progress: UIActivityIndicatorView!
     
     
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view, typically from a nib.
         
-        logsTable.dataSource = self
-        logsTable.delegate = self
+        progress.clipsToBounds = true
+        progress.layer.cornerRadius = 10
+        
+        progress.startAnimating()
+        
+        view.bringSubview(toFront: progress)
         
         loadGame()
         loadLogs()
+        
+        logsTable.dataSource = self
+        logsTable.delegate = self
+        
+       
         
     }
     
@@ -56,13 +70,15 @@ class SummaryController: UIViewController, UITableViewDelegate, UITableViewDataS
     
     func translate(msg: String) -> String {
         
-        let j = JSON.parse(msg)
+        //let ret = [String]()
         
-        print(j)
+        let j = JSON.parse(msg)
         
         switch j["cmd"].string! {
         
         case "SCORE_AWAY":
+            //ret.append(Mboard.TAG_AWAY)
+            //ret.append(
             return "Away, \(j["step"].int!) points"
         case "SCORE_HOME":
             return "Home, \(j["step"].int!) points"
@@ -151,11 +167,13 @@ class SummaryController: UIViewController, UITableViewDelegate, UITableViewDataS
             
             self.hot.text = "\(ot)"
             self.ht.text = "\(total)"
+            self.homeScore.text = "\(total)"
             
         } else {
             
             self.aot.text = "\(ot)"
             self.at.text = "\(total)"
+            self.awayScore.text = "\(total)"
             
         }
         
@@ -172,6 +190,8 @@ class SummaryController: UIViewController, UITableViewDelegate, UITableViewDataS
         let url = "\(Mboard.HTTP)\(ed!)/api/scores" + "/\(id!)"
 
         print(url)
+        
+        self.progress.startAnimating()
         
         Alamofire.request(url, method: .get)
             .responseJSON{ response in
@@ -207,9 +227,11 @@ class SummaryController: UIViewController, UITableViewDelegate, UITableViewDataS
                             self.awayName.text = data["away"]["name"].string!
                             self.homeName.text = data["home"]["name"].string!
                             
+                            self.awayLg.text = data["away"]["name"].string!
+                            self.homeLg.text = data["home"]["name"].string!
+                            
                             self.setScoreboard(data["away"]["points"], isHome: false)
                             self.setScoreboard(data["home"]["points"], isHome: true)
-                            
                             
                         
                         }
@@ -217,6 +239,8 @@ class SummaryController: UIViewController, UITableViewDelegate, UITableViewDataS
                     }
                     
                 }
+                
+                //self.progress.stopAnimating()
         }
         
     } // loadGame
@@ -229,6 +253,8 @@ class SummaryController: UIViewController, UITableViewDelegate, UITableViewDataS
         let url = "\(Mboard.HTTP)\(ed!)/api/scores" + "/\(id!)/logs"
         
         print(url)
+        
+        //self.progress.startAnimating()
         
         Alamofire.request(url, method: .get)
             .responseJSON{ response in
@@ -276,7 +302,10 @@ class SummaryController: UIViewController, UITableViewDelegate, UITableViewDataS
                             
                             let d2 = f2.string(from: d!)
                             
-                            log.append("[\(d2)]: \(l)")
+                            
+                            log.append("\(d2)")
+                            log.append("Play")
+                            log.append("\(l)")
                             log.append(v["id"].string!)
                             
                             data.append(log)
@@ -287,10 +316,13 @@ class SummaryController: UIViewController, UITableViewDelegate, UITableViewDataS
                         
                         self.logsTable.reloadData()
                         
-                        
                     }
                     
+                    
+                    
                 }
+                
+                self.progress.stopAnimating()
         }
         
     } // loadLogs
@@ -308,7 +340,9 @@ class SummaryController: UIViewController, UITableViewDelegate, UITableViewDataS
         let cell = logsTable.dequeueReusableCell(withIdentifier: "cell",
                                                   for: indexPath) as! LogViewCell
         
-        cell.log.text = logs[indexPath.item][0]
+        cell.timestamp.text = logs[indexPath.item][0]
+        cell.playTag.text = logs[indexPath.item][1]
+        cell.log.text = logs[indexPath.item][2]
         
         return cell
         

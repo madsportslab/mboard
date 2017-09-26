@@ -60,6 +60,9 @@ class Mboard {
     static let WS_TIMEOUT_AWAY_UP   = "TIMEOUT_AWAY_UP"
     static let WS_TIMEOUT_AWAY_DOWN = "TIMEOUT_AWAY_DOWN"
     
+    static let TAG_HOME             = "HOME"
+    static let TAG_AWAY             = "AWAY"
+    
     static let MAX_WS_ERRORS        = 20
     
     

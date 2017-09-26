@@ -12,6 +12,8 @@ class LogViewCell: UITableViewCell {
     
     // MARK: Properties
     @IBOutlet weak var log: UILabel!
+    @IBOutlet weak var timestamp: UILabel!
+    @IBOutlet weak var playTag: UILabel!
     
     // MARK: Actions
     
