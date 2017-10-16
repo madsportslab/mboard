@@ -41,7 +41,7 @@ class LogViewController: UIViewController, UITableViewDataSource, UITableViewDel
         // Dispose of any resources that can be recreated.
     }
     
-    func translate(msg: String) -> String {
+    func translate(msg: String) -> (String, String) {
         
         let j = JSON.parse(msg)
         
@@ -50,35 +50,35 @@ class LogViewController: UIViewController, UITableViewDataSource, UITableViewDel
         switch j["cmd"].string! {
             
         case "SCORE_AWAY":
-            return "Away, \(j["step"].int!) points"
+            return ("Away", "\(j["step"].int!) points")
         case "SCORE_HOME":
-            return "Home, \(j["step"].int!) points"
+            return ("Home", "\(j["step"].int!) points")
         case "TIMEOUT_HOME_UP":
-            return "Home, timeout called"
+            return ("Home", "timeout called")
         case "TIMEOUT_HOME_DOWN":
-            return "Home, timeout cancelled"
+            return ("Home", "Timeout retracted")
         case "TIMEOUT_AWAY_UP":
-            return "Away, timeout called"
+            return ("Away", "Timeout called")
         case "TIMEOUT_AWAY_DOWN":
-            return "Away, timeout cancelled"
+            return ("Away", "Timeout retracted")
         case "FOUL_HOME_UP":
-            return "Home, foul called"
+            return ("Home", "Foul called")
         case "FOUL_HOME_DOWN":
-            return "Home, foul cancelled"
+            return ("Home", "Foul retracted")
         case "FOUL_AWAY_UP":
-            return "Away, timeout called"
+            return ("Away", "Timeout called")
         case "FOUL_AWAY_DOWN":
-            return "Away, timeout cancelled"
+            return ("Away", "Timeout retracted")
         case "POSSESSION_HOME":
-            return "Home, possession"
+            return ("Home", "Possession change")
         case "POSSESSION_AWAY":
-            return "Away, possession"
+            return ("Away", "Possession change")
         case "CLOCK_START":
-            return "Clock started"
+            return ("Clock", "Started")
         case "CLOCK_STOP":
-            return "Clock stopped"
+            return ("Clock", "Stopped")
         default:
-            return "unreadable log message"
+            return ("Error", "Unreadable log message")
         }
         
     } // translate
@@ -96,7 +96,15 @@ class LogViewController: UIViewController, UITableViewDataSource, UITableViewDel
         let cell = logsTable.dequeueReusableCell(withIdentifier: "cell",
                                                  for: indexPath) as! LogViewCell
         
-        cell.log.text = logs[indexPath.item][0]
+        cell.timestamp.layer.cornerRadius = 5
+        cell.timestamp.layer.masksToBounds = true
+        cell.timestamp.text = logs[indexPath.item][0]
+
+        cell.playTag.layer.cornerRadius = 5
+        cell.playTag.layer.masksToBounds = true
+        cell.playTag.text = logs[indexPath.item][1]
+        
+        cell.log.text = logs[indexPath.item][2]
         
         return cell
         
@@ -149,7 +157,7 @@ class LogViewController: UIViewController, UITableViewDataSource, UITableViewDel
                             f.dateFormat = "yyyy-MM-dd'T'HH:mm:ssZ"
                             
                             let d = f.date(from: v["created"].string!)
-                            let l = self.translate(msg: v["msg"].string!)
+                            let (t, l) = self.translate(msg: v["msg"].string!)
                             
                             let f2 = DateFormatter()
                             
@@ -157,7 +165,9 @@ class LogViewController: UIViewController, UITableViewDataSource, UITableViewDel
                             
                             let d2 = f2.string(from: d!)
                             
-                            log.append("\(d2) - \(l)")
+                            log.append(d2)
+                            log.append(t)
+                            log.append(l)
                             log.append(v["id"].string!)
                             
                             data.append(log)
