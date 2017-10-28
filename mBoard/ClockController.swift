@@ -43,6 +43,14 @@ class ClockController: UIViewController {
     @IBOutlet weak var homePos: UIButton!
     @IBOutlet weak var posLabel: UILabel!
     @IBOutlet weak var shotclockStack: UIStackView!
+    @IBOutlet weak var awayTimeout: UIButton!
+    @IBOutlet weak var homeTimeout: UIButton!
+    @IBOutlet weak var homeTimeoutCancel: UIButton!
+    @IBOutlet weak var awayTimeoutCancel: UIButton!
+    @IBOutlet weak var awayName: UILabel!
+    @IBOutlet weak var homeName: UILabel!
+    @IBOutlet weak var ballPos: UISegmentedControl!
+    
     
     override func viewDidDisappear(_ animated: Bool) {
         UIApplication.shared.isIdleTimerDisabled = false
@@ -62,33 +70,51 @@ class ClockController: UIViewController {
         
         clockPause()
         
-        posLabel.layer.masksToBounds = true
-        posLabel.layer.cornerRadius = 5
+        //posLabel.layer.masksToBounds = true
+        //posLabel.layer.cornerRadius = 5
         
         nextPeriodBtn.layer.cornerRadius = 5
         nextPeriodBtn.layer.borderColor = UIColor.red.cgColor
         nextPeriodBtn.layer.borderWidth = 1
         nextPeriodBtn.isEnabled = false
         
+        resetGCBtn.setFAIcon(icon: FAType.FARepeat, iconSize: 16, forState: .normal)
         
-        resetGCBtn.setFAIcon(icon: FAType.FARefresh, iconSize: 16, forState: .normal)
+        rewBtn.setFAIcon(icon: FAType.FAAngleUp, iconSize: 16, forState: .normal)
+        fwdBtn.setFAIcon(icon: FAType.FAAngleDown, iconSize: 16, forState: .normal)
         
-        rewBtn.setFAIcon(icon: FAType.FAPlus, iconSize: 16, forState: .normal)
-        fwdBtn.setFAIcon(icon: FAType.FAMinus, iconSize: 16, forState: .normal)
+        rewSCBtn.setFAIcon(icon: FAType.FAAngleUp, iconSize: 16, forState: .normal)
+        fwdSCBtn.setFAIcon(icon: FAType.FAAngleDown, iconSize: 16, forState: .normal)
         
-        rewSCBtn.setFAIcon(icon: FAType.FAPlus, iconSize: 16, forState: .normal)
-        fwdSCBtn.setFAIcon(icon: FAType.FAMinus, iconSize: 16, forState: .normal)
+        resetSCBtn.setFAIcon(icon: FAType.FARepeat, iconSize: 16, forState: .normal)
         
-        resetSCBtn.setFAIcon(icon: FAType.FARefresh, iconSize: 16, forState: .normal)
+        awayTimeout.setFAIcon(icon: FAType.FAHandStopO, iconSize: 16, forState: .normal)
+        awayTimeoutCancel.setFAIcon(icon: FAType.FARemove, iconSize: 16, forState: .normal)
+        homeTimeout.setFAIcon(icon: FAType.FAHandStopO, iconSize: 16, forState: .normal)
+        homeTimeoutCancel.setFAIcon(icon: FAType.FARemove, iconSize: 16, forState: .normal)
         
         //startBtn.setFATitleColor(color: Mboard.NeonGreenColor)
         
         startBtn.layer.borderColor = Mboard.NeonGreenColor.cgColor
         startBtn.layer.borderWidth = 1
         startBtn.layer.cornerRadius = startBtn.bounds.size.width/2
-        
         startBtn.layer.masksToBounds = true
 
+        awayTimeout.layer.borderColor = Mboard.TealColor.cgColor
+        awayTimeout.layer.borderWidth = 1
+        awayTimeout.layer.cornerRadius = 5
+        
+        awayTimeoutCancel.layer.borderColor = Mboard.TealColor.cgColor
+        awayTimeoutCancel.layer.borderWidth = 1
+        awayTimeoutCancel.layer.cornerRadius = 5
+        
+        homeTimeout.layer.borderColor = Mboard.TealColor.cgColor
+        homeTimeout.layer.borderWidth = 1
+        homeTimeout.layer.cornerRadius = 5
+        
+        homeTimeoutCancel.layer.borderColor = Mboard.TealColor.cgColor
+        homeTimeoutCancel.layer.borderWidth = 1
+        homeTimeoutCancel.layer.cornerRadius = 5
         
         rewBtn.layer.borderColor = Mboard.TealColor.cgColor
         rewBtn.layer.borderWidth = 1
@@ -121,15 +147,33 @@ class ClockController: UIViewController {
         resetSCBtn.layer.cornerRadius = fwdBtn.bounds.size.width/2
         resetSCBtn.layer.masksToBounds = true
 
-        awayPos.layer.borderColor = Mboard.TealColor.cgColor
-        awayPos.layer.borderWidth = 1
-        awayPos.layer.cornerRadius = 5
+        //awayPos.layer.borderColor = Mboard.TealColor.cgColor
+        //awayPos.layer.borderWidth = 1
+        //awayPos.layer.cornerRadius = 5
 
-        homePos.layer.borderColor = Mboard.TealColor.cgColor
-        homePos.layer.borderWidth = 1
-        homePos.layer.cornerRadius = 5
+        //homePos.layer.borderColor = Mboard.TealColor.cgColor
+        //homePos.layer.borderWidth = 1
+        //homePos.layer.cornerRadius = 5
         
+        awayTimeout.layer.borderColor = Mboard.TealColor.cgColor
+        awayTimeout.layer.borderWidth = 1
+        awayTimeout.layer.cornerRadius = fwdSCBtn.bounds.size.width/2
+        awayTimeout.layer.masksToBounds = true
         
+        awayTimeoutCancel.layer.borderColor = Mboard.TealColor.cgColor
+        awayTimeoutCancel.layer.borderWidth = 1
+        awayTimeoutCancel.layer.cornerRadius = fwdSCBtn.bounds.size.width/2
+        awayTimeoutCancel.layer.masksToBounds = true
+        
+        homeTimeout.layer.borderColor = Mboard.TealColor.cgColor
+        homeTimeout.layer.borderWidth = 1
+        homeTimeout.layer.cornerRadius = fwdSCBtn.bounds.size.width/2
+        homeTimeout.layer.masksToBounds = true
+        
+        homeTimeoutCancel.layer.borderColor = Mboard.TealColor.cgColor
+        homeTimeoutCancel.layer.borderWidth = 1
+        homeTimeoutCancel.layer.cornerRadius = fwdSCBtn.bounds.size.width/2
+        homeTimeoutCancel.layer.masksToBounds = true
         
         loadGame()
         
@@ -290,8 +334,17 @@ class ClockController: UIViewController {
                         self.setGameClock(j)
                         self.setShotClock(j)
                         
-                        self.awayPos.setTitle(j["away"]["name"].string!, for: .normal)
-                        self.homePos.setTitle(j["home"]["name"].string!, for: .normal)
+                        //self.awayPos.setTitle(j["away"]["name"].string!, for: .normal)
+                        //self.homePos.setTitle(j["home"]["name"].string!, for: .normal)
+                        
+                        self.awayName.text = j["away"]["name"].string!
+                        self.homeName.text = j["home"]["name"].string!
+                        
+                        self.ballPos.setTitle(j["away"]["name"].string!,
+                                              forSegmentAt: 0)
+                        
+                        self.ballPos.setTitle(j["home"]["name"].string!,
+                                              forSegmentAt: 1)
                         
                         self.initWS()
                         
@@ -369,9 +422,10 @@ class ClockController: UIViewController {
 
                     //self.homePos.layer.borderColor = UIColor.green.cgColor
                     //self.awayPos.layer.borderColor = Mboard.TealColor.cgColor
-                    self.homePos.layer.backgroundColor = Mboard.TealColor.cgColor
-                    self.awayPos.layer.backgroundColor = UIColor.clear.cgColor
+                    //self.homePos.layer.backgroundColor = Mboard.TealColor.cgColor
+                    //self.awayPos.layer.backgroundColor = UIColor.clear.cgColor
                     
+                    self.ballPos.selectedSegmentIndex = 1
                     //self.homePos.setTitleColor(UIColor.white, for: .normal)
                     
                     //self.awayPos.setTitleColor(Mboard.TealColor, for: .normal)
@@ -379,9 +433,10 @@ class ClockController: UIViewController {
                     
                 case "POSSESSION_AWAY":
                     
-                    self.homePos.layer.backgroundColor = UIColor.clear.cgColor
-                    self.awayPos.layer.backgroundColor = Mboard.TealColor.cgColor
+                    //self.homePos.layer.backgroundColor = UIColor.clear.cgColor
+                    //self.awayPos.layer.backgroundColor = Mboard.TealColor.cgColor
                     
+                    self.ballPos.selectedSegmentIndex = 0
                     //self.awayPos.setTitleColor(UIColor.white, for: .normal)
                     
                     //self.homePos.setTitleColor(Mboard.TealColor, for: .normal)
@@ -495,24 +550,63 @@ class ClockController: UIViewController {
         
     }
     
-    @IBAction func awayPosChange(_ sender: Any) {
+    @IBAction func callAwayTimeout(_ sender: Any) {
         
         ws.send(JSON([
-            "cmd": Mboard.WS_POSSESSION_AWAY,
-            "meta": ["stop": !running]
-        ]))
-        
-        
+            "cmd": Mboard.WS_TIMEOUT_AWAY_UP
+            ]))
         
     }
     
-    @IBAction func homePosChange(_ sender: Any) {
-
+    @IBAction func callHomeTimeout(_ sender: Any) {
+        
         ws.send(JSON([
-            "cmd": Mboard.WS_POSSESSION_HOME,
-            "meta": ["stop": !running]
+            "cmd": Mboard.WS_TIMEOUT_HOME_UP
             ]))
         
+    }
+    
+    @IBAction func cancelAwayTimeout(_ sender: Any) {
+        
+        ws.send(JSON([
+            "cmd": Mboard.WS_TIMEOUT_AWAY_DOWN
+            ]))
+        
+    }
+    
+    @IBAction func cancelHomeTimeout(_ sender: Any) {
+        
+        ws.send(JSON([
+            "cmd": Mboard.WS_TIMEOUT_HOME_DOWN
+            ]))
+        
+    }
+    
+    @IBAction func togglePossession(_ sender: UISegmentedControl) {
+        
+        switch ballPos.selectedSegmentIndex {
+        case 0:
+            
+            ws.send(JSON([
+                "cmd": Mboard.WS_POSSESSION_AWAY,
+                "meta": ["stop": !running]
+                ]))
+            
+            break
+            
+        case 1:
+            
+            ws.send(JSON([
+                "cmd": Mboard.WS_POSSESSION_HOME,
+                "meta": ["stop": !running]
+                ]))
+            
+            break
+            
+        default:
+            break
+            
+        }
     }
     
     

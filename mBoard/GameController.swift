@@ -41,21 +41,9 @@ class GameController: UIViewController {
     @IBOutlet weak var pFAwayBtn: UIButton!
     @IBOutlet weak var mFHomeBtn: UIButton!
     @IBOutlet weak var pFHomeBtn: UIButton!
-    @IBOutlet weak var mTAwayBtn: UIButton!
-    @IBOutlet weak var pTAwayBtn: UIButton!
-    @IBOutlet weak var mTHomeBtn: UIButton!
-    @IBOutlet weak var pTHomeBtn: UIButton!
     @IBOutlet weak var endBtn: UIButton!
     @IBOutlet weak var homeScore: UILabel!
     @IBOutlet weak var awayScore: UILabel!
-    @IBOutlet weak var awayT1: UILabel!
-    @IBOutlet weak var awayT2: UILabel!
-    @IBOutlet weak var awayT3: UILabel!
-    @IBOutlet weak var awayT4: UILabel!
-    @IBOutlet weak var homeT1: UILabel!
-    @IBOutlet weak var homeT2: UILabel!
-    @IBOutlet weak var homeT3: UILabel!
-    @IBOutlet weak var homeT4: UILabel!
     @IBOutlet weak var awayFouls: UILabel!
     @IBOutlet weak var homeFouls: UILabel!
     @IBOutlet weak var awayName: UILabel!
@@ -64,7 +52,9 @@ class GameController: UIViewController {
     @IBOutlet weak var m2Label: UILabel!
     @IBOutlet weak var m3Label: UILabel!
     @IBOutlet weak var foulLabel: UILabel!
-    @IBOutlet weak var timeoutLabel: UILabel!
+    @IBOutlet weak var awayTimeouts: UILabel!
+    @IBOutlet weak var homeTimeouts: UILabel!
+    
     
     override func viewDidDisappear(_ animated: Bool) {
         UIApplication.shared.isIdleTimerDisabled = false
@@ -81,16 +71,6 @@ class GameController: UIViewController {
         UIApplication.shared.isIdleTimerDisabled = true
     
         server = (defaults.object(forKey: Mboard.SERVER) as? String)!
-        
-        awayT1.setFAIcon(icon: FAType.FACircle, iconSize: 18)
-        awayT2.setFAIcon(icon: FAType.FACircle, iconSize: 18)
-        awayT3.setFAIcon(icon: FAType.FACircle, iconSize: 18)
-        awayT4.setFAIcon(icon: FAType.FACircle, iconSize: 18)
-        
-        homeT1.setFAIcon(icon: FAType.FACircle, iconSize: 18)
-        homeT2.setFAIcon(icon: FAType.FACircle, iconSize: 18)
-        homeT3.setFAIcon(icon: FAType.FACircle, iconSize: 18)
-        homeT4.setFAIcon(icon: FAType.FACircle, iconSize: 18)
         
         endBtn.layer.borderWidth = 1
         endBtn.layer.borderColor = Mboard.TealColor.cgColor
@@ -116,12 +96,6 @@ class GameController: UIViewController {
         mFHomeBtn.setFAIcon(icon: FAType.FAMinus, iconSize: 16, forState: .normal)
         pFHomeBtn.setFAIcon(icon: FAType.FAPlus, iconSize: 16, forState: .normal)
         
-        
-        pTAwayBtn.setFAIcon(icon: FAType.FAHandStopO, iconSize: 16, forState: .normal)
-        pTHomeBtn.setFAIcon(icon: FAType.FAHandStopO, iconSize: 16, forState: .normal)
-        
-        mTAwayBtn.setFAIcon(icon: FAType.FAUndo, iconSize: 16, forState: .normal)
-        mTHomeBtn.setFAIcon(icon: FAType.FAUndo, iconSize: 16, forState: .normal)
         
         m1AwayBtn.layer.borderWidth = 1
         m1AwayBtn.layer.borderColor = Mboard.TealColor.cgColor
@@ -163,16 +137,6 @@ class GameController: UIViewController {
         pFAwayBtn.layer.cornerRadius = pFAwayBtn.bounds.size.width/2
         pFAwayBtn.layer.masksToBounds = true
         
-        mTAwayBtn.layer.borderWidth = 1
-        mTAwayBtn.layer.borderColor = Mboard.TealColor.cgColor
-        mTAwayBtn.layer.cornerRadius = mTAwayBtn.bounds.size.width/2
-        mTAwayBtn.layer.masksToBounds = true
-        
-        pTAwayBtn.layer.borderWidth = 1
-        pTAwayBtn.layer.borderColor = Mboard.TealColor.cgColor
-        pTAwayBtn.layer.cornerRadius = pTAwayBtn.bounds.size.width/2
-        pTAwayBtn.layer.masksToBounds = true
-        
         m1HomeBtn.layer.borderWidth = 1
         m1HomeBtn.layer.borderColor = Mboard.TealColor.cgColor
         m1HomeBtn.layer.cornerRadius = m1HomeBtn.bounds.size.width/2
@@ -213,16 +177,6 @@ class GameController: UIViewController {
         pFHomeBtn.layer.cornerRadius = pFHomeBtn.bounds.size.width/2
         pFHomeBtn.layer.masksToBounds = true
         
-        mTHomeBtn.layer.borderWidth = 1
-        mTHomeBtn.layer.borderColor = Mboard.TealColor.cgColor
-        mTHomeBtn.layer.cornerRadius = mTHomeBtn.bounds.size.width/2
-        mTHomeBtn.layer.masksToBounds = true
-        
-        pTHomeBtn.layer.borderWidth = 1
-        pTHomeBtn.layer.borderColor = Mboard.TealColor.cgColor
-        pTHomeBtn.layer.cornerRadius = pTHomeBtn.bounds.size.width/2
-        pTHomeBtn.layer.masksToBounds = true
-        
         m1Label.layer.cornerRadius = 5
         m1Label.layer.borderColor = UIColor.white.cgColor
         m1Label.layer.masksToBounds = true
@@ -239,10 +193,7 @@ class GameController: UIViewController {
         foulLabel.layer.borderColor = UIColor.white.cgColor
         foulLabel.layer.masksToBounds = true
         
-        /*timeoutLabel.layer.cornerRadius = 5
-        timeoutLabel.layer.borderColor = UIColor.white.cgColor
-        timeoutLabel.layer.masksToBounds = true
-        */
+        
     }
     
     override func viewDidAppear(_ animated: Bool) {
@@ -299,9 +250,9 @@ class GameController: UIViewController {
                 case "AWAY_SCORE":
                     self.awayScore.text = obj["val"].string!
                 case "HOME_FOUL":
-                    self.homeFouls.text = "Fouls: \(obj["val"].string!)"
+                    self.homeFouls.text = "\(obj["val"].string!)"
                 case "AWAY_FOUL":
-                    self.awayFouls.text = "Fouls: \(obj["val"].string!)"
+                    self.awayFouls.text = "\(obj["val"].string!)"
                 case "HOME_TIMEOUT":
                     self.setTimeouts(true, data: Int(obj["val"].string!)!)
                 case "AWAY_TIMEOUT":
@@ -319,164 +270,21 @@ class GameController: UIViewController {
     
     
     func setTimeouts(_ home: Bool, data j: Int) {
-        
+    
         if home {
-        
-            if j == 4 {
-                
-                homeT1.isEnabled = true
-                homeT2.isEnabled = true
-                homeT3.isEnabled = true
-                homeT4.isEnabled = true
-                
-            } else if j == 3 {
-                
-                homeT1.isEnabled = true
-                homeT2.isEnabled = true
-                homeT3.isEnabled = true
-                homeT4.isEnabled = false
-                
-            } else if j == 2 {
-                
-                homeT1.isEnabled = true
-                homeT2.isEnabled = true
-                homeT3.isEnabled = false
-                homeT4.isEnabled = false
-                
-            } else if j == 1 {
-                
-                homeT1.isEnabled = true
-                homeT2.isEnabled = false
-                homeT3.isEnabled = false
-                homeT4.isEnabled = false
-                
-            } else if j == 0 {
-                
-                homeT1.isEnabled = false
-                homeT2.isEnabled = false
-                homeT3.isEnabled = false
-                homeT4.isEnabled = false
-                
-            }
-            
+            self.homeTimeouts.text = "\(j)"
         } else {
-            
-            if j == 4 {
-                
-                awayT1.isEnabled = true
-                awayT2.isEnabled = true
-                awayT3.isEnabled = true
-                awayT4.isEnabled = true
-                
-            } else if j == 3 {
-                
-                awayT1.isEnabled = true
-                awayT2.isEnabled = true
-                awayT3.isEnabled = true
-                awayT4.isEnabled = false
-                
-            } else if j == 2 {
-                
-                awayT1.isEnabled = true
-                awayT2.isEnabled = true
-                awayT3.isEnabled = false
-                awayT4.isEnabled = false
-                
-            } else if j == 1 {
-                
-                awayT1.isEnabled = true
-                awayT2.isEnabled = false
-                awayT3.isEnabled = false
-                awayT4.isEnabled = false
-                
-            } else if j == 0 {
-                
-                awayT1.isEnabled = false
-                awayT2.isEnabled = false
-                awayT3.isEnabled = false
-                awayT4.isEnabled = false
-                
-            }
-            
+            self.awayTimeouts.text = "\(j)"
         }
         
     } // setTimeouts
     
-    func initTimeouts(data j: Int) {
-        
-        totalTimeouts = j
-        
-            if j == 4 {
-                
-                homeT1.isHidden = false
-                homeT2.isHidden = false
-                homeT3.isHidden = false
-                homeT4.isHidden = false
-                
-                awayT1.isHidden = false
-                awayT2.isHidden = false
-                awayT3.isHidden = false
-                awayT4.isHidden = false
-                
-            } else if j == 3 {
-                
-                homeT1.isHidden = false
-                homeT2.isHidden = false
-                homeT3.isHidden = false
-                homeT4.isHidden = true
-                
-                awayT1.isHidden = false
-                awayT2.isHidden = false
-                awayT3.isHidden = false
-                awayT4.isHidden = true
-                
-            } else if j == 2 {
-                
-                homeT1.isHidden = false
-                homeT2.isHidden = false
-                homeT3.isHidden = true
-                homeT4.isHidden = true
-                
-                awayT1.isHidden = false
-                awayT2.isHidden = false
-                awayT3.isHidden = true
-                awayT4.isHidden = true
-                
-            } else if j == 1 {
-                
-                homeT1.isHidden = false
-                homeT2.isHidden = true
-                homeT3.isHidden = true
-                homeT4.isHidden = true
-                
-                awayT1.isHidden = false
-                awayT2.isHidden = true
-                awayT3.isHidden = true
-                awayT4.isHidden = true
-                
-            } else if j == 0 {
-                
-                homeT1.isHidden = true
-                homeT2.isHidden = true
-                homeT3.isHidden = true
-                homeT4.isHidden = true
-                
-                awayT1.isHidden = true
-                awayT2.isHidden = true
-                awayT3.isHidden = true
-                awayT4.isHidden = true
-                
-            }
-
-        
-    } // initTimeouts
-    
     func setFouls(_ home: Bool, data j: Int) {
         
         if home {
-            self.homeFouls.text = "Fouls: \(j)"
+            self.homeFouls.text = "\(j)"
         } else {
-            self.awayFouls.text = "Fouls: \(j)"
+            self.awayFouls.text = "\(j)"
         }
         
     } // setFouls
@@ -561,8 +369,6 @@ class GameController: UIViewController {
                     self.awayName.text = j["away"]["name"].string!
                     self.homeName.text = j["home"]["name"].string!
 
-                    self.initTimeouts(data: j["settings"]["timeouts"].int!)
-                    
                     self.setTotalPoints(false, data: j["away"]["points"])
                     self.setFouls(false, data: j["away"]["fouls"].int!)
                     self.setTimeouts(false, data: j["away"]["timeouts"].int!)
@@ -755,38 +561,6 @@ class GameController: UIViewController {
         
         ws.send(JSON([
             "cmd": Mboard.WS_FOUL_HOME_UP
-            ]))
-        
-    }
-    
-    @IBAction func timeRmAway(_ sender: Any) {
-        
-        ws.send(JSON([
-            "cmd": Mboard.WS_TIMEOUT_AWAY_DOWN
-            ]))
-        
-    }
-    
-    @IBAction func timeAddAway(_ sender: Any) {
-        
-        ws.send(JSON([
-            "cmd": Mboard.WS_TIMEOUT_AWAY_UP
-            ]))
-        
-    }
-    
-    @IBAction func timeRmHome(_ sender: Any) {
-        
-        ws.send(JSON([
-            "cmd": Mboard.WS_TIMEOUT_HOME_DOWN
-            ]))
-        
-    }
-    
-    @IBAction func timeAddHome(_ sender: Any) {
-        
-        ws.send(JSON([
-            "cmd": Mboard.WS_TIMEOUT_HOME_UP
             ]))
         
     }
