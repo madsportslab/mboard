@@ -270,7 +270,7 @@ class GameController: UIViewController {
     
     
     func setTimeouts(_ home: Bool, data j: Int) {
-    
+        
         if home {
             self.homeTimeouts.text = "\(j)"
         } else {
