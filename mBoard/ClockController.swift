@@ -20,7 +20,8 @@ class ClockController: UIViewController {
     
     var server:String?
     var running = false
-    
+    var home:String?
+    var away:String?
     
     let defaults = UserDefaults.standard
     let verbosePeriods = ["1st", "2nd", "3rd", "4th"]
@@ -165,6 +166,14 @@ class ClockController: UIViewController {
         //homeTimeoutCancel.layer.masksToBounds = true
         
         clockAdjust.setFAIcon(icon: FAType.FASliders, iconSize: 24)
+        
+        awayTimeout.setFAText(prefixText: "", icon: FAType.FAHandStopO, postfixText: " Timeout", size: 16, forState: .normal)
+        
+        homeTimeout.setFAText(prefixText: "", icon: FAType.FAHandStopO, postfixText: " Timeout", size: 16, forState: .normal)
+        
+        awayTimeoutCancel.setFAText(prefixText: "", icon: FAType.FARemove, postfixText: " Cancel", size: 16, forState: .normal)
+        
+        homeTimeoutCancel.setFAText(prefixText: "", icon: FAType.FARemove, postfixText: " Cancel", size: 16, forState: .normal)
         
         loadGame()
         
@@ -328,14 +337,20 @@ class ClockController: UIViewController {
                         //self.awayPos.setTitle(j["away"]["name"].string!, for: .normal)
                         //self.homePos.setTitle(j["home"]["name"].string!, for: .normal)
                         
-                        self.awayName.text = j["away"]["name"].string!
-                        self.homeName.text = j["home"]["name"].string!
+                        self.away = j["away"]["name"].string!
+                        self.home = j["home"]["name"].string!
+                        
+                        self.awayName.text = self.away!
+                        self.homeName.text = self.home!
                         
                         self.ballPos.setTitle(j["away"]["name"].string!,
                                               forSegmentAt: 0)
                         
                         self.ballPos.setTitle(j["home"]["name"].string!,
                                               forSegmentAt: 1)
+                        
+                        self.setTimeouts(false, data: j["away"]["timeouts"].int!)
+                        self.setTimeouts(true, data: j["home"]["timeouts"].int!)
                         
                         //self.awayTimeout.setTitle(
                         //    "\(j["away"]["name"].string!) Timeout", for: .normal)
@@ -416,33 +431,17 @@ class ClockController: UIViewController {
                     
                     
                 case "POSSESSION_HOME":
-
-                    //self.homePos.layer.borderColor = UIColor.green.cgColor
-                    //self.awayPos.layer.borderColor = Mboard.TealColor.cgColor
-                    //self.homePos.layer.backgroundColor = Mboard.TealColor.cgColor
-                    //self.awayPos.layer.backgroundColor = UIColor.clear.cgColor
-                    
                     self.ballPos.selectedSegmentIndex = 1
-                    //self.homePos.setTitleColor(UIColor.white, for: .normal)
-                    
-                    //self.awayPos.setTitleColor(Mboard.TealColor, for: .normal)
                     
                     
                 case "POSSESSION_AWAY":
-                    
-                    //self.homePos.layer.backgroundColor = UIColor.clear.cgColor
-                    //self.awayPos.layer.backgroundColor = Mboard.TealColor.cgColor
-                    
                     self.ballPos.selectedSegmentIndex = 0
-                    //self.awayPos.setTitleColor(UIColor.white, for: .normal)
-                    
-                    //self.homePos.setTitleColor(Mboard.TealColor, for: .normal)
                     
                 case "HOME_TIMEOUT":
                     self.setTimeouts(true, data: Int(obj["val"].string!)!)
                     
                 case "AWAY_TIMEOUT":
-                    self.setTimeouts(true, data: Int(obj["val"].string!)!)
+                    self.setTimeouts(false, data: Int(obj["val"].string!)!)
                     
                 default:
                     print("Unknown message from websocket.")
@@ -457,9 +456,9 @@ class ClockController: UIViewController {
     func setTimeouts(_ home: Bool, data j: Int) {
         
         if home {
-            self.homeName.text = "\(j)"
+            self.homeName.text = "\(self.home!) (\(j))"
         } else {
-            self.awayName.text = "\(j)"
+            self.awayName.text = "\(self.away!) (\(j))"
         }
         
     } // setTimeouts
@@ -566,12 +565,24 @@ class ClockController: UIViewController {
     @IBAction func callAwayTimeout(_ sender: Any) {
         
         ws.send(JSON([
+            "cmd": Mboard.WS_CLOCK_STOP
+            ]))
+            
+        clockPause()
+        
+        ws.send(JSON([
             "cmd": Mboard.WS_TIMEOUT_AWAY_UP
             ]))
         
     }
     
     @IBAction func callHomeTimeout(_ sender: Any) {
+        
+        ws.send(JSON([
+            "cmd": Mboard.WS_CLOCK_STOP
+            ]))
+            
+        clockPause()
         
         ws.send(JSON([
             "cmd": Mboard.WS_TIMEOUT_HOME_UP
@@ -622,6 +633,17 @@ class ClockController: UIViewController {
         }
     }
     
+    @IBAction func adjustClock(_ sender: Any) {
+        
+        ws.send(JSON([
+            "cmd": Mboard.WS_CLOCK_STOP
+            ]))
+            
+        clockPause()
+        
+        self.performSegue(withIdentifier: "adjustSegue", sender: self)
+        
+    }
     
     
     

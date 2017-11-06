@@ -1716,7 +1716,7 @@
                                     <navigationItem id="Vho-d1-hAe">
                                         <barButtonItem key="rightBarButtonItem" title="Adjust clock" id="2gm-g8-u9r">
                                             <connections>
-                                                <segue destination="32v-Uc-nMS" kind="show" id="y1i-fm-zIg"/>
+                                                <action selector="adjustClock:" destination="osI-Rm-tle" id="ssc-7E-CPr"/>
                                             </connections>
                                         </barButtonItem>
                                     </navigationItem>
@@ -1755,6 +1755,7 @@
                         <outlet property="period" destination="wBi-0P-qK1" id="MPU-87-KCA"/>
                         <outlet property="shotClock" destination="0Og-hx-I11" id="J2s-Wx-OMZ"/>
                         <outlet property="startBtn" destination="dPT-FK-8cJ" id="TNH-uF-kJV"/>
+                        <segue destination="32v-Uc-nMS" kind="show" identifier="adjustSegue" id="I9i-TR-02V"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="ZrC-Ge-Yro" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -1810,22 +1811,31 @@
                                                 <rect key="frame" x="0.0" y="0.0" width="107.5" height="32"/>
                                                 <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="17"/>
                                                 <state key="normal" title="Button">
-                                                    <color key="titleColor" red="1" green="0.1005283142" blue="0.08981287768" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+                                                    <color key="titleColor" red="0.30931556760000001" green="0.6570865253" blue="1" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                                                 </state>
+                                                <connections>
+                                                    <action selector="gameClockDown:" destination="32v-Uc-nMS" eventType="touchUpInside" id="PkQ-Q9-Js6"/>
+                                                </connections>
                                             </button>
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="vjc-wL-yh0">
                                                 <rect key="frame" x="107.5" y="0.0" width="108" height="32"/>
                                                 <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="17"/>
                                                 <state key="normal" title="Button">
-                                                    <color key="titleColor" red="1" green="0.1005283142" blue="0.08981287768" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+                                                    <color key="titleColor" red="0.30931556760000001" green="0.6570865253" blue="1" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                                                 </state>
+                                                <connections>
+                                                    <action selector="gameClockUp:" destination="32v-Uc-nMS" eventType="touchUpInside" id="6yi-d9-sUM"/>
+                                                </connections>
                                             </button>
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="nPc-Zj-HKp">
                                                 <rect key="frame" x="215.5" y="0.0" width="107.5" height="32"/>
                                                 <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="17"/>
                                                 <state key="normal" title="Button">
-                                                    <color key="titleColor" red="1" green="0.1005283142" blue="0.08981287768" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+                                                    <color key="titleColor" red="0.30931556760000001" green="0.6570865253" blue="1" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                                                 </state>
+                                                <connections>
+                                                    <action selector="resetGameClock:" destination="32v-Uc-nMS" eventType="touchUpInside" id="mab-rZ-yut"/>
+                                                </connections>
                                             </button>
                                         </subviews>
                                     </stackView>
@@ -1845,22 +1855,31 @@
                                                 <rect key="frame" x="0.0" y="0.0" width="107.5" height="32"/>
                                                 <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="17"/>
                                                 <state key="normal" title="Button">
-                                                    <color key="titleColor" red="1" green="0.1005283142" blue="0.08981287768" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+                                                    <color key="titleColor" red="0.30931556760000001" green="0.6570865253" blue="1" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                                                 </state>
+                                                <connections>
+                                                    <action selector="shotClockDown:" destination="32v-Uc-nMS" eventType="touchUpInside" id="5aZ-gt-Lww"/>
+                                                </connections>
                                             </button>
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="rUB-A4-MC8">
                                                 <rect key="frame" x="107.5" y="0.0" width="108" height="32"/>
                                                 <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="17"/>
                                                 <state key="normal" title="Button">
-                                                    <color key="titleColor" red="1" green="0.1005283142" blue="0.08981287768" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+                                                    <color key="titleColor" red="0.30931556760000001" green="0.6570865253" blue="1" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                                                 </state>
+                                                <connections>
+                                                    <action selector="shotClockUp:" destination="32v-Uc-nMS" eventType="touchUpInside" id="VTk-80-RTz"/>
+                                                </connections>
                                             </button>
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="apV-P6-meF">
                                                 <rect key="frame" x="215.5" y="0.0" width="107.5" height="32"/>
                                                 <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="17"/>
                                                 <state key="normal" title="Button">
-                                                    <color key="titleColor" red="1" green="0.1005283142" blue="0.08981287768" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+                                                    <color key="titleColor" red="0.30931556760000001" green="0.6570865253" blue="1" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                                                 </state>
+                                                <connections>
+                                                    <action selector="shotClockReset:" destination="32v-Uc-nMS" eventType="touchUpInside" id="ZhE-0h-9Xl"/>
+                                                </connections>
                                             </button>
                                         </subviews>
                                     </stackView>
@@ -3561,6 +3580,7 @@
         <image name="Basketball" width="25" height="25"/>
     </resources>
     <inferredMetricsTieBreakers>
+        <segue reference="I9i-TR-02V"/>
         <segue reference="7F6-2a-0cp"/>
         <segue reference="QtD-HJ-MN2"/>
         <segue reference="oKO-tJ-cNB"/>

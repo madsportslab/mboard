@@ -54,27 +54,27 @@ class AdjustClock: UIViewController {
         
         incrGameBtn.layer.borderWidth = 1
         incrGameBtn.layer.backgroundColor = UIColor.clear.cgColor
-        incrGameBtn.layer.borderColor = UIColor.red.cgColor
+        incrGameBtn.layer.borderColor = Mboard.TealColor.cgColor
         
         decrGameBtn.layer.borderWidth = 1
         decrGameBtn.layer.backgroundColor = UIColor.clear.cgColor
-        decrGameBtn.layer.borderColor = UIColor.red.cgColor
+        decrGameBtn.layer.borderColor = Mboard.TealColor.cgColor
         
         resetGameBtn.layer.borderWidth = 1
         resetGameBtn.layer.backgroundColor = UIColor.clear.cgColor
-        resetGameBtn.layer.borderColor = UIColor.red.cgColor
+        resetGameBtn.layer.borderColor = Mboard.TealColor.cgColor
         
         incrShotBtn.layer.borderWidth = 1
         incrShotBtn.layer.backgroundColor = UIColor.clear.cgColor
-        incrShotBtn.layer.borderColor = UIColor.red.cgColor
+        incrShotBtn.layer.borderColor = Mboard.TealColor.cgColor
         
         decrShotBtn.layer.borderWidth = 1
         decrShotBtn.layer.backgroundColor = UIColor.clear.cgColor
-        decrShotBtn.layer.borderColor = UIColor.red.cgColor
+        decrShotBtn.layer.borderColor = Mboard.TealColor.cgColor
         
         resetShotBtn.layer.borderWidth = 1
         resetShotBtn.layer.backgroundColor = UIColor.clear.cgColor
-        resetShotBtn.layer.borderColor = UIColor.red.cgColor
+        resetShotBtn.layer.borderColor = Mboard.TealColor.cgColor
         
         loadGame()
         
@@ -138,13 +138,10 @@ class AdjustClock: UIViewController {
                         
                         print(j)
                         
-                        //self.setGameClock(j)
-                        //self.setShotClock(j)
+                        self.setGameClock(j)
+                        self.setShotClock(j)
                         
-                        //self.awayPos.setTitle(j["away"]["name"].string!, for: .normal)
-                        //self.homePos.setTitle(j["home"]["name"].string!, for: .normal)
-                        
-                        //self.initWS()
+                        self.initWS()
                         
                     }
                     
@@ -154,8 +151,182 @@ class AdjustClock: UIViewController {
         
     } // loadGame
     
+    func setGameClock(_ j: JSON) {
+        
+        var mins = 0
+        
+        if j["settings"].exists() {
+            mins = j["settings"]["minutes"].int!
+        } else {
+            mins = j["minutes"].int!
+        }
+        
+        let delta = mins * 60 - j["game"]["seconds"].int!
+        let ndelta = delta - 1
+        let seconds = delta % 60
+        let minutes = Int(floor(Double(delta)/60.0))
+        let tenths = 10 - j["game"]["tenths"].int!
+        
+        
+        if delta == 60 {
+            
+            if minutes == 1 {
+                
+                if tenths == 10 {
+                    gameClock.text = "\(minutes):00"
+                } else {
+                    gameClock.text = "\(ndelta).\(tenths)"
+                }
+                
+            } else {
+                gameClock.text = "\(minutes):59.\(tenths)"
+            }
+            
+        } else if minutes == 0 {
+            
+            if ndelta == -1 {
+                gameClock.text = "0.0"
+            } else if tenths == 10 {
+                gameClock.text = "\(delta).0"
+            } else {
+                gameClock.text = "\(ndelta).\(tenths)"
+            }
+            
+        } else if seconds == 0 {
+            gameClock.text = "\(minutes):00"
+        } else if seconds < 10 && seconds >= 0 {
+            gameClock.text = "\(minutes):0\(seconds)"
+        } else {
+            gameClock.text = "\(minutes):\(seconds)"
+        }
+        
+    } // setGameClock
+    
+    func setShotClock(_ j: JSON) {
+        
+        var vio = 0
+        
+        if j["settings"].exists() {
+            vio = j["settings"]["shot"].int!
+            
+            if vio == -1 {
+                self.shotClock.isHidden = true
+            } else {
+                self.shotClock.isHidden = false
+            }
+            
+        } else {
+            vio = j["shotclock"].int!
+        }
+        
+        let sc = vio - j["shot"]["seconds"].int!
+        
+        self.shotClock.text = "\(sc)"
+        
+    } // setShotClock
+    
+    func initWS() {
+        
+        //ws = WebSocket(Mboard.GAMESOCKET)
+        
+        let url = "\(Mboard.WS)\(server!)/ws/game"
+        
+        ws = WebSocket(url)
+        
+        ws.event.close = { code, reason, clean in
+            
+            self.ws.open()
+            
+        }
+        
+        ws.event.open = {
+            print("socket connected")
+        }
+        
+        ws.event.error = { error in
+            print(error)
+        }
+        
+        ws.event.message = { message in
+            
+            if let txt = message as? String {
+                
+                var obj = JSON.parse(txt)
+                
+                print(obj)
+                
+                switch obj["key"] {
+                case "CLOCK":
+                    
+                    let v = JSON.parse(obj["val"].string!)
+                    
+                    self.setGameClock(v)
+                    self.setShotClock(v)
+                    
+                default:
+                    print("Unknown message from websocket.")
+                    
+                }
+                
+            }
+        }
+        
+    } // initWS
     
     // MARK: Actions
+    
+    @IBAction func gameClockDown(_ sender: Any) {
+        
+        ws.send(JSON([
+            "cmd": Mboard.WS_CLOCK_STEP,
+            "step": 1
+            ]))
+        
+    }
+    
+    @IBAction func gameClockUp(_ sender: Any) {
+        
+        ws.send(JSON([
+            "cmd": Mboard.WS_CLOCK_STEP,
+            "step": -1
+            ]))
+        
+    }
+    
+    @IBAction func resetGameClock(_ sender: Any) {
+        
+        ws.send(JSON([
+            "cmd": Mboard.WS_CLOCK_RESET
+            ]))
+        
+    }
+    
+    @IBAction func shotClockDown(_ sender: Any) {
+    
+        ws.send(JSON([
+            "cmd": Mboard.WS_SHOT_STEP,
+            "step": 1
+            ]))
+        
+    }
+    
+    @IBAction func shotClockUp(_ sender: Any) {
+    
+        ws.send(JSON([
+            "cmd": Mboard.WS_SHOT_STEP,
+            "step": -1
+            ]))
+        
+    }
+    
+    @IBAction func shotClockReset(_ sender: Any) {
+    
+        ws.send(JSON([
+            "cmd": Mboard.WS_SHOT_RESET
+            ]))
+        
+    }
+    
     
 } // AdjustClock
 
