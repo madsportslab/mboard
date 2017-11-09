@@ -194,7 +194,9 @@ class LogViewController: UIViewController, UITableViewDataSource, UITableViewDel
                             
                             let d2 = f2.string(from: d!)
                             
-                            log.append(d2)
+                            print(d2)
+                            //log.append(d2)
+                            log.append(v["clock"].string!)
                             log.append(t)
                             log.append(l)
                             log.append(v["id"].string!)
