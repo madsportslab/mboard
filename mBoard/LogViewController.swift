@@ -21,18 +21,15 @@ class LogViewController: UIViewController, UITableViewDataSource, UITableViewDel
     @IBOutlet weak var logsTable: UITableView!
     
     override func viewDidAppear(_ animated: Bool) {
-        
+        loadLogs()
     }
     
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view, typically from a nib.
         
-        
         logsTable.delegate = self
         logsTable.dataSource = self
-        
-        loadLogs()
         
     }
     
@@ -49,33 +46,65 @@ class LogViewController: UIViewController, UITableViewDataSource, UITableViewDel
         
         switch j["cmd"].string! {
             
-        case "SCORE_AWAY":
+        case Mboard.WS_SCORE_AWAY:
             return ("Away", "\(j["step"].int!) points")
-        case "SCORE_HOME":
+        case Mboard.WS_SCORE_HOME:
             return ("Home", "\(j["step"].int!) points")
-        case "TIMEOUT_HOME_UP":
-            return ("Home", "timeout called")
-        case "TIMEOUT_HOME_DOWN":
-            return ("Home", "Timeout retracted")
-        case "TIMEOUT_AWAY_UP":
-            return ("Away", "Timeout called")
-        case "TIMEOUT_AWAY_DOWN":
-            return ("Away", "Timeout retracted")
-        case "FOUL_HOME_UP":
+        case Mboard.WS_TIMEOUT_HOME:
+            
+            if j["reason"].string! != "" {
+                return ("Home", j["reason"].string!)
+            } else {
+                return ("Home", "Timeout called")
+            }
+            
+            break
+            
+        case Mboard.WS_TIMEOUT_HOME_CANCEL:
+            
+            if j["reason"].string! != "" {
+                return ("Home", j["reason"].string!)
+            } else {
+                return ("Home", "Timeout retracted")
+            }
+            
+            break
+            
+        case Mboard.WS_TIMEOUT_AWAY:
+            
+            if j["reason"].string! != "" {
+                return ("Away", j["reason"].string!)
+            } else {
+                return ("Away", "Timeout called")
+            }
+            
+            break
+            
+        case Mboard.WS_TIMEOUT_AWAY_CANCEL:
+            
+            if j["reason"].string! != "" {
+                return ("Away", j["reason"].string!)
+            } else {
+                return ("Away", "Timeout retracted")
+            }
+            
+            break
+            
+        case Mboard.WS_FOUL_HOME_UP:
             return ("Home", "Foul called")
-        case "FOUL_HOME_DOWN":
+        case Mboard.WS_FOUL_HOME_DOWN:
             return ("Home", "Foul retracted")
-        case "FOUL_AWAY_UP":
-            return ("Away", "Timeout called")
-        case "FOUL_AWAY_DOWN":
-            return ("Away", "Timeout retracted")
-        case "POSSESSION_HOME":
+        case Mboard.WS_FOUL_AWAY_UP:
+            return ("Away", "Foul called")
+        case Mboard.WS_FOUL_AWAY_DOWN:
+            return ("Away", "Foul retracted")
+        case Mboard.WS_POSSESSION_HOME:
             return ("Home", "Possession change")
-        case "POSSESSION_AWAY":
+        case Mboard.WS_POSSESSION_AWAY:
             return ("Away", "Possession change")
-        case "CLOCK_START":
+        case Mboard.WS_CLOCK_START:
             return ("Clock", "Started")
-        case "CLOCK_STOP":
+        case Mboard.WS_CLOCK_STOP:
             return ("Clock", "Stopped")
         default:
             return ("Error", "Unreadable log message")
@@ -169,7 +198,7 @@ class LogViewController: UIViewController, UITableViewDataSource, UITableViewDel
                             log.append(t)
                             log.append(l)
                             log.append(v["id"].string!)
-                            
+                        
                             data.append(log)
                             
                         }

@@ -32,18 +32,6 @@ class ClockController: UIViewController {
     @IBOutlet weak var period: UILabel!
     @IBOutlet weak var shotClock: UILabel!
     @IBOutlet weak var startBtn: UIButton!
-    //@IBOutlet weak var rewBtn: UIButton!
-    //@IBOutlet weak var fwdBtn: UIButton!
-    //@IBOutlet weak var rewSCBtn: UIButton!
-    //@IBOutlet weak var fwdSCBtn: UIButton!
-    //@IBOutlet weak var resetGCBtn: UIButton!
-    //@IBOutlet weak var resetSCBtn: UIButton!
-    //@IBOutlet weak var gameLabel: UILabel!
-    //@IBOutlet weak var shotLabel: UILabel!
-    //@IBOutlet weak var awayPos: UIButton!
-    //@IBOutlet weak var homePos: UIButton!
-    //@IBOutlet weak var posLabel: UILabel!
-    //@IBOutlet weak var shotclockStack: UIStackView!
     @IBOutlet weak var awayTimeout: UIButton!
     @IBOutlet weak var homeTimeout: UIButton!
     @IBOutlet weak var homeTimeoutCancel: UIButton!
@@ -59,111 +47,43 @@ class ClockController: UIViewController {
     }
     
     override func viewDidAppear(_ animated: Bool) {
-        
+        UIApplication.shared.isIdleTimerDisabled = true
     }
     
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view, typically from a nib.
         
-        UIApplication.shared.isIdleTimerDisabled = true
-        
         server = (defaults.object(forKey: Mboard.SERVER) as? String)!
         
         clockPause()
-        
-        //posLabel.layer.masksToBounds = true
-        //posLabel.layer.cornerRadius = 5
         
         nextPeriodBtn.layer.cornerRadius = 5
         nextPeriodBtn.layer.borderColor = UIColor.red.cgColor
         nextPeriodBtn.layer.borderWidth = 1
         nextPeriodBtn.isEnabled = false
         
-        //resetGCBtn.setFAIcon(icon: FAType.FARepeat, iconSize: 16, forState: .normal)
-        
-        //rewBtn.setFAIcon(icon: FAType.FAAngleUp, iconSize: 16, forState: .normal)
-        //fwdBtn.setFAIcon(icon: FAType.FAAngleDown, iconSize: 16, forState: .normal)
-        
-        //rewSCBtn.setFAIcon(icon: FAType.FAAngleUp, iconSize: 16, forState: .normal)
-        //fwdSCBtn.setFAIcon(icon: FAType.FAAngleDown, iconSize: 16, forState: .normal)
-        
-        //resetSCBtn.setFAIcon(icon: FAType.FARepeat, iconSize: 16, forState: .normal)
-        
-        //awayTimeout.setFAIcon(icon: FAType.FAHandStopO, iconSize: 16, forState: .normal)
-        //awayTimeoutCancel.setFAIcon(icon: FAType.FARemove, iconSize: 16, forState: .normal)
-        //homeTimeout.setFAIcon(icon: FAType.FAHandStopO, iconSize: 16, forState: .normal)
-        //homeTimeoutCancel.setFAIcon(icon: FAType.FARemove, iconSize: 16, forState: .normal)
-        
-        //startBtn.setFATitleColor(color: Mboard.NeonGreenColor)
-        
         startBtn.layer.borderColor = Mboard.NeonGreenColor.cgColor
         startBtn.layer.borderWidth = 1
         startBtn.layer.cornerRadius = startBtn.bounds.size.width/2
         startBtn.layer.masksToBounds = true
         
-        //rewBtn.layer.borderColor = Mboard.TealColor.cgColor
-        //rewBtn.layer.borderWidth = 1
-        //rewBtn.layer.cornerRadius = rewBtn.bounds.size.width/2
-        //rewBtn.layer.masksToBounds = true
-        
-        //fwdBtn.layer.borderColor = Mboard.TealColor.cgColor
-        //fwdBtn.layer.borderWidth = 1
-        //fwdBtn.layer.cornerRadius = fwdBtn.bounds.size.width/2
-        //fwdBtn.layer.masksToBounds = true
-        
-        //rewSCBtn.layer.borderColor = Mboard.TealColor.cgColor
-        //rewSCBtn.layer.borderWidth = 1
-        //rewSCBtn.layer.cornerRadius = rewSCBtn.bounds.size.width/2
-        //rewSCBtn.layer.masksToBounds = true
-        
-        //fwdSCBtn.layer.borderColor = Mboard.TealColor.cgColor
-        //fwdSCBtn.layer.borderWidth = 1
-        //fwdSCBtn.layer.cornerRadius = fwdSCBtn.bounds.size.width/2
-        //fwdSCBtn.layer.masksToBounds = true
-        
-        //resetGCBtn.layer.borderColor = UIColor.red.cgColor
-        //resetGCBtn.layer.borderWidth = 1
-        //resetGCBtn.layer.cornerRadius = resetGCBtn.bounds.size.width/2
-        //resetGCBtn.layer.masksToBounds = true
-
-        
-        //resetSCBtn.layer.borderColor = UIColor.red.cgColor
-        //resetSCBtn.layer.borderWidth = 1
-        //resetSCBtn.layer.cornerRadius = resetSCBtn.bounds.size.width/2
-        //resetSCBtn.layer.masksToBounds = true
-
-        //awayPos.layer.borderColor = Mboard.TealColor.cgColor
-        //awayPos.layer.borderWidth = 1
-        //awayPos.layer.cornerRadius = 5
-
-        //homePos.layer.borderColor = Mboard.TealColor.cgColor
-        //homePos.layer.borderWidth = 1
-        //homePos.layer.cornerRadius = 5
         
         awayTimeout.layer.borderColor = Mboard.TealColor.cgColor
         awayTimeout.layer.borderWidth = 1
         awayTimeout.layer.cornerRadius = 5
-        //awayTimeout.layer.cornerRadius = awayTimeout.bounds.size.width/2
-        //awayTimeout.layer.masksToBounds = true
         
         awayTimeoutCancel.layer.borderColor = Mboard.TealColor.cgColor
         awayTimeoutCancel.layer.borderWidth = 1
         awayTimeoutCancel.layer.cornerRadius = 5
-        //awayTimeoutCancel.layer.cornerRadius = awayTimeoutCancel.bounds.size.width/2
-        //awayTimeoutCancel.layer.masksToBounds = true
         
         homeTimeout.layer.borderColor = Mboard.TealColor.cgColor
         homeTimeout.layer.borderWidth = 1
         homeTimeout.layer.cornerRadius = 5
-        //homeTimeout.layer.cornerRadius = homeTimeout.bounds.size.width/2
-        //homeTimeout.layer.masksToBounds = true
         
         homeTimeoutCancel.layer.borderColor = Mboard.TealColor.cgColor
         homeTimeoutCancel.layer.borderWidth = 1
         homeTimeoutCancel.layer.cornerRadius = 5
-        //homeTimeoutCancel.layer.cornerRadius = homeTimeoutCancel.bounds.size.width/2
-        //homeTimeoutCancel.layer.masksToBounds = true
         
         clockAdjust.setFAIcon(icon: FAType.FASliders, iconSize: 24)
         
@@ -439,8 +359,16 @@ class ClockController: UIViewController {
                     
                 case "HOME_TIMEOUT":
                     self.setTimeouts(true, data: Int(obj["val"].string!)!)
+                    self.clockPause()
+                    
+                case "HOME_TIMEOUT_CANCEL":
+                    self.setTimeouts(true, data: Int(obj["val"].string!)!)
                     
                 case "AWAY_TIMEOUT":
+                    self.setTimeouts(false, data: Int(obj["val"].string!)!)
+                    self.clockPause()
+                    
+                case "AWAY_TIMEOUT_CANCEL":
                     self.setTimeouts(false, data: Int(obj["val"].string!)!)
                     
                 default:
@@ -464,71 +392,6 @@ class ClockController: UIViewController {
     } // setTimeouts
     
     // MARK: Actions
-    /*
-    @IBAction func gcMinusTick(_ sender: Any) {
-        
-        ws.send(JSON([
-            "cmd": Mboard.WS_CLOCK_STEP,
-            "step": -1
-            ]))
-        
-        clockPause()
-        
-    }
-    
-    @IBAction func gcAddTick(_ sender: Any) {
-    
-        ws.send(JSON([
-            "cmd": Mboard.WS_CLOCK_STEP,
-            "step": 1
-            ]))
-
-        clockPause()
-        
-    }
-    
-    @IBAction func gcReset(_ sender: Any) {
-    
-        ws.send(JSON([
-            "cmd": Mboard.WS_CLOCK_RESET
-            ]))
-        
-        clockPause()
-        
-    }
-    
-    @IBAction func scMinusTick(_ sender: Any) {
-    
-        ws.send(JSON([
-            "cmd": Mboard.WS_SHOT_STEP,
-            "step": -1
-            ]))
-        
-        clockPause()
-        
-    }
-    
-    @IBAction func scAddTick(_ sender: Any) {
-    
-        ws.send(JSON([
-            "cmd": Mboard.WS_SHOT_STEP,
-            "step": 1
-            ]))
-        
-        clockPause()
-        
-    }
-    
-    @IBAction func scReset(_ sender: Any) {
-    
-        ws.send(JSON([
-            "cmd": Mboard.WS_SHOT_RESET
-            ]))
-        
-        clockPause()
-        
-    }
-    */
     
     @IBAction func toggleClock(_ sender: Any) {
         
@@ -565,13 +428,7 @@ class ClockController: UIViewController {
     @IBAction func callAwayTimeout(_ sender: Any) {
         
         ws.send(JSON([
-            "cmd": Mboard.WS_CLOCK_STOP
-            ]))
-            
-        clockPause()
-        
-        ws.send(JSON([
-            "cmd": Mboard.WS_TIMEOUT_AWAY_UP
+            "cmd": Mboard.WS_TIMEOUT_AWAY
             ]))
         
     }
@@ -579,13 +436,7 @@ class ClockController: UIViewController {
     @IBAction func callHomeTimeout(_ sender: Any) {
         
         ws.send(JSON([
-            "cmd": Mboard.WS_CLOCK_STOP
-            ]))
-            
-        clockPause()
-        
-        ws.send(JSON([
-            "cmd": Mboard.WS_TIMEOUT_HOME_UP
+            "cmd": Mboard.WS_TIMEOUT_HOME
             ]))
         
     }
@@ -593,7 +444,7 @@ class ClockController: UIViewController {
     @IBAction func cancelAwayTimeout(_ sender: Any) {
         
         ws.send(JSON([
-            "cmd": Mboard.WS_TIMEOUT_AWAY_DOWN
+            "cmd": Mboard.WS_TIMEOUT_AWAY_CANCEL
             ]))
         
     }
@@ -601,7 +452,7 @@ class ClockController: UIViewController {
     @IBAction func cancelHomeTimeout(_ sender: Any) {
         
         ws.send(JSON([
-            "cmd": Mboard.WS_TIMEOUT_HOME_DOWN
+            "cmd": Mboard.WS_TIMEOUT_HOME_CANCEL
             ]))
         
     }
