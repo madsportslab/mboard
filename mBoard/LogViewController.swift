@@ -51,44 +51,16 @@ class LogViewController: UIViewController, UITableViewDataSource, UITableViewDel
         case Mboard.WS_SCORE_HOME:
             return ("Home", "\(j["step"].int!) points")
         case Mboard.WS_TIMEOUT_HOME:
-            
-            if j["reason"].string! != "" {
-                return ("Home", j["reason"].string!)
-            } else {
-                return ("Home", "Timeout called")
-            }
-            
-            break
+            return ("Home", "Timeout called")
             
         case Mboard.WS_TIMEOUT_HOME_CANCEL:
-            
-            if j["reason"].string! != "" {
-                return ("Home", j["reason"].string!)
-            } else {
-                return ("Home", "Timeout retracted")
-            }
-            
-            break
+            return ("Home", "Timeout retracted")
             
         case Mboard.WS_TIMEOUT_AWAY:
-            
-            if j["reason"].string! != "" {
-                return ("Away", j["reason"].string!)
-            } else {
-                return ("Away", "Timeout called")
-            }
-            
-            break
+            return ("Away", "Timeout called")
             
         case Mboard.WS_TIMEOUT_AWAY_CANCEL:
-            
-            if j["reason"].string! != "" {
-                return ("Away", j["reason"].string!)
-            } else {
-                return ("Away", "Timeout retracted")
-            }
-            
-            break
+            return ("Away", "Timeout retracted")
             
         case Mboard.WS_FOUL_HOME_UP:
             return ("Home", "Foul called")
@@ -106,6 +78,8 @@ class LogViewController: UIViewController, UITableViewDataSource, UITableViewDel
             return ("Clock", "Started")
         case Mboard.WS_CLOCK_STOP:
             return ("Clock", "Stopped")
+        case Mboard.WS_PERIOD_UP:
+            return ("Game", "Period end")
         default:
             return ("Error", "Unreadable log message")
         }
@@ -129,9 +103,9 @@ class LogViewController: UIViewController, UITableViewDataSource, UITableViewDel
         cell.timestamp.layer.masksToBounds = true
         cell.timestamp.text = logs[indexPath.item][0]
 
-        cell.playTag.layer.cornerRadius = 5
-        cell.playTag.layer.masksToBounds = true
-        cell.playTag.text = logs[indexPath.item][1]
+        //cell.playTag.layer.cornerRadius = 5
+        //cell.playTag.layer.masksToBounds = true
+        //cell.playTag.text = logs[indexPath.item][1]
         
         cell.log.text = logs[indexPath.item][2]
         
@@ -196,7 +170,12 @@ class LogViewController: UIViewController, UITableViewDataSource, UITableViewDel
                             
                             print(d2)
                             //log.append(d2)
-                            log.append(v["clock"].string!)
+                            
+                            let msg = JSON.parse(v["msg"].string!)
+                            
+                            let period = Mboard.Periods[msg["period"].int! + 1]
+                            
+                            log.append("\(v["clock"].string!) \(period) - \(t)")
                             log.append(t)
                             log.append(l)
                             log.append(v["id"].string!)

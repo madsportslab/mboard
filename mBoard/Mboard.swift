@@ -49,6 +49,7 @@ class Mboard {
     static let WS_POSSESSION_AWAY   = "POSSESSION_AWAY"
     static let WS_FINAL             = "FINAL"
     static let WS_ABORT             = "ABORT"
+    static let WS_PERIOD            = "PERIOD"
     static let WS_SCORE_HOME        = "SCORE_HOME"
     static let WS_SCORE_AWAY        = "SCORE_AWAY"
     static let WS_FOUL_HOME_UP      = "FOUL_HOME_UP"
@@ -75,5 +76,6 @@ class Mboard {
     static let YellowColor = UIColor(
         red: 255/255, green: 255/255, blue: 51/255, alpha: 1)
     
+    static let Periods = ["1st", "2nd", "3rd", "4th"]
     
 } // Mboard

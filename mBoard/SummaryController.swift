@@ -76,36 +76,38 @@ class SummaryController: UIViewController, UITableViewDelegate, UITableViewDataS
         
         switch j["cmd"].string! {
         
-        case "SCORE_AWAY":
+        case Mboard.WS_SCORE_AWAY:
             //ret.append(Mboard.TAG_AWAY)
             //ret.append(
             return ("Away", "\(j["step"].int!) points")
-        case "SCORE_HOME":
+        case Mboard.WS_SCORE_HOME:
             return ("Home", "\(j["step"].int!) points")
-        case "TIMEOUT_HOME_UP":
+        case Mboard.WS_TIMEOUT_HOME:
             return ("Home", "Timeout called")
-        case "TIMEOUT_HOME_DOWN":
+        case Mboard.WS_TIMEOUT_HOME_CANCEL:
             return ("Home", "Timeout retracted")
-        case "TIMEOUT_AWAY_UP":
+        case Mboard.WS_TIMEOUT_AWAY:
             return ("Away", "Timeout called")
-        case "TIMEOUT_AWAY_DOWN":
+        case Mboard.WS_TIMEOUT_AWAY_CANCEL:
             return ("Away", "Timeout retracted")
-        case "FOUL_HOME_UP":
+        case Mboard.WS_FOUL_HOME_UP:
             return ("Home", "Foul called")
-        case "FOUL_HOME_DOWN":
+        case Mboard.WS_FOUL_HOME_DOWN:
             return ("Home", "Foul retracted")
-        case "FOUL_AWAY_UP":
+        case Mboard.WS_FOUL_AWAY_UP:
             return ("Away", "Timeout called")
-        case "FOUL_AWAY_DOWN":
+        case Mboard.WS_FOUL_AWAY_DOWN:
             return ("Away", "Timeout retracted")
-        case "POSSESSION_HOME":
+        case Mboard.WS_POSSESSION_HOME:
             return ("Home", "Possession change")
-        case "POSSESSION_AWAY":
+        case Mboard.WS_POSSESSION_AWAY:
             return ("Away", "Possession change")
-        case "CLOCK_START":
+        case Mboard.WS_CLOCK_START:
             return ("Clock", "Started")
-        case "CLOCK_STOP":
+        case Mboard.WS_CLOCK_STOP:
             return ("Clock", "Stopped")
+        case Mboard.WS_PERIOD_UP:
+            return ("Game", "Period end")
         default:
             return ("Error", "Unreadable log message")
         }
@@ -289,21 +291,12 @@ class SummaryController: UIViewController, UITableViewDelegate, UITableViewDataS
                             
                             var log = [String]()
                             
-                            let f = DateFormatter()
+                            let msg = JSON.parse(v["msg"].string!)
+                            let period = Mboard.Periods[msg["period"].int! + 1]
                             
-                            f.dateFormat = "yyyy-MM-dd'T'HH:mm:ssZ"
-                            
-                            let d = f.date(from: v["created"].string!)
                             let (t, l) = self.translate(msg: v["msg"].string!)
                             
-                            let f2 = DateFormatter()
-                            
-                            f2.dateFormat = "HH:mm:ss"
-                            
-                            let d2 = f2.string(from: d!)
-                            
-                            
-                            log.append("\(d2)")
+                            log.append("\(v["clock"].string!) \(period) - \(t)")
                             log.append(t)
                             log.append(l)
                             log.append(v["id"].string!)
@@ -346,9 +339,9 @@ class SummaryController: UIViewController, UITableViewDelegate, UITableViewDataS
         cell.timestamp.layer.masksToBounds = true
         cell.timestamp.text = logs[indexPath.item][0]
         
-        cell.playTag.layer.cornerRadius = 5
-        cell.playTag.layer.masksToBounds = true
-        cell.playTag.text = logs[indexPath.item][1]
+        //cell.playTag.layer.cornerRadius = 5
+        //cell.playTag.layer.masksToBounds = true
+        //cell.playTag.text = logs[indexPath.item][1]
         
         cell.log.text = logs[indexPath.item][2]
         
