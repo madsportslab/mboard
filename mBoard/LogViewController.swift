@@ -80,6 +80,14 @@ class LogViewController: UIViewController, UITableViewDataSource, UITableViewDel
             return ("Clock", "Stopped")
         case Mboard.WS_PERIOD_UP:
             return ("Game", "Period end")
+        case Mboard.WS_CLOCK_STEP:
+            return ("Clock", "Clock forward.")
+        case Mboard.WS_CLOCK_RESET:
+            return ("Clock", "clock reset.")
+        case Mboard.WS_SHOT_STEP:
+            return ("Clock", "Clock forward.")
+        case Mboard.WS_SHOT_RESET:
+            return ("Clock", "clock reset.")
         default:
             return ("Error", "Unreadable log message")
         }

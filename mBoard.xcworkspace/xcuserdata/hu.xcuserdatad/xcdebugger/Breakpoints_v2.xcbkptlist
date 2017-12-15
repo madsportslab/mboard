@@ -58,11 +58,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "mBoard/ClockController.swift"
-            timestampString = "532110937.502981"
+            timestampString = "533470704.031318"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "185"
-            endingLineNumber = "185"
+            startingLineNumber = "182"
+            endingLineNumber = "182"
             landmarkName = "clockPause()"
             landmarkType = "7">
          </BreakpointContent>
@@ -74,7 +74,7 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "mBoard/GameController.swift"
-            timestampString = "532110937.503812"
+            timestampString = "532364423.768097"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "272"
@@ -90,11 +90,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "mBoard/SummaryController.swift"
-            timestampString = "532110937.504577"
+            timestampString = "533470704.031443"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "187"
-            endingLineNumber = "187"
+            startingLineNumber = "209"
+            endingLineNumber = "209"
             landmarkName = "loadGame()"
             landmarkType = "7">
          </BreakpointContent>
@@ -106,11 +106,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "mBoard/SummaryController.swift"
-            timestampString = "532110937.505238"
+            timestampString = "533470704.031515"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "250"
-            endingLineNumber = "250"
+            startingLineNumber = "272"
+            endingLineNumber = "272"
             landmarkName = "loadLogs()"
             landmarkType = "7">
          </BreakpointContent>
@@ -122,11 +122,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "mBoard/SummaryController.swift"
-            timestampString = "532110937.505688"
+            timestampString = "533470704.031579"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "117"
-            endingLineNumber = "117"
+            startingLineNumber = "139"
+            endingLineNumber = "139"
             landmarkName = "setScoreboard(_:isHome:)"
             landmarkType = "7">
          </BreakpointContent>
@@ -138,11 +138,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "mBoard/LogViewController.swift"
-            timestampString = "532110937.50621"
+            timestampString = "533470704.031644"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "181"
-            endingLineNumber = "181"
+            startingLineNumber = "189"
+            endingLineNumber = "189"
             landmarkName = "loadLogs()"
             landmarkType = "7">
          </BreakpointContent>
@@ -154,11 +154,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "mBoard/LogViewController.swift"
-            timestampString = "532110937.507085"
+            timestampString = "533470704.031712"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "150"
-            endingLineNumber = "150"
+            startingLineNumber = "158"
+            endingLineNumber = "158"
             landmarkName = "loadLogs()"
             landmarkType = "7">
          </BreakpointContent>

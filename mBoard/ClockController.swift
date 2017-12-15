@@ -24,7 +24,6 @@ class ClockController: UIViewController {
     var away:String?
     
     let defaults = UserDefaults.standard
-    let verbosePeriods = ["1st", "2nd", "3rd", "4th"]
     
     // MARK: Properties
     @IBOutlet weak var nextPeriodBtn: UIButton!
@@ -165,10 +164,8 @@ class ClockController: UIViewController {
             
             if vio == -1 {
                 self.shotClock.isHidden = true
-                //self.shotclockStack.isHidden = true
             } else {
                 self.shotClock.isHidden = false
-                //self.shotclockStack.isHidden = false
             }
             
         } else {
@@ -347,7 +344,7 @@ class ClockController: UIViewController {
                     
                     let p = obj["val"].string!
                     
-                    self.period.text = self.verbosePeriods[Int(p)!]
+                    self.period.text = Mboard.Periods[Int(p)!]
                     
                     
                 case "POSSESSION_HOME":

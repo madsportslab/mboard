@@ -77,8 +77,6 @@ class SummaryController: UIViewController, UITableViewDelegate, UITableViewDataS
         switch j["cmd"].string! {
         
         case Mboard.WS_SCORE_AWAY:
-            //ret.append(Mboard.TAG_AWAY)
-            //ret.append(
             return ("Away", "\(j["step"].int!) points")
         case Mboard.WS_SCORE_HOME:
             return ("Home", "\(j["step"].int!) points")
@@ -108,6 +106,30 @@ class SummaryController: UIViewController, UITableViewDelegate, UITableViewDataS
             return ("Clock", "Stopped")
         case Mboard.WS_PERIOD_UP:
             return ("Game", "Period end")
+        case Mboard.WS_CLOCK_STEP:
+            
+            if j["step"] == -1 {
+              return ("Clock", "Step backward")
+            } else if j["step"] == 1 {
+              return ("Clock", "Step forward")
+            } else {
+                return ("Clock", "Step unknown")
+            }
+            
+        case Mboard.WS_CLOCK_RESET:
+            return ("Clock", "Reset")
+        case Mboard.WS_SHOT_STEP:
+            
+            if j["step"] == -1 {
+                return ("Clock", "Step backward")
+            } else if j["step"] == 1 {
+                return ("Clock", "Step forward")
+            } else {
+                return ("Clock", "Step unknown")
+            }
+            
+        case Mboard.WS_SHOT_RESET:
+            return ("Clock", "Reset")
         default:
             return ("Error", "Unreadable log message")
         }

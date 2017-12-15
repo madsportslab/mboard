@@ -44,12 +44,12 @@ class AdjustClock: UIViewController {
         
         server = (defaults.object(forKey: Mboard.SERVER) as? String)!
         
-        incrGameBtn.setFAIcon(icon: FAType.FAStepForward, iconSize: 32, forState: .normal)
-        decrGameBtn.setFAIcon(icon: FAType.FAStepBackward, iconSize: 32, forState: .normal)
+        incrGameBtn.setFAIcon(icon: FAType.FAStepBackward, iconSize: 32, forState: .normal)
+        decrGameBtn.setFAIcon(icon: FAType.FAStepForward, iconSize: 32, forState: .normal)
         resetGameBtn.setFAIcon(icon: FAType.FARefresh, iconSize: 32, forState: .normal)
         
-        incrShotBtn.setFAIcon(icon: FAType.FAStepForward, iconSize: 32, forState: .normal)
-        decrShotBtn.setFAIcon(icon: FAType.FAStepBackward, iconSize: 32, forState: .normal)
+        incrShotBtn.setFAIcon(icon: FAType.FAStepBackward, iconSize: 32, forState: .normal)
+        decrShotBtn.setFAIcon(icon: FAType.FAStepForward, iconSize: 32, forState: .normal)
         resetShotBtn.setFAIcon(icon: FAType.FARefresh, iconSize: 32, forState: .normal)
         
         incrGameBtn.layer.borderWidth = 1
@@ -83,6 +83,17 @@ class AdjustClock: UIViewController {
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
+    }
+    
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        
+        if segue.identifier == "clockSegue" {
+            
+            if let tab = segue.destination as? UITabBarController {
+                tab.selectedIndex = 1
+            }
+            
+        }
     }
     
     func loadGame() {
@@ -210,9 +221,19 @@ class AdjustClock: UIViewController {
             vio = j["settings"]["shot"].int!
             
             if vio == -1 {
+            
                 self.shotClock.isHidden = true
+                self.incrShotBtn.isHidden = true
+                self.decrShotBtn.isHidden = true
+                self.resetShotBtn.isHidden = true
+
             } else {
+                
                 self.shotClock.isHidden = false
+                self.incrShotBtn.isHidden = false
+                self.decrShotBtn.isHidden = false
+                self.resetShotBtn.isHidden = false
+
             }
             
         } else {
@@ -327,6 +348,9 @@ class AdjustClock: UIViewController {
         
     }
     
+    @IBAction func backBtn(_ sender: Any) {
+        self.performSegue(withIdentifier: "clockSegue", sender: self)
+    }
     
 } // AdjustClock
 

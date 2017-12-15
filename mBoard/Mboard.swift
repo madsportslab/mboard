@@ -22,6 +22,8 @@ class Mboard {
     static let GAMES            = WWW + "/api/games"
     static let SCORES           = WWW + "/api/scores"
     
+    static let MADSPORTSLAB     = "http://127.0.0.1:8110"
+    static let UPDATESERVICE    = "http://172.16.130.215:8900"
     
     static let MBOARD           = "mboard."
     static let PERIODS          = MBOARD + "periods"
@@ -34,7 +36,7 @@ class Mboard {
     static let SERVER           = MBOARD + "server"
     static let SAVED_SERVERS    = MBOARD + "savedservers"
     static let GAME             = MBOARD + "game"
-
+    
     // ws commands
     
     static let WS_CLOCK_START       = "CLOCK_START"
