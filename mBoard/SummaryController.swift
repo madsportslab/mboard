@@ -314,7 +314,7 @@ class SummaryController: UIViewController, UITableViewDelegate, UITableViewDataS
                             var log = [String]()
                             
                             let msg = JSON.parse(v["msg"].string!)
-                            let period = Mboard.Periods[msg["period"].int! + 1]
+                            let period = Mboard.Periods[msg["period"].int!]
                             
                             let (t, l) = self.translate(msg: v["msg"].string!)
                             

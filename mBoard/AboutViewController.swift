@@ -20,6 +20,7 @@ class AboutViewController: UIViewController {
     
     // MARK: Properties
     @IBOutlet weak var checkBtn: UIButton!
+    @IBOutlet weak var versionLabel: UILabel!
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -34,6 +35,11 @@ class AboutViewController: UIViewController {
         checkBtn.layer.backgroundColor = UIColor.clear.cgColor
         checkBtn.layer.cornerRadius = 5
         
+        let d = Bundle.main.infoDictionary!
+        let v = d["CFBundleShortVersionString"] as! String
+        
+        versionLabel.text = v
+
         //getFirmware()
         
     }

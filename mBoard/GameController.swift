@@ -242,7 +242,7 @@ class GameController: UIViewController {
             
             if let txt = message as? String {
                 
-                var obj = JSON.parse(txt)
+                var obj = JSON.init(parseJSON: txt)
             
                 switch obj["key"] {
                 case "HOME_SCORE":

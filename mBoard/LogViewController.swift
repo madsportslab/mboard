@@ -40,7 +40,7 @@ class LogViewController: UIViewController, UITableViewDataSource, UITableViewDel
     
     func translate(msg: String) -> (String, String) {
         
-        let j = JSON.parse(msg)
+        let j = JSON.init(parseJSON: msg)
         
         print(j)
         
@@ -179,9 +179,9 @@ class LogViewController: UIViewController, UITableViewDataSource, UITableViewDel
                             print(d2)
                             //log.append(d2)
                             
-                            let msg = JSON.parse(v["msg"].string!)
+                            let msg = JSON.init(parseJSON: v["msg"].string!)
                             
-                            let period = Mboard.Periods[msg["period"].int! + 1]
+                            let period = Mboard.Periods[msg["period"].int!]
                             
                             log.append("\(v["clock"].string!) \(period) - \(t)")
                             log.append(t)

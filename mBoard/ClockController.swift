@@ -26,7 +26,7 @@ class ClockController: UIViewController {
     let defaults = UserDefaults.standard
     
     // MARK: Properties
-    @IBOutlet weak var nextPeriodBtn: UIButton!
+    //@IBOutlet weak var nextPeriodBtn: UIButton!
     @IBOutlet weak var gameClock: UILabel!
     @IBOutlet weak var period: UILabel!
     @IBOutlet weak var shotClock: UILabel!
@@ -37,8 +37,11 @@ class ClockController: UIViewController {
     @IBOutlet weak var awayTimeoutCancel: UIButton!
     @IBOutlet weak var awayName: UILabel!
     @IBOutlet weak var homeName: UILabel!
+    @IBOutlet weak var awayTimeoutCount: UILabel!
+    @IBOutlet weak var homeTimeoutCount: UILabel!
     @IBOutlet weak var ballPos: UISegmentedControl!
     @IBOutlet weak var clockAdjust: UIBarButtonItem!
+    @IBOutlet weak var endPeriod: UIBarButtonItem!
     
     
     override func viewDidDisappear(_ animated: Bool) {
@@ -57,42 +60,62 @@ class ClockController: UIViewController {
         
         clockPause()
         
-        nextPeriodBtn.layer.cornerRadius = 5
-        nextPeriodBtn.layer.borderColor = UIColor.red.cgColor
-        nextPeriodBtn.layer.borderWidth = 1
-        nextPeriodBtn.isEnabled = false
+        //nextPeriodBtn.layer.cornerRadius = 5
+        //nextPeriodBtn.layer.borderColor = UIColor.red.cgColor
+        //nextPeriodBtn.layer.borderWidth = 1
+        //nextPeriodBtn.isEnabled = false
         
-        startBtn.layer.borderColor = Mboard.NeonGreenColor.cgColor
+        //startBtn.layer.borderColor = Mboard.NeonGreenColor.cgColor
+        startBtn.layer.borderColor = Mboard.TealColor.cgColor
         startBtn.layer.borderWidth = 1
-        startBtn.layer.cornerRadius = startBtn.bounds.size.width/2
-        startBtn.layer.masksToBounds = true
+        startBtn.layer.cornerRadius = 5
+        //startBtn.layer.cornerRadius = startBtn.bounds.size.width/2
+        //startBtn.layer.masksToBounds = true
         
         
-        awayTimeout.layer.borderColor = Mboard.TealColor.cgColor
+        //awayTimeout.layer.borderColor = Mboard.TealColor.cgColor
         awayTimeout.layer.borderWidth = 1
         awayTimeout.layer.cornerRadius = 5
+        //awayTimeout.layer.cornerRadius = awayTimeout.bounds.size.width/2
+        //awayTimeout.layer.masksToBounds = true
         
-        awayTimeoutCancel.layer.borderColor = Mboard.TealColor.cgColor
+        //awayTimeoutCancel.layer.borderColor = Mboard.TealColor.cgColor
         awayTimeoutCancel.layer.borderWidth = 1
         awayTimeoutCancel.layer.cornerRadius = 5
+        //awayTimeoutCancel.layer.cornerRadius = awayTimeoutCancel.bounds.size.width/2
+        //awayTimeoutCancel.layer.masksToBounds = true
         
-        homeTimeout.layer.borderColor = Mboard.TealColor.cgColor
+        //homeTimeout.layer.borderColor = Mboard.TealColor.cgColor
         homeTimeout.layer.borderWidth = 1
         homeTimeout.layer.cornerRadius = 5
+        //homeTimeout.layer.cornerRadius = homeTimeout.bounds.size.width/2
+        //homeTimeout.layer.masksToBounds = true
         
-        homeTimeoutCancel.layer.borderColor = Mboard.TealColor.cgColor
+        //homeTimeoutCancel.layer.borderColor = Mboard.TealColor.cgColor
         homeTimeoutCancel.layer.borderWidth = 1
         homeTimeoutCancel.layer.cornerRadius = 5
+        //homeTimeoutCancel.layer.cornerRadius = homeTimeoutCancel.bounds.size.width/2
+        //homeTimeoutCancel.layer.masksToBounds = true
         
         clockAdjust.setFAIcon(icon: FAType.FASliders, iconSize: 24)
         
-        awayTimeout.setFAText(prefixText: "", icon: FAType.FAHandStopO, postfixText: " Timeout", size: 16, forState: .normal)
+        //awayTimeout.setFAIcon(icon: FAType.FAHandStopO, forState: .normal)
+        //homeTimeout.setFAIcon(icon: FAType.FAHandStopO, forState: .normal)
+        //awayTimeoutCancel.setFAIcon(icon: FAType.FAPlus, forState: .normal)
+        //homeTimeoutCancel.setFAIcon(icon: FAType.FAMinus, forState: .normal)
         
-        homeTimeout.setFAText(prefixText: "", icon: FAType.FAHandStopO, postfixText: " Timeout", size: 16, forState: .normal)
+        //awayTimeout.setFAText(prefixText: "", icon: FAType.FAHandStopO, postfixText: " Timeout", size: 16, forState: .normal)
         
-        awayTimeoutCancel.setFAText(prefixText: "", icon: FAType.FARemove, postfixText: " Cancel", size: 16, forState: .normal)
+        //homeTimeout.setFAText(prefixText: "", icon: FAType.FAHandStopO, postfixText: " Timeout", size: 16, forState: .normal)
         
-        homeTimeoutCancel.setFAText(prefixText: "", icon: FAType.FARemove, postfixText: " Cancel", size: 16, forState: .normal)
+        //awayTimeoutCancel.setFAText(prefixText: "", icon: FAType.FARemove, postfixText: " Cancel", size: 16, forState: .normal)
+        
+        //homeTimeoutCancel.setFAText(prefixText: "", icon: FAType.FARemove, postfixText: " Cancel", size: 16, forState: .normal)
+        
+        //awayTimeout.setFATitleColor(color: UIColor.white)
+        //awayTimeoutCancel.setFATitleColor(color: UIColor.white)
+        //homeTimeout.setFATitleColor(color: UIColor.white)
+        //homeTimeoutCancel.setFATitleColor(color: UIColor.white)
         
         loadGame()
         
@@ -138,7 +161,8 @@ class ClockController: UIViewController {
             
             if ndelta == -1 {
                 gameClock.text = "0.0"
-                nextPeriodBtn.isEnabled = true
+                //nextPeriodBtn.isEnabled = true
+                endPeriod.isEnabled = true
             } else if tenths == 10 {
                 gameClock.text = "\(delta).0"
             } else {
@@ -251,9 +275,6 @@ class ClockController: UIViewController {
                         self.setGameClock(j)
                         self.setShotClock(j)
                         
-                        //self.awayPos.setTitle(j["away"]["name"].string!, for: .normal)
-                        //self.homePos.setTitle(j["home"]["name"].string!, for: .normal)
-                        
                         self.away = j["away"]["name"].string!
                         self.home = j["home"]["name"].string!
                         
@@ -268,12 +289,6 @@ class ClockController: UIViewController {
                         
                         self.setTimeouts(false, data: j["away"]["timeouts"].int!)
                         self.setTimeouts(true, data: j["home"]["timeouts"].int!)
-                        
-                        //self.awayTimeout.setTitle(
-                        //    "\(j["away"]["name"].string!) Timeout", for: .normal)
-                        
-                        //self.homeTimeout.setTitle(
-                        //    "\(j["home"]["name"].string!) Timeout", for: .normal)
                         
                         self.initWS()
                         
@@ -312,14 +327,14 @@ class ClockController: UIViewController {
             
             if let txt = message as? String {
                 
-                var obj = JSON.parse(txt)
+                var obj = JSON.init(parseJSON: txt)
                 
                 print(obj)
                 
                 switch obj["key"] {
                 case "CLOCK":
                     
-                    let v = JSON.parse(obj["val"].string!)
+                    let v = JSON.init(parseJSON: obj["val"].string!)
                     
                     self.setGameClock(v)
                     self.setShotClock(v)
@@ -329,14 +344,13 @@ class ClockController: UIViewController {
                     
                     self.clockPause()
                     
-                    
-                    
                     // play sound on server side
                     
                     
                 case "END_PERIOD":
                     
-                    self.nextPeriodBtn.isEnabled = true
+                    //self.nextPeriodBtn.isEnabled = true
+                    self.endPeriod.isEnabled = true
                     self.clockPause()
                     
                     
@@ -381,9 +395,9 @@ class ClockController: UIViewController {
     func setTimeouts(_ home: Bool, data j: Int) {
         
         if home {
-            self.homeName.text = "\(self.home!) (\(j))"
+            self.homeTimeoutCount.text = "\(j)"
         } else {
-            self.awayName.text = "\(self.away!) (\(j))"
+            self.awayTimeoutCount.text = "\(j)"
         }
         
     } // setTimeouts
@@ -418,7 +432,8 @@ class ClockController: UIViewController {
             "cmd": Mboard.WS_PERIOD_UP
             ]))
         
-        nextPeriodBtn.isEnabled = false
+        //nextPeriodBtn.isEnabled = false
+        endPeriod.isEnabled = false
         
     }
     

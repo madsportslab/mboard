@@ -148,6 +148,7 @@
                             </tableView>
                             <navigationBar contentMode="scaleToFill" barStyle="black" translatesAutoresizingMaskIntoConstraints="NO" id="b4a-IW-kpP">
                                 <rect key="frame" x="0.0" y="20" width="375" height="44"/>
+                                <color key="barTintColor" red="0.050980392159999999" green="0.21960784310000001" blue="0.35686274509999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <items>
                                     <navigationItem title="mboard" id="hyO-uH-nWe">
                                         <barButtonItem key="leftBarButtonItem" title="Connections" id="eRK-e6-YVO">
@@ -241,7 +242,9 @@
                             <constraint firstItem="sYc-bE-8xy" firstAttribute="centerY" secondItem="QS5-Rx-YEW" secondAttribute="centerY" id="MJC-2C-CLX"/>
                         </constraints>
                     </view>
-                    <tabBarItem key="tabBarItem" title="Media" id="cPa-gy-q4n"/>
+                    <tabBarItem key="tabBarItem" title="Media" id="cPa-gy-q4n">
+                        <color key="badgeColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                    </tabBarItem>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="4Nw-L8-lE0" sceneMemberID="firstResponder"/>
             </objects>
@@ -341,7 +344,8 @@
                                 </subviews>
                             </stackView>
                             <navigationBar contentMode="scaleToFill" barStyle="black" translatesAutoresizingMaskIntoConstraints="NO" id="MZ0-IE-cGO">
-                                <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
+                                <rect key="frame" x="0.0" y="20" width="375" height="44"/>
+                                <color key="barTintColor" red="0.050980392159999999" green="0.21960784310000001" blue="0.35686274509999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <items>
                                     <navigationItem title="Periods" id="Q8S-s1-MHW">
                                         <barButtonItem key="leftBarButtonItem" title="Back" id="VKw-3U-QKK">
@@ -363,7 +367,7 @@
                             <constraint firstItem="2lE-Xv-zhq" firstAttribute="top" secondItem="hzj-NO-Ih9" secondAttribute="bottom" constant="60" id="ecF-bY-LYu"/>
                             <constraint firstAttribute="trailing" secondItem="MZ0-IE-cGO" secondAttribute="trailing" id="ij4-Qc-Ixt"/>
                             <constraint firstAttribute="trailing" secondItem="2lE-Xv-zhq" secondAttribute="trailing" constant="30" id="pFb-2w-q0q"/>
-                            <constraint firstItem="MZ0-IE-cGO" firstAttribute="top" secondItem="fVo-xr-KjO" secondAttribute="top" id="pHj-2x-6EH"/>
+                            <constraint firstItem="MZ0-IE-cGO" firstAttribute="top" secondItem="hzj-NO-Ih9" secondAttribute="bottom" id="pHj-2x-6EH"/>
                             <constraint firstItem="MZ0-IE-cGO" firstAttribute="leading" secondItem="fVo-xr-KjO" secondAttribute="leading" id="r0X-bP-00L"/>
                         </constraints>
                     </view>
@@ -533,15 +537,15 @@
                                                         <color key="textColor" cocoaTouchSystemColor="scrollViewTexturedBackgroundColor"/>
                                                         <nil key="highlightedColor"/>
                                                     </label>
-                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="0.1.0" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Pu5-a4-kiI">
-                                                        <rect key="frame" x="7.5" y="16.5" width="31.5" height="16.5"/>
+                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="1.0" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Pu5-a4-kiI">
+                                                        <rect key="frame" x="13.5" y="16.5" width="19.5" height="16.5"/>
                                                         <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="14"/>
                                                         <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                                         <nil key="highlightedColor"/>
                                                     </label>
                                                 </subviews>
                                             </stackView>
-                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Copyright © 2017.  All Rights Reserved." textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="q0Q-bX-iaa">
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Copyright © 2018.  All Rights Reserved." textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="q0Q-bX-iaa">
                                                 <rect key="frame" x="89.5" y="130" width="196" height="13"/>
                                                 <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="11"/>
                                                 <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
@@ -572,6 +576,7 @@
                     <tabBarItem key="tabBarItem" title="About" id="tmK-1q-r21"/>
                     <connections>
                         <outlet property="checkBtn" destination="yV2-v7-mHM" id="Yxs-vL-RAQ"/>
+                        <outlet property="versionLabel" destination="Pu5-a4-kiI" id="Hbd-VR-ALm"/>
                         <segue destination="nIf-JX-Fri" kind="show" identifier="updateSegue" id="Fnx-6S-4mU"/>
                     </connections>
                 </viewController>
@@ -592,7 +597,8 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <navigationBar contentMode="scaleToFill" barStyle="black" translatesAutoresizingMaskIntoConstraints="NO" id="XGC-zO-bvv">
-                                <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
+                                <rect key="frame" x="0.0" y="20" width="375" height="44"/>
+                                <color key="barTintColor" red="0.050980392159999999" green="0.21960784310000001" blue="0.35686274509999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <items>
                                     <navigationItem title="Firmware update" id="YS3-4B-aHu">
                                         <barButtonItem key="leftBarButtonItem" title="Back" id="DQW-cf-fIN">
@@ -665,7 +671,7 @@
                             <constraint firstItem="ukQ-Af-nY3" firstAttribute="centerX" secondItem="PYr-24-yZv" secondAttribute="centerX" id="1hn-gZ-aqL"/>
                             <constraint firstAttribute="trailing" secondItem="XGC-zO-bvv" secondAttribute="trailing" id="Qao-Jw-b6f"/>
                             <constraint firstItem="XGC-zO-bvv" firstAttribute="leading" secondItem="PYr-24-yZv" secondAttribute="leading" id="eQA-bG-JbU"/>
-                            <constraint firstItem="XGC-zO-bvv" firstAttribute="top" secondItem="PYr-24-yZv" secondAttribute="top" id="gcT-XC-0Yi"/>
+                            <constraint firstItem="XGC-zO-bvv" firstAttribute="top" secondItem="lgk-EK-S7N" secondAttribute="bottom" id="gcT-XC-0Yi"/>
                             <constraint firstItem="ukQ-Af-nY3" firstAttribute="centerY" secondItem="PYr-24-yZv" secondAttribute="centerY" id="jsn-SV-oZ3"/>
                             <constraint firstItem="XGC-zO-bvv" firstAttribute="centerX" secondItem="PYr-24-yZv" secondAttribute="centerX" id="uAJ-sb-wSt"/>
                         </constraints>
@@ -879,7 +885,8 @@
                                 </subviews>
                             </stackView>
                             <navigationBar contentMode="scaleToFill" barStyle="black" translatesAutoresizingMaskIntoConstraints="NO" id="UI3-z9-nmH">
-                                <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
+                                <rect key="frame" x="0.0" y="20" width="375" height="44"/>
+                                <color key="barTintColor" red="0.050980392159999999" green="0.21960784310000001" blue="0.35686274509999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <items>
                                     <navigationItem title="Foul Penalty" id="fFT-kS-hzG">
                                         <barButtonItem key="leftBarButtonItem" title="Back" id="2ee-Mn-Dz7">
@@ -893,7 +900,7 @@
                         </subviews>
                         <color key="backgroundColor" red="0.050980392159999999" green="0.21960784310000001" blue="0.35686274509999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
-                            <constraint firstItem="UI3-z9-nmH" firstAttribute="top" secondItem="XrE-Z4-WhA" secondAttribute="top" id="CPH-Ln-YOY"/>
+                            <constraint firstItem="UI3-z9-nmH" firstAttribute="top" secondItem="5li-hk-baw" secondAttribute="bottom" id="CPH-Ln-YOY"/>
                             <constraint firstItem="Bkj-Pv-r0S" firstAttribute="top" secondItem="5li-hk-baw" secondAttribute="bottom" constant="60" id="LBK-bw-szc"/>
                             <constraint firstItem="mBf-co-VqC" firstAttribute="top" secondItem="caS-JQ-EYJ" secondAttribute="bottom" constant="30" id="Oct-w5-VT8"/>
                             <constraint firstItem="UI3-z9-nmH" firstAttribute="leading" secondItem="XrE-Z4-WhA" secondAttribute="leading" id="Wqj-S1-2CH"/>
@@ -946,7 +953,8 @@
                                 <nil key="highlightedColor"/>
                             </label>
                             <navigationBar contentMode="scaleToFill" barStyle="black" translatesAutoresizingMaskIntoConstraints="NO" id="yrk-PS-Lnh">
-                                <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
+                                <rect key="frame" x="0.0" y="20" width="375" height="44"/>
+                                <color key="barTintColor" red="0.050980392159999999" green="0.21960784310000001" blue="0.35686274509999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <items>
                                     <navigationItem title="Timeouts" id="ZV6-JT-l7X">
                                         <barButtonItem key="leftBarButtonItem" title="Back" id="xEa-x7-U4W">
@@ -1056,7 +1064,7 @@
                             <constraint firstItem="zEg-SX-Lxp" firstAttribute="centerX" secondItem="jaw-8J-sfz" secondAttribute="centerX" id="81N-La-ZW5"/>
                             <constraint firstItem="taU-g2-VZI" firstAttribute="top" secondItem="zEg-SX-Lxp" secondAttribute="bottom" constant="30" id="A2p-54-ndp"/>
                             <constraint firstAttribute="trailing" secondItem="yrk-PS-Lnh" secondAttribute="trailing" id="Gur-4W-a5L"/>
-                            <constraint firstItem="yrk-PS-Lnh" firstAttribute="top" secondItem="jaw-8J-sfz" secondAttribute="top" id="VN7-8R-HgH"/>
+                            <constraint firstItem="yrk-PS-Lnh" firstAttribute="top" secondItem="QzO-3t-Wei" secondAttribute="bottom" id="VN7-8R-HgH"/>
                             <constraint firstItem="SyB-aj-W65" firstAttribute="top" secondItem="QzO-3t-Wei" secondAttribute="bottom" constant="60" id="ctf-lZ-IcK"/>
                             <constraint firstItem="SyB-aj-W65" firstAttribute="centerX" secondItem="jaw-8J-sfz" secondAttribute="centerX" id="dff-eN-49l"/>
                             <constraint firstAttribute="trailing" secondItem="SyB-aj-W65" secondAttribute="trailing" constant="30" id="ewJ-e9-59q"/>
@@ -1086,17 +1094,20 @@
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="20" translatesAutoresizingMaskIntoConstraints="NO" id="UeS-cP-ZY3">
-                                <rect key="frame" x="0.0" y="-5584.5" width="0.0" height="11836"/>
+                            <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="center" translatesAutoresizingMaskIntoConstraints="NO" id="j0W-Xn-1Fv">
+                                <rect key="frame" x="87.5" y="269.5" width="200" height="128.5"/>
                                 <subviews>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Scan QR code to connect" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="1tO-6n-Vve">
-                                        <rect key="frame" x="0.0" y="0.0" width="0.0" height="11733"/>
+                                        <rect key="frame" x="0.0" y="0.0" width="200" height="65.5"/>
+                                        <constraints>
+                                            <constraint firstAttribute="width" constant="200" id="v5a-S7-SxK"/>
+                                        </constraints>
                                         <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="28"/>
                                         <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="7q3-5U-uEm">
-                                        <rect key="frame" x="0.0" y="11753" width="0.0" height="32"/>
+                                        <rect key="frame" x="85" y="65.5" width="30" height="32"/>
                                         <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="17"/>
                                         <state key="normal">
                                             <color key="titleColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
@@ -1106,10 +1117,10 @@
                                         </connections>
                                     </button>
                                     <stackView opaque="NO" contentMode="scaleToFill" distribution="fillEqually" spacing="10" translatesAutoresizingMaskIntoConstraints="NO" id="vDg-Fk-Tf0">
-                                        <rect key="frame" x="0.0" y="11805" width="0.0" height="31"/>
+                                        <rect key="frame" x="14" y="97.5" width="172" height="31"/>
                                         <subviews>
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="k90-FM-6ei">
-                                                <rect key="frame" x="0.0" y="0.0" width="0.0" height="31"/>
+                                                <rect key="frame" x="0.0" y="0.0" width="81" height="31"/>
                                                 <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="16"/>
                                                 <state key="normal" title="Get started">
                                                     <color key="titleColor" red="0.30931556760000001" green="0.6570865253" blue="1" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
@@ -1119,7 +1130,7 @@
                                                 </connections>
                                             </button>
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="wordWrap" translatesAutoresizingMaskIntoConstraints="NO" id="cZn-Jj-hXD">
-                                                <rect key="frame" x="192.5" y="0.0" width="0.0" height="31"/>
+                                                <rect key="frame" x="91" y="0.0" width="81" height="31"/>
                                                 <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="16"/>
                                                 <state key="normal" title="Advanced">
                                                     <color key="titleColor" red="0.30931556760000001" green="0.6570865253" blue="1" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
@@ -1135,8 +1146,8 @@
                         </subviews>
                         <color key="backgroundColor" red="0.050980392159999999" green="0.21960784310000001" blue="0.35686274509999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
-                            <constraint firstItem="UeS-cP-ZY3" firstAttribute="centerY" secondItem="FSW-bc-67e" secondAttribute="centerY" id="S8T-HJ-72d"/>
-                            <constraint firstItem="UeS-cP-ZY3" firstAttribute="centerX" secondItem="FSW-bc-67e" secondAttribute="centerX" id="W5o-Xf-POw"/>
+                            <constraint firstItem="j0W-Xn-1Fv" firstAttribute="centerY" secondItem="FSW-bc-67e" secondAttribute="centerY" id="7U9-Yg-oSl"/>
+                            <constraint firstItem="j0W-Xn-1Fv" firstAttribute="centerX" secondItem="FSW-bc-67e" secondAttribute="centerX" id="NU8-c4-5pS"/>
                         </constraints>
                     </view>
                     <nil key="simulatedStatusBarMetrics"/>
@@ -1672,8 +1683,26 @@
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="20" translatesAutoresizingMaskIntoConstraints="NO" id="O8v-vR-3ZZ">
-                                <rect key="frame" x="10" y="54" width="355" height="441"/>
+                            <navigationBar contentMode="scaleToFill" barStyle="black" translatesAutoresizingMaskIntoConstraints="NO" id="Deu-hE-4yj">
+                                <rect key="frame" x="0.0" y="20" width="375" height="42"/>
+                                <color key="barTintColor" red="0.050980392159999999" green="0.21960784310000001" blue="0.35686274509999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <items>
+                                    <navigationItem id="Vho-d1-hAe">
+                                        <barButtonItem key="leftBarButtonItem" title="End period" id="PvY-lU-pK8">
+                                            <connections>
+                                                <action selector="changePeriod:" destination="osI-Rm-tle" id="hBF-E2-sgJ"/>
+                                            </connections>
+                                        </barButtonItem>
+                                        <barButtonItem key="rightBarButtonItem" title="Adjust clock" id="2gm-g8-u9r">
+                                            <connections>
+                                                <action selector="adjustClock:" destination="osI-Rm-tle" id="ssc-7E-CPr"/>
+                                            </connections>
+                                        </barButtonItem>
+                                    </navigationItem>
+                                </items>
+                            </navigationBar>
+                            <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="fillProportionally" spacing="40" translatesAutoresizingMaskIntoConstraints="NO" id="O8v-vR-3ZZ">
+                                <rect key="frame" x="10" y="96" width="355" height="511"/>
                                 <subviews>
                                     <stackView opaque="NO" contentMode="scaleToFill" distribution="fillProportionally" spacing="5" translatesAutoresizingMaskIntoConstraints="NO" id="i1K-20-XFd">
                                         <rect key="frame" x="0.0" y="0.0" width="355" height="85"/>
@@ -1708,28 +1737,29 @@
                                         </subviews>
                                     </stackView>
                                     <segmentedControl opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="plain" selectedSegmentIndex="0" translatesAutoresizingMaskIntoConstraints="NO" id="wk0-IG-3Ld">
-                                        <rect key="frame" x="0.0" y="105" width="355" height="29"/>
+                                        <rect key="frame" x="0.0" y="125" width="355" height="29"/>
                                         <segments>
                                             <segment title="First"/>
                                             <segment title="Second"/>
                                         </segments>
-                                        <color key="tintColor" red="0.30931556760000001" green="0.6570865253" blue="1" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+                                        <color key="tintColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                         <connections>
                                             <action selector="togglePossession:" destination="osI-Rm-tle" eventType="valueChanged" id="10E-m5-Dl8"/>
                                         </connections>
                                     </segmentedControl>
                                     <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="center" translatesAutoresizingMaskIntoConstraints="NO" id="uhp-Q8-Vq7">
-                                        <rect key="frame" x="0.0" y="153" width="355" height="128"/>
+                                        <rect key="frame" x="0.0" y="193" width="355" height="128"/>
                                         <subviews>
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="dPT-FK-8cJ">
                                                 <rect key="frame" x="113.5" y="0.0" width="128" height="128"/>
+                                                <color key="backgroundColor" red="0.30931556760000001" green="0.6570865253" blue="1" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                                                 <constraints>
                                                     <constraint firstAttribute="width" secondItem="dPT-FK-8cJ" secondAttribute="height" multiplier="1:1" id="LLB-mZ-0og"/>
                                                     <constraint firstAttribute="width" constant="128" id="whi-1M-o3L"/>
                                                 </constraints>
                                                 <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="17"/>
                                                 <state key="normal">
-                                                    <color key="titleColor" red="0.2087466935" green="1" blue="0.18823374779999999" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+                                                    <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                                 </state>
                                                 <connections>
                                                     <action selector="toggleClock:" destination="osI-Rm-tle" eventType="touchUpInside" id="lbc-cg-mav"/>
@@ -1738,131 +1768,125 @@
                                         </subviews>
                                     </stackView>
                                     <stackView opaque="NO" contentMode="scaleToFill" distribution="fillEqually" spacing="5" translatesAutoresizingMaskIntoConstraints="NO" id="6or-TF-kpl">
-                                        <rect key="frame" x="0.0" y="301" width="355" height="34"/>
+                                        <rect key="frame" x="0.0" y="361" width="355" height="55"/>
                                         <subviews>
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="wordWrap" translatesAutoresizingMaskIntoConstraints="NO" id="1Vf-Wg-P7D">
-                                                <rect key="frame" x="0.0" y="0.0" width="115" height="34"/>
+                                                <rect key="frame" x="0.0" y="0.0" width="115" height="55"/>
+                                                <color key="backgroundColor" red="0.13333333333333333" green="0.26666666666666666" blue="0.40000000000000002" alpha="1" colorSpace="calibratedRGB"/>
+                                                <constraints>
+                                                    <constraint firstAttribute="width" secondItem="1Vf-Wg-P7D" secondAttribute="height" multiplier="1:1" id="stT-5U-8X0"/>
+                                                </constraints>
                                                 <fontDescription key="fontDescription" name="HelveticaNeue-Thin" family="Helvetica Neue" pointSize="18"/>
                                                 <state key="normal" title="Timeout">
-                                                    <color key="titleColor" red="0.30931556760000001" green="0.6570865253" blue="1" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+                                                    <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                                 </state>
                                                 <connections>
                                                     <action selector="callAwayTimeout:" destination="osI-Rm-tle" eventType="touchUpInside" id="6IP-JI-nUW"/>
                                                 </connections>
                                             </button>
-                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Away" textAlignment="center" lineBreakMode="wordWrap" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="x30-Py-AiG">
-                                                <rect key="frame" x="120" y="0.0" width="115" height="34"/>
-                                                <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="17"/>
-                                                <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                                <nil key="highlightedColor"/>
-                                            </label>
+                                            <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="mvc-dD-YRg">
+                                                <rect key="frame" x="120" y="0.0" width="115" height="55"/>
+                                                <subviews>
+                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Away" textAlignment="center" lineBreakMode="wordWrap" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="x30-Py-AiG">
+                                                        <rect key="frame" x="0.0" y="0.0" width="115" height="20"/>
+                                                        <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="17"/>
+                                                        <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                                        <nil key="highlightedColor"/>
+                                                    </label>
+                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Away" textAlignment="center" lineBreakMode="wordWrap" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="pP5-fs-WLx">
+                                                        <rect key="frame" x="0.0" y="20" width="115" height="35"/>
+                                                        <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="30"/>
+                                                        <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                                        <nil key="highlightedColor"/>
+                                                    </label>
+                                                </subviews>
+                                            </stackView>
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="YLe-Qd-pEO">
-                                                <rect key="frame" x="240" y="0.0" width="115" height="34"/>
+                                                <rect key="frame" x="240" y="0.0" width="115" height="55"/>
+                                                <color key="backgroundColor" red="0.1333333333" green="0.2666666667" blue="0.40000000000000002" alpha="1" colorSpace="calibratedRGB"/>
+                                                <constraints>
+                                                    <constraint firstAttribute="width" secondItem="YLe-Qd-pEO" secondAttribute="height" multiplier="1:1" id="h9B-Gm-pkT"/>
+                                                </constraints>
                                                 <fontDescription key="fontDescription" name="HelveticaNeue-Thin" family="Helvetica Neue" pointSize="18"/>
                                                 <state key="normal" title="Cancel">
-                                                    <color key="titleColor" red="0.30931556760000001" green="0.6570865253" blue="1" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+                                                    <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                                 </state>
                                                 <connections>
                                                     <action selector="cancelAwayTimeout:" destination="osI-Rm-tle" eventType="touchUpInside" id="fZ0-wD-SGg"/>
                                                 </connections>
                                             </button>
                                         </subviews>
+                                        <constraints>
+                                            <constraint firstAttribute="height" relation="lessThanOrEqual" constant="64" id="gSe-dV-Ebz"/>
+                                        </constraints>
                                     </stackView>
                                     <stackView opaque="NO" contentMode="scaleToFill" distribution="fillEqually" spacing="5" translatesAutoresizingMaskIntoConstraints="NO" id="Nym-Xx-7My">
-                                        <rect key="frame" x="0.0" y="355" width="355" height="34"/>
+                                        <rect key="frame" x="0.0" y="456" width="355" height="55"/>
                                         <subviews>
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="wordWrap" translatesAutoresizingMaskIntoConstraints="NO" id="WU5-oc-y0y">
-                                                <rect key="frame" x="0.0" y="0.0" width="115" height="34"/>
+                                                <rect key="frame" x="0.0" y="0.0" width="115" height="55"/>
+                                                <color key="backgroundColor" red="0.1333333333" green="0.2666666667" blue="0.40000000000000002" alpha="1" colorSpace="calibratedRGB"/>
+                                                <constraints>
+                                                    <constraint firstAttribute="width" secondItem="WU5-oc-y0y" secondAttribute="height" multiplier="1:1" id="Qrr-mh-6Hl"/>
+                                                </constraints>
                                                 <fontDescription key="fontDescription" name="HelveticaNeue-Thin" family="Helvetica Neue" pointSize="18"/>
                                                 <state key="normal" title="Timeout">
-                                                    <color key="titleColor" red="0.30931556760000001" green="0.6570865253" blue="1" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+                                                    <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                                 </state>
                                                 <connections>
                                                     <action selector="callHomeTimeout:" destination="osI-Rm-tle" eventType="touchUpInside" id="9v9-lT-vtF"/>
                                                 </connections>
                                             </button>
-                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Home" textAlignment="center" lineBreakMode="wordWrap" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="p8r-qC-A69">
-                                                <rect key="frame" x="120" y="0.0" width="115" height="34"/>
-                                                <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="17"/>
-                                                <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                                <nil key="highlightedColor"/>
-                                            </label>
+                                            <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="OOV-bG-Xun">
+                                                <rect key="frame" x="120" y="0.0" width="115" height="55"/>
+                                                <subviews>
+                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Home" textAlignment="center" lineBreakMode="wordWrap" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="p8r-qC-A69">
+                                                        <rect key="frame" x="0.0" y="0.0" width="115" height="20"/>
+                                                        <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="17"/>
+                                                        <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                                        <nil key="highlightedColor"/>
+                                                    </label>
+                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Home" textAlignment="center" lineBreakMode="wordWrap" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Zfh-Y2-oL2">
+                                                        <rect key="frame" x="0.0" y="20" width="115" height="35"/>
+                                                        <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="30"/>
+                                                        <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                                        <nil key="highlightedColor"/>
+                                                    </label>
+                                                </subviews>
+                                            </stackView>
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="nAc-u7-Jbl">
-                                                <rect key="frame" x="240" y="0.0" width="115" height="34"/>
+                                                <rect key="frame" x="240" y="0.0" width="115" height="55"/>
+                                                <color key="backgroundColor" red="0.1333333333" green="0.2666666667" blue="0.40000000000000002" alpha="1" colorSpace="calibratedRGB"/>
+                                                <constraints>
+                                                    <constraint firstAttribute="width" secondItem="nAc-u7-Jbl" secondAttribute="height" multiplier="1:1" id="TRR-cr-ag1"/>
+                                                </constraints>
                                                 <fontDescription key="fontDescription" name="HelveticaNeue-Thin" family="Helvetica Neue" pointSize="18"/>
                                                 <state key="normal" title="Cancel">
-                                                    <color key="titleColor" red="0.30931556760000001" green="0.6570865253" blue="1" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+                                                    <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                                 </state>
                                                 <connections>
                                                     <action selector="cancelHomeTimeout:" destination="osI-Rm-tle" eventType="touchUpInside" id="gtC-S5-A8Q"/>
                                                 </connections>
                                             </button>
                                         </subviews>
-                                    </stackView>
-                                    <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="fillProportionally" alignment="center" translatesAutoresizingMaskIntoConstraints="NO" id="DJg-ab-S3w">
-                                        <rect key="frame" x="0.0" y="409" width="355" height="32"/>
-                                        <subviews>
-                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="wordWrap" translatesAutoresizingMaskIntoConstraints="NO" id="tqV-nD-lZd">
-                                                <rect key="frame" x="97.5" y="0.0" width="160" height="32"/>
-                                                <constraints>
-                                                    <constraint firstAttribute="width" constant="160" id="Uar-AP-0B3"/>
-                                                </constraints>
-                                                <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="17"/>
-                                                <state key="normal" title="Start next period">
-                                                    <color key="titleColor" red="1" green="0.1005283142" blue="0.08981287768" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
-                                                </state>
-                                                <connections>
-                                                    <action selector="changePeriod:" destination="osI-Rm-tle" eventType="touchUpInside" id="49M-7I-8aK"/>
-                                                </connections>
-                                            </button>
-                                        </subviews>
+                                        <constraints>
+                                            <constraint firstAttribute="height" relation="lessThanOrEqual" constant="64" id="ONs-AW-ByM"/>
+                                        </constraints>
                                     </stackView>
                                 </subviews>
                             </stackView>
-                            <label opaque="NO" userInteractionEnabled="NO" alpha="0.34999999403953552" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" usesAttributedText="YES" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="0Ft-LA-ltX">
-                                <rect key="frame" x="135" y="323.5" width="105" height="20"/>
-                                <attributedString key="attributedText">
-                                    <fragment content="madsports">
-                                        <attributes>
-                                            <color key="NSColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                            <font key="NSFont" size="17" name="HelveticaNeue"/>
-                                        </attributes>
-                                    </fragment>
-                                    <fragment content="lab">
-                                        <attributes>
-                                            <color key="NSColor" red="0.30931556761468149" green="0.65708652525502442" blue="1" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
-                                            <font key="NSFont" size="17" name="HelveticaNeue"/>
-                                        </attributes>
-                                    </fragment>
-                                </attributedString>
-                                <nil key="highlightedColor"/>
-                            </label>
-                            <navigationBar contentMode="scaleToFill" barStyle="black" translatesAutoresizingMaskIntoConstraints="NO" id="Deu-hE-4yj">
-                                <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
-                                <items>
-                                    <navigationItem id="Vho-d1-hAe">
-                                        <barButtonItem key="rightBarButtonItem" title="Adjust clock" id="2gm-g8-u9r">
-                                            <connections>
-                                                <action selector="adjustClock:" destination="osI-Rm-tle" id="ssc-7E-CPr"/>
-                                            </connections>
-                                        </barButtonItem>
-                                    </navigationItem>
-                                </items>
-                            </navigationBar>
                         </subviews>
                         <color key="backgroundColor" red="0.050980392159999999" green="0.21960784310000001" blue="0.35686274509999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
                             <constraint firstAttribute="trailing" secondItem="O8v-vR-3ZZ" secondAttribute="trailing" constant="10" id="8B3-dd-r6T"/>
-                            <constraint firstAttribute="bottom" relation="greaterThanOrEqual" secondItem="O8v-vR-3ZZ" secondAttribute="bottom" constant="60" id="D3c-kG-AhO"/>
-                            <constraint firstItem="O8v-vR-3ZZ" firstAttribute="top" secondItem="95e-0H-W4d" secondAttribute="top" constant="54" id="FHV-aU-lKk"/>
+                            <constraint firstItem="O8v-vR-3ZZ" firstAttribute="top" secondItem="Deu-hE-4yj" secondAttribute="bottom" constant="34" id="FHV-aU-lKk"/>
                             <constraint firstItem="O8v-vR-3ZZ" firstAttribute="leading" secondItem="95e-0H-W4d" secondAttribute="leading" constant="10" id="HLe-Bj-M4O"/>
                             <constraint firstAttribute="trailing" secondItem="Deu-hE-4yj" secondAttribute="trailing" id="MOf-hT-98T"/>
                             <constraint firstItem="Deu-hE-4yj" firstAttribute="leading" secondItem="95e-0H-W4d" secondAttribute="leading" id="OK5-aE-Rcl"/>
-                            <constraint firstItem="0Ft-LA-ltX" firstAttribute="centerX" secondItem="95e-0H-W4d" secondAttribute="centerX" id="Zkh-Cv-svq"/>
-                            <constraint firstItem="0Ft-LA-ltX" firstAttribute="centerY" secondItem="95e-0H-W4d" secondAttribute="centerY" id="bjm-Ce-9cE"/>
                             <constraint firstItem="Deu-hE-4yj" firstAttribute="centerX" secondItem="95e-0H-W4d" secondAttribute="centerX" id="ePQ-bk-Ho8"/>
                             <constraint firstItem="O8v-vR-3ZZ" firstAttribute="centerX" secondItem="95e-0H-W4d" secondAttribute="centerX" id="eqQ-c1-Zj5"/>
-                            <constraint firstItem="Deu-hE-4yj" firstAttribute="top" secondItem="95e-0H-W4d" secondAttribute="top" id="pOX-td-UR8"/>
+                            <constraint firstAttribute="bottom" secondItem="O8v-vR-3ZZ" secondAttribute="bottom" constant="60" id="fTN-lL-AtP"/>
+                            <constraint firstItem="Deu-hE-4yj" firstAttribute="top" secondItem="XAb-Po-adM" secondAttribute="bottom" id="pOX-td-UR8"/>
                         </constraints>
                     </view>
                     <tabBarItem key="tabBarItem" title="Clock" id="KNF-PM-0Dx"/>
@@ -1872,13 +1896,15 @@
                         <outlet property="awayName" destination="x30-Py-AiG" id="v96-iY-Xxe"/>
                         <outlet property="awayTimeout" destination="1Vf-Wg-P7D" id="wjl-Ch-Mex"/>
                         <outlet property="awayTimeoutCancel" destination="YLe-Qd-pEO" id="fv1-SR-TJo"/>
+                        <outlet property="awayTimeoutCount" destination="pP5-fs-WLx" id="4DB-iD-wf4"/>
                         <outlet property="ballPos" destination="wk0-IG-3Ld" id="bKb-gQ-dbH"/>
                         <outlet property="clockAdjust" destination="2gm-g8-u9r" id="hIm-Du-Gfr"/>
+                        <outlet property="endPeriod" destination="PvY-lU-pK8" id="sn4-VM-uTR"/>
                         <outlet property="gameClock" destination="IsS-ja-0dQ" id="uib-4f-cKU"/>
                         <outlet property="homeName" destination="p8r-qC-A69" id="5tB-V3-kwX"/>
                         <outlet property="homeTimeout" destination="WU5-oc-y0y" id="2fH-R7-y1p"/>
                         <outlet property="homeTimeoutCancel" destination="nAc-u7-Jbl" id="DrV-4f-BJj"/>
-                        <outlet property="nextPeriodBtn" destination="tqV-nD-lZd" id="SxT-19-zqE"/>
+                        <outlet property="homeTimeoutCount" destination="Zfh-Y2-oL2" id="DTD-pf-V44"/>
                         <outlet property="period" destination="wBi-0P-qK1" id="MPU-87-KCA"/>
                         <outlet property="shotClock" destination="0Og-hx-I11" id="J2s-Wx-OMZ"/>
                         <outlet property="startBtn" destination="dPT-FK-8cJ" id="TNH-uF-kJV"/>
@@ -1919,6 +1945,19 @@
                                 </attributedString>
                                 <nil key="highlightedColor"/>
                             </label>
+                            <navigationBar contentMode="scaleToFill" barStyle="black" translatesAutoresizingMaskIntoConstraints="NO" id="4Sv-lc-Jta">
+                                <rect key="frame" x="0.0" y="20" width="375" height="44"/>
+                                <color key="barTintColor" red="0.050980392159999999" green="0.21960784310000001" blue="0.35686274509999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <items>
+                                    <navigationItem title="Adjust clock" id="0dS-av-eVb">
+                                        <barButtonItem key="leftBarButtonItem" title="Back" id="NNe-dW-xPH">
+                                            <connections>
+                                                <action selector="backBtn:" destination="32v-Uc-nMS" id="s1f-Uc-eOL"/>
+                                            </connections>
+                                        </barButtonItem>
+                                    </navigationItem>
+                                </items>
+                            </navigationBar>
                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="20" translatesAutoresizingMaskIntoConstraints="NO" id="i3u-Up-QSw">
                                 <rect key="frame" x="26" y="62" width="323" height="351.5"/>
                                 <subviews>
@@ -2012,23 +2051,11 @@
                                     </stackView>
                                 </subviews>
                             </stackView>
-                            <navigationBar contentMode="scaleToFill" barStyle="black" translatesAutoresizingMaskIntoConstraints="NO" id="4Sv-lc-Jta">
-                                <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
-                                <items>
-                                    <navigationItem title="Adjust clock" id="0dS-av-eVb">
-                                        <barButtonItem key="leftBarButtonItem" title="Back" id="NNe-dW-xPH">
-                                            <connections>
-                                                <action selector="backBtn:" destination="32v-Uc-nMS" id="s1f-Uc-eOL"/>
-                                            </connections>
-                                        </barButtonItem>
-                                    </navigationItem>
-                                </items>
-                            </navigationBar>
                         </subviews>
                         <color key="backgroundColor" red="0.050980392159999999" green="0.21960784310000001" blue="0.35686274509999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
                             <constraint firstItem="i3u-Up-QSw" firstAttribute="top" secondItem="T3N-l6-iEj" secondAttribute="bottom" constant="42" id="2A0-4N-hwG"/>
-                            <constraint firstItem="4Sv-lc-Jta" firstAttribute="top" secondItem="aKC-rI-MP6" secondAttribute="top" id="3K9-JI-mIU"/>
+                            <constraint firstItem="4Sv-lc-Jta" firstAttribute="top" secondItem="T3N-l6-iEj" secondAttribute="bottom" id="3K9-JI-mIU"/>
                             <constraint firstAttribute="trailingMargin" secondItem="i3u-Up-QSw" secondAttribute="trailing" constant="10" id="3ci-Jf-4sN"/>
                             <constraint firstItem="i3u-Up-QSw" firstAttribute="leading" secondItem="aKC-rI-MP6" secondAttribute="leadingMargin" constant="10" id="6as-Zy-mMi"/>
                             <constraint firstItem="4Sv-lc-Jta" firstAttribute="centerX" secondItem="aKC-rI-MP6" secondAttribute="centerX" id="7XV-mT-ftm"/>
@@ -2149,13 +2176,20 @@
                                     </label>
                                 </subviews>
                             </stackView>
-                            <navigationBar contentMode="scaleToFill" barStyle="black" translatesAutoresizingMaskIntoConstraints="NO" id="Dhi-8E-myz">
+                            <navigationBar contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Dhi-8E-myz">
                                 <rect key="frame" x="0.0" y="20" width="375" height="44"/>
+                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                                <color key="tintColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                                <color key="barTintColor" red="0.050980392159999999" green="0.21960784310000001" blue="0.35686274509999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <textAttributes key="titleTextAttributes">
+                                    <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                </textAttributes>
                                 <items>
                                     <navigationItem title="Getting Started" id="l0D-yZ-Wh0">
-                                        <barButtonItem key="leftBarButtonItem" title="Back" id="Za1-e4-Nry">
+                                        <barButtonItem key="leftBarButtonItem" title="Home" id="csA-br-bTO">
+                                            <color key="tintColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                             <connections>
-                                                <segue destination="QTK-3K-lHU" kind="show" id="mKH-pJ-Dtg"/>
+                                                <segue destination="QTK-3K-lHU" kind="show" id="Maw-v9-Rqz"/>
                                             </connections>
                                         </barButtonItem>
                                     </navigationItem>
@@ -2194,7 +2228,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <label opaque="NO" userInteractionEnabled="NO" alpha="0.34999999403953552" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" usesAttributedText="YES" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="BCC-cM-VPf">
-                                <rect key="frame" x="135" y="568" width="105" height="20"/>
+                                <rect key="frame" x="135" y="617" width="105" height="20"/>
                                 <attributedString key="attributedText">
                                     <fragment content="madsports">
                                         <attributes>
@@ -2212,7 +2246,8 @@
                                 <nil key="highlightedColor"/>
                             </label>
                             <navigationBar contentMode="scaleToFill" barStyle="black" translatesAutoresizingMaskIntoConstraints="NO" id="Uc2-6J-fUN">
-                                <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
+                                <rect key="frame" x="0.0" y="20" width="375" height="44"/>
+                                <color key="barTintColor" red="0.050980392159999999" green="0.21960784310000001" blue="0.35686274509999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <items>
                                     <navigationItem title="Select mboard" id="oAP-GB-L4v">
                                         <barButtonItem key="leftBarButtonItem" title=" Back" id="KBN-7J-zlu">
@@ -2229,7 +2264,7 @@
                                 </items>
                             </navigationBar>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="A6i-3X-RM3">
-                                <rect key="frame" x="10" y="80" width="355" height="478"/>
+                                <rect key="frame" x="10" y="80" width="355" height="527"/>
                                 <color key="backgroundColor" red="0.050980392159999999" green="0.21960784310000001" blue="0.35686274509999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <color key="separatorColor" red="0.30931556760000001" green="0.6570865253" blue="1" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                                 <color key="sectionIndexColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
@@ -2278,7 +2313,7 @@
                             <constraint firstAttribute="trailing" secondItem="A6i-3X-RM3" secondAttribute="trailing" constant="10" id="Ohc-px-lrj"/>
                             <constraint firstItem="Uc2-6J-fUN" firstAttribute="centerX" secondItem="zyw-Ga-R0e" secondAttribute="centerX" id="gcD-AQ-Eqg"/>
                             <constraint firstItem="A6i-3X-RM3" firstAttribute="top" secondItem="FVz-C4-xQH" secondAttribute="bottom" constant="60" id="idh-Ez-PN0"/>
-                            <constraint firstItem="Uc2-6J-fUN" firstAttribute="top" secondItem="zyw-Ga-R0e" secondAttribute="top" id="ihM-ya-17h"/>
+                            <constraint firstItem="Uc2-6J-fUN" firstAttribute="top" secondItem="FVz-C4-xQH" secondAttribute="bottom" id="ihM-ya-17h"/>
                             <constraint firstItem="I5e-4V-GlB" firstAttribute="top" secondItem="A6i-3X-RM3" secondAttribute="bottom" constant="60" id="xBA-Ih-Kyk"/>
                             <constraint firstItem="A6i-3X-RM3" firstAttribute="leading" secondItem="zyw-Ga-R0e" secondAttribute="leading" constant="10" id="xZ0-90-UYK"/>
                             <constraint firstItem="A6i-3X-RM3" firstAttribute="centerX" secondItem="zyw-Ga-R0e" secondAttribute="centerX" id="yXP-6O-hyn"/>
@@ -2307,7 +2342,8 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <navigationBar contentMode="scaleToFill" barStyle="black" translatesAutoresizingMaskIntoConstraints="NO" id="xWS-9U-gP2">
-                                <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
+                                <rect key="frame" x="0.0" y="20" width="375" height="44"/>
+                                <color key="barTintColor" red="0.050980392159999999" green="0.21960784310000001" blue="0.35686274509999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <items>
                                     <navigationItem title="Add device" id="PAY-k8-Zwo">
                                         <barButtonItem key="leftBarButtonItem" title="Cancel" id="53w-6x-00d">
@@ -2349,7 +2385,7 @@
                         </subviews>
                         <color key="backgroundColor" red="0.050980392159999999" green="0.21960784310000001" blue="0.35686274509999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
-                            <constraint firstItem="xWS-9U-gP2" firstAttribute="top" secondItem="ftd-Xu-wPN" secondAttribute="top" id="0CD-jM-cEH"/>
+                            <constraint firstItem="xWS-9U-gP2" firstAttribute="top" secondItem="NBo-RZ-Bod" secondAttribute="bottom" id="0CD-jM-cEH"/>
                             <constraint firstItem="CN5-g4-AgS" firstAttribute="top" secondItem="NBo-RZ-Bod" secondAttribute="bottom" constant="80" id="4ca-SA-7jX"/>
                             <constraint firstItem="xWS-9U-gP2" firstAttribute="centerX" secondItem="ftd-Xu-wPN" secondAttribute="centerX" id="Bhw-ru-6ac"/>
                             <constraint firstItem="xWS-9U-gP2" firstAttribute="leading" secondItem="ftd-Xu-wPN" secondAttribute="leading" id="DMt-ES-ZYZ"/>
@@ -2409,6 +2445,7 @@
                             </activityIndicatorView>
                             <navigationBar contentMode="scaleToFill" barStyle="black" translatesAutoresizingMaskIntoConstraints="NO" id="HVE-5m-dIr">
                                 <rect key="frame" x="0.0" y="20" width="375" height="44"/>
+                                <color key="barTintColor" red="0.050980392159999999" green="0.21960784310000001" blue="0.35686274509999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <items>
                                     <navigationItem title="Game Summary" id="FJq-eC-pS1">
                                         <barButtonItem key="leftBarButtonItem" title="Back" id="dMs-g7-eAk">
@@ -3365,7 +3402,8 @@
                                 </subviews>
                             </stackView>
                             <navigationBar contentMode="scaleToFill" barStyle="black" translatesAutoresizingMaskIntoConstraints="NO" id="kv2-zF-bLs">
-                                <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
+                                <rect key="frame" x="0.0" y="20" width="375" height="44"/>
+                                <color key="barTintColor" red="0.050980392159999999" green="0.21960784310000001" blue="0.35686274509999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <items>
                                     <navigationItem title="Minutes Per Period" id="EWd-le-9bC">
                                         <barButtonItem key="leftBarButtonItem" title="Back" id="L9V-qE-hAX">
@@ -3379,7 +3417,7 @@
                         </subviews>
                         <color key="backgroundColor" red="0.050980392159999999" green="0.21960784310000001" blue="0.35686274509999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
-                            <constraint firstItem="kv2-zF-bLs" firstAttribute="top" secondItem="LcM-6A-5fb" secondAttribute="top" id="71b-fe-tpP"/>
+                            <constraint firstItem="kv2-zF-bLs" firstAttribute="top" secondItem="te9-h5-SQQ" secondAttribute="bottom" id="71b-fe-tpP"/>
                             <constraint firstItem="kv2-zF-bLs" firstAttribute="centerX" secondItem="LcM-6A-5fb" secondAttribute="centerX" id="AEJ-NE-ajI"/>
                             <constraint firstItem="wA7-3f-dKx" firstAttribute="leading" secondItem="LcM-6A-5fb" secondAttribute="leadingMargin" constant="30" id="HGg-Po-pYQ"/>
                             <constraint firstAttribute="trailingMargin" secondItem="wA7-3f-dKx" secondAttribute="trailing" constant="30" id="Kim-NO-37k"/>
@@ -3435,7 +3473,8 @@
                                 <nil key="highlightedColor"/>
                             </label>
                             <navigationBar contentMode="scaleToFill" barStyle="black" translatesAutoresizingMaskIntoConstraints="NO" id="287-lC-7eM">
-                                <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
+                                <rect key="frame" x="0.0" y="20" width="375" height="44"/>
+                                <color key="barTintColor" red="0.050980392159999999" green="0.21960784310000001" blue="0.35686274509999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <items>
                                     <navigationItem title="Shot Clock" id="4NU-co-YRP">
                                         <barButtonItem key="leftBarButtonItem" title="Back" id="kFY-if-VaN">
@@ -3579,7 +3618,7 @@
                             <constraint firstItem="287-lC-7eM" firstAttribute="leading" secondItem="SyS-Hh-Jdt" secondAttribute="leading" id="RYS-IG-hXF"/>
                             <constraint firstItem="kuz-jF-Ace" firstAttribute="top" secondItem="sak-ED-G9c" secondAttribute="bottom" constant="60" id="YlU-9m-x1X"/>
                             <constraint firstItem="kuz-jF-Ace" firstAttribute="centerX" secondItem="SyS-Hh-Jdt" secondAttribute="centerX" id="g8G-CH-g9t"/>
-                            <constraint firstItem="287-lC-7eM" firstAttribute="top" secondItem="SyS-Hh-Jdt" secondAttribute="top" id="pJM-zE-e70"/>
+                            <constraint firstItem="287-lC-7eM" firstAttribute="top" secondItem="sak-ED-G9c" secondAttribute="bottom" id="pJM-zE-e70"/>
                         </constraints>
                     </view>
                     <connections>
@@ -3638,10 +3677,11 @@
                     <nil key="simulatedStatusBarMetrics"/>
                     <nil key="simulatedTopBarMetrics"/>
                     <simulatedTabBarMetrics key="simulatedBottomBarMetrics" barStyle="black"/>
-                    <tabBar key="tabBar" contentMode="scaleToFill" barStyle="black" id="W41-8p-JO9">
+                    <tabBar key="tabBar" contentMode="scaleToFill" id="W41-8p-JO9">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="49"/>
                         <autoresizingMask key="autoresizingMask"/>
                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                        <color key="barTintColor" red="0.050980392159999999" green="0.21960784310000001" blue="0.35686274509999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                     </tabBar>
                     <connections>
                         <outlet property="tabs" destination="W41-8p-JO9" id="8Ca-AS-gT7"/>
@@ -3663,10 +3703,18 @@
                     <nil key="simulatedStatusBarMetrics"/>
                     <nil key="simulatedTopBarMetrics"/>
                     <simulatedTabBarMetrics key="simulatedBottomBarMetrics" barStyle="black"/>
-                    <tabBar key="tabBar" contentMode="scaleToFill" barStyle="black" id="W28-zg-YXA">
+                    <tabBar key="tabBar" contentMode="scaleToFill" id="W28-zg-YXA">
                         <rect key="frame" x="0.0" y="975" width="768" height="49"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMinY="YES"/>
-                        <color key="backgroundColor" red="0.0" green="0.0" blue="0.0" alpha="0.0" colorSpace="custom" customColorSpace="sRGB"/>
+                        <color key="barTintColor" red="0.050980392159999999" green="0.21960784310000001" blue="0.35686274509999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                        <userDefinedRuntimeAttributes>
+                            <userDefinedRuntimeAttribute type="color" keyPath="tintColor">
+                                <color key="value" red="0.0" green="0.0" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                            </userDefinedRuntimeAttribute>
+                            <userDefinedRuntimeAttribute type="color" keyPath="unselectedItemTintColor">
+                                <color key="value" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                            </userDefinedRuntimeAttribute>
+                        </userDefinedRuntimeAttributes>
                     </tabBar>
                     <connections>
                         <outlet property="tabs" destination="W28-zg-YXA" id="mJN-BF-GhO"/>
@@ -3686,7 +3734,7 @@
         <image name="Basketball" width="25" height="25"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="eVx-c5-HU5"/>
+        <segue reference="RlM-5W-YmZ"/>
         <segue reference="DhT-L2-OhP"/>
         <segue reference="oKO-tJ-cNB"/>
         <segue reference="LvX-Gb-y12"/>

@@ -19,11 +19,11 @@ class MainTabBarController: UITabBarController {
         super.viewDidLoad()
         // Do any additional setup after loading the view, typically from a nib.
         
-        tabs.items?[0].setFAIcon(icon: FAType.FAHome)
-        tabs.items?[1].setFAIcon(icon: FAType.FAVideoCamera)
-        tabs.items?[2].setFAIcon(icon: FAType.FAAdn)
-        tabs.items?[3].setFAIcon(icon: FAType.FASliders)
-        tabs.items?[4].setFAIcon(icon: FAType.FAFlask)
+        tabs.items?[0].setFAIcon(icon: FAType.FAHome, size: nil, textColor: UIColor.lightGray, backgroundColor: UIColor.clear, selectedTextColor: Mboard.TealColor, selectedBackgroundColor: UIColor.clear)
+        tabs.items?[1].setFAIcon(icon: FAType.FAVideoCamera, size: nil, textColor: UIColor.lightGray, backgroundColor: UIColor.clear, selectedTextColor: Mboard.TealColor, selectedBackgroundColor: UIColor.clear)
+        tabs.items?[2].setFAIcon(icon: FAType.FAAdn, size: nil, textColor: UIColor.lightGray, backgroundColor: UIColor.clear, selectedTextColor: Mboard.TealColor, selectedBackgroundColor: UIColor.clear)
+        tabs.items?[3].setFAIcon(icon: FAType.FASliders, size: nil, textColor: UIColor.lightGray, backgroundColor: UIColor.clear, selectedTextColor: Mboard.TealColor, selectedBackgroundColor: UIColor.clear)
+        tabs.items?[4].setFAIcon(icon: FAType.FAFlask, size: nil, textColor: UIColor.lightGray, backgroundColor: UIColor.clear, selectedTextColor: Mboard.TealColor, selectedBackgroundColor: UIColor.clear)
         
     }
     

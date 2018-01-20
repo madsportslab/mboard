@@ -178,7 +178,7 @@ class FirstViewController: UIViewController, UITableViewDelegate, UITableViewDat
         
         if j["data"]["Valid"].bool! {
             
-            let data = JSON.parse(j["data"]["String"].string!)
+            let data = JSON.init(parseJSON: j["data"]["String"].string!)
             
             return totalScore(data)
             
@@ -237,7 +237,7 @@ class FirstViewController: UIViewController, UITableViewDelegate, UITableViewDat
                                 
                                 if v["data"]["Valid"].bool! {
                                     
-                                    let data = JSON.parse(v["data"]["String"].string!)
+                                    let data = JSON.init(parseJSON: v["data"]["String"].string!)
                                     
                                     if !data["away"]["name"].string!.isEmpty {
                                       row.append(data["away"]["name"].string!)

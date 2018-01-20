@@ -24,7 +24,7 @@ class MainViewController: UIViewController {
         super.viewDidLoad()
         // Do any additional setup after loading the view, typically from a nib.
         
-        let ed = defaults.object(forKey: Mboard.SERVER) as? String
+        //let ed = defaults.object(forKey: Mboard.SERVER) as? String
         
         scanQR.setFAIcon(icon: FAType.FACamera, iconSize: 128, forState: .normal)
     

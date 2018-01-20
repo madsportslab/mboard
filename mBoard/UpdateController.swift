@@ -63,6 +63,8 @@ class UpdateController: UIViewController {
                 switch response.result {
                 case .failure(let error):
                     
+                    self.updateBtn.isEnabled = false
+                    
                     if let status = response.response?.statusCode {
                         
                         if status == 404 {

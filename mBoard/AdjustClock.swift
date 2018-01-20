@@ -272,14 +272,14 @@ class AdjustClock: UIViewController {
             
             if let txt = message as? String {
                 
-                var obj = JSON.parse(txt)
+                var obj = JSON.init(parseJSON: txt)
                 
                 print(obj)
                 
                 switch obj["key"] {
                 case "CLOCK":
                     
-                    let v = JSON.parse(obj["val"].string!)
+                    let v = JSON.init(parseJSON: obj["val"].string!)
                     
                     self.setGameClock(v)
                     self.setShotClock(v)

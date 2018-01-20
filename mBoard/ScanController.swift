@@ -37,14 +37,14 @@ class ScanController: UIViewController, AVCaptureMetadataOutputObjectsDelegate {
         qr?.layer.borderWidth = 2
         //qr?.frame = self.view.layer.bounds
         
-        let device = AVCaptureDevice.defaultDevice(
-            withMediaType: AVMediaTypeVideo)
+        let device = AVCaptureDevice.default(
+            for: AVMediaType.video)
         
         var input: AVCaptureDeviceInput
         
         do {
             
-            input = try AVCaptureDeviceInput(device: device)
+            input = try AVCaptureDeviceInput(device: device!)
             
             session = AVCaptureSession()
             
@@ -56,11 +56,11 @@ class ScanController: UIViewController, AVCaptureMetadataOutputObjectsDelegate {
             
             session?.addOutput(output)
             
-            output.metadataObjectTypes = [AVMetadataObjectTypeQRCode]
+            output.metadataObjectTypes = [AVMetadataObject.ObjectType.qr]
             
-            preview = AVCaptureVideoPreviewLayer(session: session)
+            preview = AVCaptureVideoPreviewLayer(session: session!)
             
-            preview?.videoGravity = AVLayerVideoGravityResizeAspectFill
+            preview?.videoGravity = AVLayerVideoGravity.resizeAspectFill
             preview?.frame = self.view.layer.bounds
             //preview?.frame = CGRect(x: self.view.layer.bounds.width/2,
             //                        y: self.view.layer.bounds.height/2 ,
@@ -69,8 +69,8 @@ class ScanController: UIViewController, AVCaptureMetadataOutputObjectsDelegate {
             
             session?.startRunning()
             
-            output.rectOfInterest = (preview?.metadataOutputRectOfInterest(
-                for: (preview?.bounds)!))!
+            output.rectOfInterest = (preview?.metadataOutputRectConverted(
+                fromLayerRect: (preview?.bounds)!))!
             
         } catch {
             print(error)
@@ -89,7 +89,7 @@ class ScanController: UIViewController, AVCaptureMetadataOutputObjectsDelegate {
         // Dispose of any resources that can be recreated.
     }
     
-    func captureOutput(_ captureOutput: AVCaptureOutput!, didOutputMetadataObjects metadataObjects: [Any]!, from connection: AVCaptureConnection!) {
+    func metadataOutput(_ captureOutput: AVCaptureMetadataOutput, didOutput metadataObjects: [AVMetadataObject], from connection: AVCaptureConnection) {
         
         if metadataObjects == nil || metadataObjects.count == 0 {
             address.text = "No QR code found"
@@ -97,9 +97,9 @@ class ScanController: UIViewController, AVCaptureMetadataOutputObjectsDelegate {
         
         let obj = metadataObjects[0] as? AVMetadataMachineReadableCodeObject
         
-        if obj?.type == AVMetadataObjectTypeQRCode {
+        if obj?.type == AVMetadataObject.ObjectType.qr {
             
-            let code = preview?.transformedMetadataObject(for: obj) as! AVMetadataMachineReadableCodeObject
+            let code = preview?.transformedMetadataObject(for: obj!) as! AVMetadataMachineReadableCodeObject
             
             qr?.frame = code.bounds
             
@@ -123,7 +123,7 @@ class ScanController: UIViewController, AVCaptureMetadataOutputObjectsDelegate {
                     
                     if save {
                         
-                        servers.append(obj!.stringValue)
+                        servers.append(obj!.stringValue!)
                         
                         defaults.set(servers, forKey: Mboard.SAVED_SERVERS)
                         
@@ -131,7 +131,7 @@ class ScanController: UIViewController, AVCaptureMetadataOutputObjectsDelegate {
                     
                 } else {
                     
-                    servers.append(obj!.stringValue)
+                    servers.append(obj!.stringValue!)
                     
                     defaults.set(servers, forKey: Mboard.SAVED_SERVERS)
                     
