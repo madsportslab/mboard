@@ -7,7 +7,7 @@ target 'mBoard' do
   use_frameworks!
 
   # Pods for mBoard
-  pod "Alamofire", "~> 4.5"
+  pod "Alamofire", "~> 4.6"
   pod "Font-Awesome-Swift", "~> 1.7.2"
   pod "SwiftyJSON", "~> 4.0.0"
 #  pod "KeychainSwift", "~> 7.0.0"

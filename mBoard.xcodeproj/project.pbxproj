@@ -11,6 +11,8 @@
 		7E34FBC5CD974179A1B5A202 /* Pods_mBoard.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B1AD9ADD848A5FBFAD5CBC01 /* Pods_mBoard.framework */; };
 		851236741F0F2C1900532779 /* SelectMboardController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 851236731F0F2C1900532779 /* SelectMboardController.swift */; };
 		851236761F0F2E3000532779 /* ServerViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 851236751F0F2E3000532779 /* ServerViewCell.swift */; };
+		8512EBF9202581B300494C74 /* MediaManagerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8512EBF8202581B300494C74 /* MediaManagerView.swift */; };
+		8512EBFB202584C000494C74 /* MediaCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8512EBFA202584C000494C74 /* MediaCell.swift */; };
 		852E6B3C1E8D04A9002888FB /* AdViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 852E6B3B1E8D04A9002888FB /* AdViewController.swift */; };
 		852E6B3E1E8D04C0002888FB /* AboutViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 852E6B3D1E8D04C0002888FB /* AboutViewController.swift */; };
 		852E6B401E8DF853002888FB /* MainTabBarController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 852E6B3F1E8DF853002888FB /* MainTabBarController.swift */; };
@@ -68,6 +70,8 @@
 		819D57E7DB14AA08605E1E44 /* Pods_mBoardTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_mBoardTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		851236731F0F2C1900532779 /* SelectMboardController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SelectMboardController.swift; sourceTree = "<group>"; };
 		851236751F0F2E3000532779 /* ServerViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ServerViewCell.swift; sourceTree = "<group>"; };
+		8512EBF8202581B300494C74 /* MediaManagerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MediaManagerView.swift; sourceTree = "<group>"; };
+		8512EBFA202584C000494C74 /* MediaCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MediaCell.swift; sourceTree = "<group>"; };
 		852E6B3B1E8D04A9002888FB /* AdViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AdViewController.swift; sourceTree = "<group>"; };
 		852E6B3D1E8D04C0002888FB /* AboutViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AboutViewController.swift; sourceTree = "<group>"; };
 		852E6B3F1E8DF853002888FB /* MainTabBarController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MainTabBarController.swift; sourceTree = "<group>"; };
@@ -208,6 +212,8 @@
 				85D2EBB11F3EE94D004D801A /* LogViewController.swift */,
 				855039941FAF62BB008AC617 /* AdjustClock.swift */,
 				855A0D741FC08D62007D3C2F /* UpdateController.swift */,
+				8512EBF8202581B300494C74 /* MediaManagerView.swift */,
+				8512EBFA202584C000494C74 /* MediaCell.swift */,
 			);
 			path = mBoard;
 			sourceTree = "<group>";
@@ -554,6 +560,7 @@
 				85B59EFE1EB8369100E72F72 /* SummaryController.swift in Sources */,
 				855A0D751FC08D62007D3C2F /* UpdateController.swift in Sources */,
 				855039951FAF62BB008AC617 /* AdjustClock.swift in Sources */,
+				8512EBF9202581B300494C74 /* MediaManagerView.swift in Sources */,
 				8575F11A1E8A4B2400EAC50D /* SecondViewController.swift in Sources */,
 				851236761F0F2E3000532779 /* ServerViewCell.swift in Sources */,
 				852E6B4A1E8FE7A1002888FB /* MinutesController.swift in Sources */,
@@ -567,6 +574,7 @@
 				852E6B481E8EBE28002888FB /* GameTabBarController.swift in Sources */,
 				85D2EBB21F3EE94D004D801A /* LogViewController.swift in Sources */,
 				85828DF51E9E703F006A7C17 /* ClockController.swift in Sources */,
+				8512EBFB202584C000494C74 /* MediaCell.swift in Sources */,
 				85D2EBB01F3ECAED004D801A /* LogViewCell.swift in Sources */,
 				851236741F0F2C1900532779 /* SelectMboardController.swift in Sources */,
 				852E6B401E8DF853002888FB /* MainTabBarController.swift in Sources */,

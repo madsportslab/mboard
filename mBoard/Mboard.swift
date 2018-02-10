@@ -37,7 +37,7 @@ class Mboard {
     static let SAVED_SERVERS    = MBOARD + "savedservers"
     static let GAME             = MBOARD + "game"
     
-    // ws commands
+    // /ws/game commands
     
     static let WS_CLOCK_START       = "CLOCK_START"
     static let WS_CLOCK_STOP        = "CLOCK_STOP"
@@ -62,6 +62,23 @@ class Mboard {
     static let WS_TIMEOUT_HOME_CANCEL = "TIMEOUT_HOME_CANCEL"
     static let WS_TIMEOUT_AWAY      = "TIMEOUT_AWAY"
     static let WS_TIMEOUT_AWAY_CANCEL = "TIMEOUT_AWAY_CANCEL"
+    
+    // /ws/manager commands
+    
+    static let WS_LOGO              = "LOGO"
+    static let WS_SETUP             = "SETUP"
+    static let WS_SCOREBOARD        = "SCOREBOARD"
+    static let WS_ADVERTISEMENT     = "ADVERTISEMENT"
+    static let WS_SCREENSAVER       = "SCREENSAVER"
+    static let WS_VIDEO_PLAY        = "VIDEO_PLAY"
+    static let WS_VIDEO_STOP        = "VIDEO_STOP"
+    static let WS_PHOTO_PLAY        = "PHOTO_PLAY"
+    static let WS_PHOTO_STOP        = "PHOTO_STOP"
+    static let WS_AUDIO_PLAY        = "AUDIO_PLAY"
+    static let WS_AUDIO_STOP        = "AUDIO_STOP"
+
+    static let PLAYING              = "Playing"
+    static let BLANK                = ""
     
     static let TAG_HOME             = "HOME"
     static let TAG_AWAY             = "AWAY"

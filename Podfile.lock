@@ -6,7 +6,7 @@ PODS:
   - SwiftyJSON (4.0.0)
 
 DEPENDENCIES:
-  - Alamofire (~> 4.5)
+  - Alamofire (~> 4.6)
   - CryptoSwift (~> 0.8.1)
   - Font-Awesome-Swift (~> 1.7.2)
   - SwiftWebSocket (from `https://github.com/tidwall/SwiftWebSocket.git`, branch `master`)
@@ -29,6 +29,6 @@ SPEC CHECKSUMS:
   SwiftWebSocket: 1ef8a0efb023544643bdf480c1ec4a62b204f293
   SwiftyJSON: 070dabdcb1beb81b247c65ffa3a79dbbfb3b48aa
 
-PODFILE CHECKSUM: 3380f3c2c5bcc5e5522d48f2eee21a2ddafbe6b9
+PODFILE CHECKSUM: c90a673f9517b3280feb7b1d9213e3d9658e2ce5
 
 COCOAPODS: 1.4.0
