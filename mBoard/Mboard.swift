@@ -62,6 +62,7 @@ class Mboard {
     static let WS_TIMEOUT_HOME_CANCEL = "TIMEOUT_HOME_CANCEL"
     static let WS_TIMEOUT_AWAY      = "TIMEOUT_AWAY"
     static let WS_TIMEOUT_AWAY_CANCEL = "TIMEOUT_AWAY_CANCEL"
+    static let WS_GAME_STATE        = "GAME_STATE"
     
     // /ws/manager commands
     
@@ -85,6 +86,9 @@ class Mboard {
     
     static let MAX_WS_ERRORS        = 20
     
+    
+    static let DarkBlueColor = UIColor(
+        red: 1/34, green: 68/255, blue: 102/255, alpha: 1)
     
     static let TealColor     = UIColor(
         red: 1/255, green: 129/255, blue: 186/255, alpha: 1)

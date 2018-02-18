@@ -15,7 +15,9 @@ import SwiftyJSON
 
 class AdjustClock: UIViewController {
 
-    var ws = WebSocket()
+    var wsControl       = WebSocket()
+    var wsSubscribe     = WebSocket()
+    
     var server:String?
     
     let defaults = UserDefaults.standard
@@ -152,6 +154,7 @@ class AdjustClock: UIViewController {
                         self.setGameClock(j)
                         self.setShotClock(j)
                         
+                        self.initSubscriber()
                         self.initWS()
                         
                     }
@@ -246,29 +249,75 @@ class AdjustClock: UIViewController {
         
     } // setShotClock
     
-    func initWS() {
+    
+    func initSubscriber() {
         
-        //ws = WebSocket(Mboard.GAMESOCKET)
+        let url = "\(Mboard.WS)\(server!)/ws/subscriber"
         
-        let url = "\(Mboard.WS)\(server!)/ws/game"
+        wsSubscribe = WebSocket(url)
         
-        ws = WebSocket(url)
-        
-        ws.event.close = { code, reason, clean in
+        wsSubscribe.event.close = { code, reason, clean in
             
-            self.ws.open()
+            self.wsSubscribe.open()
             
         }
         
-        ws.event.open = {
+        wsSubscribe.event.open = {
             print("socket connected")
         }
         
-        ws.event.error = { error in
+        wsSubscribe.event.error = { error in
             print(error)
         }
         
-        ws.event.message = { message in
+        wsSubscribe.event.message = { message in
+            
+            if let txt = message as? String {
+                
+                var obj = JSON.init(parseJSON: txt)
+                
+                print(obj)
+                
+                switch obj["key"] {
+                case "CLOCK":
+                    
+                    let v = JSON.init(parseJSON: obj["val"].string!)
+                    
+                    self.setGameClock(v)
+                    self.setShotClock(v)
+                    
+                default:
+                    print("Unknown message from websocket.")
+                    
+                }
+                
+            }
+        }
+        
+    } // initSubscriber
+    
+    
+    func initWS() {
+        
+        let url = "\(Mboard.WS)\(server!)/ws/game"
+        
+        wsControl = WebSocket(url)
+        
+        wsControl.event.close = { code, reason, clean in
+            
+            self.wsControl.open()
+            
+        }
+        
+        wsControl.event.open = {
+            print("socket connected")
+        }
+        
+        wsControl.event.error = { error in
+            print(error)
+        }
+        
+        wsControl.event.message = { message in
             
             if let txt = message as? String {
                 
@@ -298,7 +347,7 @@ class AdjustClock: UIViewController {
     
     @IBAction func gameClockDown(_ sender: Any) {
         
-        ws.send(JSON([
+        wsControl.send(JSON([
             "cmd": Mboard.WS_CLOCK_STEP,
             "step": 1
             ]))
@@ -307,7 +356,7 @@ class AdjustClock: UIViewController {
     
     @IBAction func gameClockUp(_ sender: Any) {
         
-        ws.send(JSON([
+        wsControl.send(JSON([
             "cmd": Mboard.WS_CLOCK_STEP,
             "step": -1
             ]))
@@ -316,7 +365,7 @@ class AdjustClock: UIViewController {
     
     @IBAction func resetGameClock(_ sender: Any) {
         
-        ws.send(JSON([
+        wsControl.send(JSON([
             "cmd": Mboard.WS_CLOCK_RESET
             ]))
         
@@ -324,7 +373,7 @@ class AdjustClock: UIViewController {
     
     @IBAction func shotClockDown(_ sender: Any) {
     
-        ws.send(JSON([
+        wsControl.send(JSON([
             "cmd": Mboard.WS_SHOT_STEP,
             "step": 1
             ]))
@@ -333,7 +382,7 @@ class AdjustClock: UIViewController {
     
     @IBAction func shotClockUp(_ sender: Any) {
     
-        ws.send(JSON([
+        wsControl.send(JSON([
             "cmd": Mboard.WS_SHOT_STEP,
             "step": -1
             ]))
@@ -342,7 +391,7 @@ class AdjustClock: UIViewController {
     
     @IBAction func shotClockReset(_ sender: Any) {
     
-        ws.send(JSON([
+        wsControl.send(JSON([
             "cmd": Mboard.WS_SHOT_RESET
             ]))
         

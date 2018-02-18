@@ -16,7 +16,8 @@ import SwiftyJSON
 
 class GameController: UIViewController {
     
-    var ws = WebSocket()
+    var wsControl       = WebSocket()
+    var wsSubscribe     = WebSocket()
     
     var server:String?
     
@@ -61,7 +62,7 @@ class GameController: UIViewController {
     }
     
     override func viewWillAppear(_ animated: Bool) {
-        loadGame()
+        //loadGame()
     }
     
     override func viewDidLoad() {
@@ -197,7 +198,10 @@ class GameController: UIViewController {
     }
     
     override func viewDidAppear(_ animated: Bool) {
-        loadGame()
+        
+        self.initSubscriber()
+        self.initWS()
+        //loadGame()
     }
     
     override func didReceiveMemoryWarning() {
@@ -207,7 +211,7 @@ class GameController: UIViewController {
     
     func changePoints(points: Int) {
         
-        ws.send(JSON([
+        wsControl.send(JSON([
             "cmd": Mboard.WS_SCORE_HOME,
             "step": points
             
@@ -216,34 +220,33 @@ class GameController: UIViewController {
     } // changePoints
     
     
-    func initWS() {
-    
-        let url = "\(Mboard.WS)\(server!)/ws/game"
+    func initSubscriber() {
         
-        ws = WebSocket(url)
+        let url = "\(Mboard.WS)\(server!)/ws/subscriber"
         
-        ws.event.close = { code, reason, clean in
-          
-          print("close")
-          self.ws.open()
+        wsSubscribe = WebSocket(url)
+        
+        wsSubscribe.event.close = { code, reason, clean in
+            
+            print("close")
+            self.wsSubscribe.open()
             
         }
         
-        ws.event.open = {
-            print("socket connected")
+        wsSubscribe.event.open = {
+            print("websocket connected for subscriber")
         }
         
-        ws.event.error = { error in
+        wsSubscribe.event.error = { error in
             print(error)
         }
         
-        ws.event.message = { message in
-            print(message)
+        wsSubscribe.event.message = { message in
             
             if let txt = message as? String {
                 
                 var obj = JSON.init(parseJSON: txt)
-            
+                
                 switch obj["key"] {
                 case "HOME_SCORE":
                     self.homeScore.text = obj["val"].string!
@@ -257,6 +260,26 @@ class GameController: UIViewController {
                     self.setTimeouts(true, data: Int(obj["val"].string!)!)
                 case "AWAY_TIMEOUT":
                     self.setTimeouts(false, data: Int(obj["val"].string!)!)
+                case "GAME_STATE":
+                    
+                    let j = JSON(obj["state"])
+                    
+                    print(j)
+                    
+                    self.defaults.set(
+                        String(j["id"].int!), forKey: Mboard.GAME)
+                    
+                    self.awayName.text = j["away"]["name"].string!
+                    self.homeName.text = j["home"]["name"].string!
+                    
+                    self.setTotalPoints(false, data: j["away"]["points"])
+                    self.setFouls(false, data: j["away"]["fouls"].int!)
+                    self.setTimeouts(false, data: j["away"]["timeouts"].int!)
+                    
+                    self.setTotalPoints(true, data: j["home"]["points"])
+                    self.setFouls(true, data: j["home"]["fouls"].int!)
+                    self.setTimeouts(true, data: j["home"]["timeouts"].int!)
+                    
                     
                 default:
                     print(obj["key"])
@@ -264,6 +287,38 @@ class GameController: UIViewController {
                 }
                 
             }
+        }
+        
+    } // initSubscriber
+    
+    func initWS() {
+    
+        let url = "\(Mboard.WS)\(server!)/ws/game"
+        
+        wsControl = WebSocket(url)
+        
+        wsControl.event.close = { code, reason, clean in
+          
+          print("close")
+          self.wsControl.open()
+            
+        }
+        
+        wsControl.event.open = {
+            print("websocket connected for control")
+            
+            self.wsControl.send(JSON([
+                "cmd": "GAME_STATE"
+                ]))
+            
+        }
+        
+        wsControl.event.error = { error in
+            print(error)
+        }
+        
+        wsControl.event.message = { message in
+            print(message)
         }
         
     } // initWS
@@ -377,7 +432,7 @@ class GameController: UIViewController {
                     self.setFouls(true, data: j["home"]["fouls"].int!)
                     self.setTimeouts(true, data: j["home"]["timeouts"].int!)
                     
-                    
+                    self.initSubscriber()
                     self.initWS()
                     
                     
@@ -427,7 +482,7 @@ class GameController: UIViewController {
     
     @IBAction func pt1MadeAway(_ sender: Any) {
         
-        ws.send(JSON([
+        wsControl.send(JSON([
             "cmd": Mboard.WS_SCORE_AWAY,
             "step": 1
             ]))
@@ -436,7 +491,7 @@ class GameController: UIViewController {
     
     @IBAction func pt1MissAway(_ sender: Any) {
         
-        ws.send(JSON([
+        wsControl.send(JSON([
             "cmd": Mboard.WS_SCORE_AWAY,
             "step": -1
             ]))
@@ -445,7 +500,7 @@ class GameController: UIViewController {
     
     @IBAction func pt2MadeAway(_ sender: Any) {
         
-        ws.send(JSON([
+        wsControl.send(JSON([
             "cmd": Mboard.WS_SCORE_AWAY,
             "step": 2
             ]))
@@ -454,7 +509,7 @@ class GameController: UIViewController {
     
     @IBAction func pt2MissAway(_ sender: Any) {
     
-        ws.send(JSON([
+        wsControl.send(JSON([
             "cmd": Mboard.WS_SCORE_AWAY,
             "step": -2
             ]))
@@ -463,7 +518,7 @@ class GameController: UIViewController {
     
     @IBAction func pt3MadeAway(_ sender: Any) {
     
-        ws.send(JSON([
+        wsControl.send(JSON([
             "cmd": Mboard.WS_SCORE_AWAY,
             "step": 3
             ]))
@@ -472,7 +527,7 @@ class GameController: UIViewController {
     
     @IBAction func pt3MissAway(_ sender: Any) {
     
-        ws.send(JSON([
+        wsControl.send(JSON([
             "cmd": Mboard.WS_SCORE_AWAY,
             "step": -3
             ]))
@@ -481,7 +536,7 @@ class GameController: UIViewController {
     
     @IBAction func pt1MadeHome(_ sender: Any) {
         
-        ws.send(JSON([
+        wsControl.send(JSON([
             "cmd": Mboard.WS_SCORE_HOME,
             "step": 1
             ]))
@@ -490,7 +545,7 @@ class GameController: UIViewController {
     
     @IBAction func pt1MissHome(_ sender: Any) {
         
-        ws.send(JSON([
+        wsControl.send(JSON([
             "cmd": Mboard.WS_SCORE_HOME,
             "step": -1
             ]))
@@ -499,7 +554,7 @@ class GameController: UIViewController {
     
     @IBAction func pt2MadeHome(_ sender: Any) {
         
-        ws.send(JSON([
+        wsControl.send(JSON([
             "cmd": Mboard.WS_SCORE_HOME,
             "step": 2
             ]))
@@ -508,7 +563,7 @@ class GameController: UIViewController {
     
     @IBAction func pt2MissHome(_ sender: Any) {
         
-        ws.send(JSON([
+        wsControl.send(JSON([
             "cmd": Mboard.WS_SCORE_HOME,
             "step": -2
             ]))
@@ -517,7 +572,7 @@ class GameController: UIViewController {
     
     @IBAction func pt3MadeHome(_ sender: Any) {
         
-        ws.send(JSON([
+        wsControl.send(JSON([
             "cmd": Mboard.WS_SCORE_HOME,
             "step": 3
             ]))
@@ -526,7 +581,7 @@ class GameController: UIViewController {
     
     @IBAction func pt3MissHome(_ sender: Any) {
     
-        ws.send(JSON([
+        wsControl.send(JSON([
             "cmd": Mboard.WS_SCORE_HOME,
             "step": -3
             ]))
@@ -535,7 +590,7 @@ class GameController: UIViewController {
     
     @IBAction func foulRmAway(_ sender: Any) {
         
-        ws.send(JSON([
+        wsControl.send(JSON([
             "cmd": Mboard.WS_FOUL_AWAY_DOWN
             ]))
         
@@ -543,7 +598,7 @@ class GameController: UIViewController {
     
     @IBAction func foulAddAway(_ sender: Any) {
         
-        ws.send(JSON([
+        wsControl.send(JSON([
             "cmd": Mboard.WS_FOUL_AWAY_UP
             ]))
         
@@ -551,7 +606,7 @@ class GameController: UIViewController {
     
     @IBAction func foulRmHome(_ sender: Any) {
         
-        ws.send(JSON([
+        wsControl.send(JSON([
             "cmd": Mboard.WS_FOUL_HOME_DOWN
             ]))
         
@@ -559,7 +614,7 @@ class GameController: UIViewController {
     
     @IBAction func foulAddHome(_ sender: Any) {
         
-        ws.send(JSON([
+        wsControl.send(JSON([
             "cmd": Mboard.WS_FOUL_HOME_UP
             ]))
         

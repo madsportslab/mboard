@@ -15,7 +15,9 @@ import SwiftyJSON
 
 class ClockController: UIViewController {
 
-    var ws = WebSocket()
+    var wsControl       = WebSocket()
+    var wsSubscribe     = WebSocket()
+    
     var errorCount = 0
     
     var server:String?
@@ -60,62 +62,24 @@ class ClockController: UIViewController {
         
         clockPause()
         
-        //nextPeriodBtn.layer.cornerRadius = 5
-        //nextPeriodBtn.layer.borderColor = UIColor.red.cgColor
-        //nextPeriodBtn.layer.borderWidth = 1
-        //nextPeriodBtn.isEnabled = false
-        
-        //startBtn.layer.borderColor = Mboard.NeonGreenColor.cgColor
         startBtn.layer.borderColor = Mboard.TealColor.cgColor
         startBtn.layer.borderWidth = 1
         startBtn.layer.cornerRadius = 5
-        //startBtn.layer.cornerRadius = startBtn.bounds.size.width/2
-        //startBtn.layer.masksToBounds = true
-        
-        
-        //awayTimeout.layer.borderColor = Mboard.TealColor.cgColor
+ 
         awayTimeout.layer.borderWidth = 1
         awayTimeout.layer.cornerRadius = 5
-        //awayTimeout.layer.cornerRadius = awayTimeout.bounds.size.width/2
-        //awayTimeout.layer.masksToBounds = true
-        
-        //awayTimeoutCancel.layer.borderColor = Mboard.TealColor.cgColor
+
         awayTimeoutCancel.layer.borderWidth = 1
         awayTimeoutCancel.layer.cornerRadius = 5
-        //awayTimeoutCancel.layer.cornerRadius = awayTimeoutCancel.bounds.size.width/2
-        //awayTimeoutCancel.layer.masksToBounds = true
-        
-        //homeTimeout.layer.borderColor = Mboard.TealColor.cgColor
+
         homeTimeout.layer.borderWidth = 1
         homeTimeout.layer.cornerRadius = 5
-        //homeTimeout.layer.cornerRadius = homeTimeout.bounds.size.width/2
-        //homeTimeout.layer.masksToBounds = true
-        
-        //homeTimeoutCancel.layer.borderColor = Mboard.TealColor.cgColor
+
         homeTimeoutCancel.layer.borderWidth = 1
         homeTimeoutCancel.layer.cornerRadius = 5
-        //homeTimeoutCancel.layer.cornerRadius = homeTimeoutCancel.bounds.size.width/2
-        //homeTimeoutCancel.layer.masksToBounds = true
         
         clockAdjust.setFAIcon(icon: FAType.FASliders, iconSize: 24)
         
-        //awayTimeout.setFAIcon(icon: FAType.FAHandStopO, forState: .normal)
-        //homeTimeout.setFAIcon(icon: FAType.FAHandStopO, forState: .normal)
-        //awayTimeoutCancel.setFAIcon(icon: FAType.FAPlus, forState: .normal)
-        //homeTimeoutCancel.setFAIcon(icon: FAType.FAMinus, forState: .normal)
-        
-        //awayTimeout.setFAText(prefixText: "", icon: FAType.FAHandStopO, postfixText: " Timeout", size: 16, forState: .normal)
-        
-        //homeTimeout.setFAText(prefixText: "", icon: FAType.FAHandStopO, postfixText: " Timeout", size: 16, forState: .normal)
-        
-        //awayTimeoutCancel.setFAText(prefixText: "", icon: FAType.FARemove, postfixText: " Cancel", size: 16, forState: .normal)
-        
-        //homeTimeoutCancel.setFAText(prefixText: "", icon: FAType.FARemove, postfixText: " Cancel", size: 16, forState: .normal)
-        
-        //awayTimeout.setFATitleColor(color: UIColor.white)
-        //awayTimeoutCancel.setFATitleColor(color: UIColor.white)
-        //homeTimeout.setFATitleColor(color: UIColor.white)
-        //homeTimeoutCancel.setFATitleColor(color: UIColor.white)
         
         loadGame()
         
@@ -207,7 +171,10 @@ class ClockController: UIViewController {
         
         running = false
         
+        
         startBtn.setFAIcon(icon: FAType.FAPlay, iconSize: 48, forState: .normal)
+        //startBtn.setTitleColor(Mboard., for: .normal)
+        startBtn.setFATitleColor(color: Mboard.DarkBlueColor)
         
     } // clockPause
 
@@ -216,6 +183,8 @@ class ClockController: UIViewController {
         running = true
         
         startBtn.setFAIcon(icon: FAType.FAPause, iconSize: 48, forState: .normal)
+        //startBtn.setTitleColor(UIColor.clear, for: .normal)
+        startBtn.setFATitleColor(color: Mboard.DarkBlueColor)
         
     } // clockPause
     
@@ -290,6 +259,7 @@ class ClockController: UIViewController {
                         self.setTimeouts(false, data: j["away"]["timeouts"].int!)
                         self.setTimeouts(true, data: j["home"]["timeouts"].int!)
                         
+                        self.initSubscriber()
                         self.initWS()
                         
                     }
@@ -301,35 +271,32 @@ class ClockController: UIViewController {
     } // loadGame
     
     
-    func initWS() {
+    func initSubscriber() {
         
-        //ws = WebSocket(Mboard.GAMESOCKET)
+        let url = "\(Mboard.WS)\(server!)/ws/subscriber"
         
-        let url = "\(Mboard.WS)\(server!)/ws/game"
+        wsSubscribe = WebSocket(url)
         
-        ws = WebSocket(url)
-        
-        ws.event.close = { code, reason, clean in
-        
-            self.ws.open()
+        wsSubscribe.event.close = { code, reason, clean in
+            
+            self.wsSubscribe.open()
             
         }
         
-        ws.event.open = {
-            print("socket connected")
+        wsSubscribe.event.open = {
+            print("websocket connected for subscriber")
         }
         
-        ws.event.error = { error in
+        wsSubscribe.event.error = { error in
             print(error)
         }
         
-        ws.event.message = { message in
+        wsSubscribe.event.message = { message in
             
             if let txt = message as? String {
                 
                 var obj = JSON.init(parseJSON: txt)
-                
-                print(obj)
+        
                 
                 switch obj["key"] {
                 case "CLOCK":
@@ -384,10 +351,37 @@ class ClockController: UIViewController {
                     
                 default:
                     print("Unknown message from websocket.")
-
+                    
                 }
                 
             }
+        }
+
+        
+    } // initSubscriber
+    
+    func initWS() {
+        
+        let url = "\(Mboard.WS)\(server!)/ws/game"
+        
+        wsControl = WebSocket(url)
+        
+        wsControl.event.close = { code, reason, clean in
+        
+            self.wsControl.open()
+            
+        }
+        
+        wsControl.event.open = {
+            print("socket connected")
+        }
+        
+        wsControl.event.error = { error in
+            print(error)
+        }
+        
+        wsControl.event.message = { message in
+            print(message)
         }
         
     } // initWS
@@ -408,7 +402,7 @@ class ClockController: UIViewController {
         
         if running {
             
-            ws.send(JSON([
+            wsControl.send(JSON([
                 "cmd": Mboard.WS_CLOCK_STOP
                 ]))
             
@@ -416,7 +410,7 @@ class ClockController: UIViewController {
             
         } else {
             
-            ws.send(JSON([
+            wsControl.send(JSON([
                 "cmd": Mboard.WS_CLOCK_START
                 ]))
             
@@ -428,7 +422,7 @@ class ClockController: UIViewController {
     
     @IBAction func changePeriod(_ sender: Any) {
         
-        ws.send(JSON([
+        wsControl.send(JSON([
             "cmd": Mboard.WS_PERIOD_UP
             ]))
         
@@ -439,7 +433,7 @@ class ClockController: UIViewController {
     
     @IBAction func callAwayTimeout(_ sender: Any) {
         
-        ws.send(JSON([
+        wsControl.send(JSON([
             "cmd": Mboard.WS_TIMEOUT_AWAY
             ]))
         
@@ -447,7 +441,7 @@ class ClockController: UIViewController {
     
     @IBAction func callHomeTimeout(_ sender: Any) {
         
-        ws.send(JSON([
+        wsControl.send(JSON([
             "cmd": Mboard.WS_TIMEOUT_HOME
             ]))
         
@@ -455,7 +449,7 @@ class ClockController: UIViewController {
     
     @IBAction func cancelAwayTimeout(_ sender: Any) {
         
-        ws.send(JSON([
+        wsControl.send(JSON([
             "cmd": Mboard.WS_TIMEOUT_AWAY_CANCEL
             ]))
         
@@ -463,7 +457,7 @@ class ClockController: UIViewController {
     
     @IBAction func cancelHomeTimeout(_ sender: Any) {
         
-        ws.send(JSON([
+        wsControl.send(JSON([
             "cmd": Mboard.WS_TIMEOUT_HOME_CANCEL
             ]))
         
@@ -474,7 +468,7 @@ class ClockController: UIViewController {
         switch ballPos.selectedSegmentIndex {
         case 0:
             
-            ws.send(JSON([
+            wsControl.send(JSON([
                 "cmd": Mboard.WS_POSSESSION_AWAY,
                 "meta": ["stop": !running]
                 ]))
@@ -483,7 +477,7 @@ class ClockController: UIViewController {
             
         case 1:
             
-            ws.send(JSON([
+            wsControl.send(JSON([
                 "cmd": Mboard.WS_POSSESSION_HOME,
                 "meta": ["stop": !running]
                 ]))
@@ -498,7 +492,7 @@ class ClockController: UIViewController {
     
     @IBAction func adjustClock(_ sender: Any) {
         
-        ws.send(JSON([
+        wsControl.send(JSON([
             "cmd": Mboard.WS_CLOCK_STOP
             ]))
             

@@ -11,7 +11,6 @@ import UIKit
 class MediaCell: UITableViewCell {
     
     // MARK: Properties
-    @IBOutlet weak var state: UILabel!
     @IBOutlet weak var thumbnail: UIImageView!
     @IBOutlet weak var timestamp: UILabel!
     

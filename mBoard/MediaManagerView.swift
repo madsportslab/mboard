@@ -27,6 +27,8 @@ UIImagePickerControllerDelegate, UINavigationControllerDelegate {
     var PHOTO_FORMATS = ["JPEG", "JPG", "PNG"]
     
     // MARK: Properties
+    @IBOutlet weak var stopBtn: UIButton!
+    @IBOutlet weak var playBtn: UIButton!
     @IBOutlet weak var uploadBtn: UIButton!
     @IBOutlet weak var mediaTable: UITableView!
     @IBOutlet weak var mediaSegment: UISegmentedControl!
@@ -37,8 +39,15 @@ UIImagePickerControllerDelegate, UINavigationControllerDelegate {
         super.viewDidLoad()
         // Do any additional setup after loading the view, typically from a nib.
         
-        //uploadBtn.setFAIcon(icon: FAType.FACamera, iconSize: 64, forState: .normal)
-        //uploadBtn.setFATitleColor(color: Mboard.TealColor)
+        stopBtn.setFAIcon(icon: FAType.FAStop, iconSize: 32, forState: .normal)
+        stopBtn.setFATitleColor(color: Mboard.TealColor)
+        stopBtn.layer.borderColor = Mboard.TealColor.cgColor
+        stopBtn.layer.borderWidth = 1
+        
+        playBtn.setFAIcon(icon: FAType.FAPlay, iconSize: 32, forState: .normal)
+        playBtn.setFATitleColor(color: Mboard.TealColor)
+        playBtn.layer.borderColor = Mboard.TealColor.cgColor
+        playBtn.layer.borderWidth = 1
         
         uploadBtn.layer.cornerRadius = 5
         uploadBtn.layer.borderColor = Mboard.TealColor.cgColor
@@ -72,8 +81,6 @@ UIImagePickerControllerDelegate, UINavigationControllerDelegate {
         let cell = mediaTable.dequeueReusableCell(withIdentifier: "cell",
                                                  for: indexPath) as! MediaCell
         
-        cell.state.text = media[indexPath.item][3]
-        
         cell.timestamp.layer.cornerRadius = 5
         cell.timestamp.layer.masksToBounds = true
         cell.timestamp.text = media[indexPath.item][1]
@@ -83,7 +90,7 @@ UIImagePickerControllerDelegate, UINavigationControllerDelegate {
         return cell
         
     }
-    
+    /*
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         
         var cmd = Mboard.WS_VIDEO_PLAY
@@ -92,44 +99,26 @@ UIImagePickerControllerDelegate, UINavigationControllerDelegate {
         case 0:
             
             if media[indexPath.item][3] == Mboard.PLAYING {
-                
                 cmd = Mboard.WS_VIDEO_STOP
-                media[indexPath.item][3] = Mboard.BLANK
-                
             } else {
-                
                 cmd = Mboard.WS_VIDEO_PLAY
-                media[indexPath.item][3] = Mboard.PLAYING
-                
             }
             
         case 1:
             
             if media[indexPath.item][3] == Mboard.PLAYING {
-                
                 cmd = Mboard.WS_PHOTO_STOP
-                media[indexPath.item][3] = Mboard.BLANK
-                
             } else {
-                
                 cmd = Mboard.WS_PHOTO_PLAY
-                media[indexPath.item][3] = Mboard.PLAYING
-            
             }
             
             
         case 2:
             
             if media[indexPath.item][3] == Mboard.PLAYING {
-                
                 cmd = Mboard.WS_AUDIO_STOP
-                media[indexPath.item][3] = Mboard.BLANK
-                
             } else {
-                
                 cmd = Mboard.WS_AUDIO_PLAY
-                media[indexPath.item][3] = Mboard.PLAYING
-            
             }
             
             
@@ -137,19 +126,12 @@ UIImagePickerControllerDelegate, UINavigationControllerDelegate {
             return
         }
 
-        ws.send(JSON(
-            [
-                "cmd": cmd,
-                "options": [
-                    "key": media[indexPath.item][2]
-                ]
-            ]
-        ))
+
         
         self.mediaTable.reloadData()
         
     }
-    
+*/
     func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [String : Any]) {
         
         //let chosenImage = info[UIImagePickerControllerOriginalImage] as! UIImage
@@ -441,7 +423,7 @@ UIImagePickerControllerDelegate, UINavigationControllerDelegate {
                                 m.append(v["tag"].string!)
                                 m.append(d2)
                                 m.append(v["key"].string!)
-                                m.append("") // this is for the status label
+                                //m.append("") // this is for the status label
                                 
                                 am.append(m)
 
@@ -479,6 +461,76 @@ UIImagePickerControllerDelegate, UINavigationControllerDelegate {
         picker.sourceType = .photoLibrary
         picker.mediaTypes = UIImagePickerController.availableMediaTypes(for: .photoLibrary)!
         present(picker, animated: true, completion: nil)
+        
+    }
+    
+    @IBAction func stopMedia(_ sender: Any) {
+        
+        let mediaSelected = mediaTable.indexPathForSelectedRow
+        
+        print(mediaSelected)
+        
+        if mediaSelected != nil {
+            
+            let key = media[mediaSelected!.item][2]
+            
+            var cmd = Mboard.WS_VIDEO_STOP
+            
+            switch self.mediaSegment.selectedSegmentIndex {
+            case 0:
+                cmd = Mboard.WS_VIDEO_STOP
+            case 1:
+                cmd = Mboard.WS_PHOTO_STOP
+            case 2:
+                cmd = Mboard.WS_AUDIO_STOP
+            default:
+                print("Media format not supported")
+            }
+            
+            ws.send(JSON(
+                [
+                    "cmd": cmd,
+                    "options": [
+                        "key": key
+                    ]
+                ]
+            ))
+        }
+        
+    }
+    
+    @IBAction func playMedia(_ sender: Any) {
+
+        let mediaSelected = mediaTable.indexPathForSelectedRow
+        
+        print(mediaSelected)
+        
+        if mediaSelected != nil {
+        
+            let key = media[mediaSelected!.item][2]
+                
+                var cmd = Mboard.WS_VIDEO_PLAY
+                
+                switch self.mediaSegment.selectedSegmentIndex {
+                case 0:
+                    cmd = Mboard.WS_VIDEO_PLAY
+                case 1:
+                    cmd = Mboard.WS_PHOTO_PLAY
+                case 2:
+                    cmd = Mboard.WS_AUDIO_PLAY
+                default:
+                    print("Media format not supported")
+                }
+                
+                ws.send(JSON(
+                    [
+                        "cmd": cmd,
+                        "options": [
+                            "key": key
+                        ]
+                    ]
+                ))
+        }
         
     }
     
