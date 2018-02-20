@@ -229,7 +229,7 @@ class GameController: UIViewController {
         wsSubscribe.event.close = { code, reason, clean in
             
             print("close")
-            self.wsSubscribe.open()
+            //self.wsSubscribe.open()
             
         }
         
@@ -238,7 +238,19 @@ class GameController: UIViewController {
         }
         
         wsSubscribe.event.error = { error in
-            print(error)
+            
+            let ac = UIAlertController(title: "Websocket error",
+                                       message: error.localizedDescription,
+                                       preferredStyle: UIAlertControllerStyle.alert)
+            
+            let OK = UIAlertAction(title: "OK",
+                                   style: UIAlertActionStyle.default,
+                                   handler: nil)
+            
+            ac.addAction(OK)
+            
+            self.present(ac, animated: true, completion: nil)
+            
         }
         
         wsSubscribe.event.message = { message in
@@ -299,8 +311,8 @@ class GameController: UIViewController {
         
         wsControl.event.close = { code, reason, clean in
           
-          print("close")
-          self.wsControl.open()
+          // add some retry logic
+          //self.wsControl.open()
             
         }
         
@@ -314,7 +326,19 @@ class GameController: UIViewController {
         }
         
         wsControl.event.error = { error in
-            print(error)
+            
+            let ac = UIAlertController(title: "Websocket error",
+                                       message: error.localizedDescription,
+                                       preferredStyle: UIAlertControllerStyle.alert)
+            
+            let OK = UIAlertAction(title: "OK",
+                                   style: UIAlertActionStyle.default,
+                                   handler: nil)
+            
+            ac.addAction(OK)
+            
+            self.present(ac, animated: true, completion: nil)
+            
         }
         
         wsControl.event.message = { message in

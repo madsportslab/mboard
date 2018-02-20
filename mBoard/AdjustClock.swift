@@ -257,17 +257,27 @@ class AdjustClock: UIViewController {
         wsSubscribe = WebSocket(url)
         
         wsSubscribe.event.close = { code, reason, clean in
-            
-            self.wsSubscribe.open()
-            
+            print("websocket connection closed")
         }
         
         wsSubscribe.event.open = {
-            print("socket connected")
+            print("websocket connected")
         }
         
         wsSubscribe.event.error = { error in
-            print(error)
+            
+            let ac = UIAlertController(title: "Websocket error",
+                                       message: error.localizedDescription,
+                                       preferredStyle: UIAlertControllerStyle.alert)
+            
+            let OK = UIAlertAction(title: "OK",
+                                   style: UIAlertActionStyle.default,
+                                   handler: nil)
+            
+            ac.addAction(OK)
+            
+            self.present(ac, animated: true, completion: nil)
+            
         }
         
         wsSubscribe.event.message = { message in
@@ -304,17 +314,28 @@ class AdjustClock: UIViewController {
         wsControl = WebSocket(url)
         
         wsControl.event.close = { code, reason, clean in
-            
-            self.wsControl.open()
+            print("websocket closed")
             
         }
         
         wsControl.event.open = {
-            print("socket connected")
+            print("websocket connected")
         }
         
         wsControl.event.error = { error in
-            print(error)
+            
+            let ac = UIAlertController(title: "Websocket error",
+                                       message: error.localizedDescription,
+                                       preferredStyle: UIAlertControllerStyle.alert)
+            
+            let OK = UIAlertAction(title: "OK",
+                                   style: UIAlertActionStyle.default,
+                                   handler: nil)
+            
+            ac.addAction(OK)
+            
+            self.present(ac, animated: true, completion: nil)
+            
         }
         
         wsControl.event.message = { message in

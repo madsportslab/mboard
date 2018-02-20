@@ -10,12 +10,10 @@ import UIKit
 
 import Alamofire
 import Font_Awesome_Swift
-import SwiftWebSocket
 import SwiftyJSON
 
 class FirstViewController: UIViewController, UITableViewDelegate, UITableViewDataSource {
 
-    var ws = WebSocket()
     var gameInfo = [[String]]()
     
     let defaults = UserDefaults.standard

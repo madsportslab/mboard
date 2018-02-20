@@ -308,15 +308,27 @@ UIImagePickerControllerDelegate, UINavigationControllerDelegate {
         ws = WebSocket(url)
         
         ws.event.close = { code, reason, clean in
-            self.ws.open()
+            print("websocket connection closed")
         }
         
         ws.event.open = {
-            print("socket connected")
+            print("websocket connected")
         }
         
         ws.event.error = { error in
-            print(error)
+            
+            let ac = UIAlertController(title: "Websocket error",
+                                       message: error.localizedDescription,
+                                       preferredStyle: UIAlertControllerStyle.alert)
+            
+            let OK = UIAlertAction(title: "OK",
+                                   style: UIAlertActionStyle.default,
+                                   handler: nil)
+            
+            ac.addAction(OK)
+            
+            self.present(ac, animated: true, completion: nil)
+            
         }
         
         ws.event.message = { message in

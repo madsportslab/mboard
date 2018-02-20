@@ -278,9 +278,6 @@ class ClockController: UIViewController {
         wsSubscribe = WebSocket(url)
         
         wsSubscribe.event.close = { code, reason, clean in
-            
-            self.wsSubscribe.open()
-            
         }
         
         wsSubscribe.event.open = {
@@ -288,7 +285,19 @@ class ClockController: UIViewController {
         }
         
         wsSubscribe.event.error = { error in
-            print(error)
+            
+            let ac = UIAlertController(title: "Websocket error",
+                                       message: error.localizedDescription,
+                                       preferredStyle: UIAlertControllerStyle.alert)
+            
+            let OK = UIAlertAction(title: "OK",
+                                   style: UIAlertActionStyle.default,
+                                   handler: nil)
+            
+            ac.addAction(OK)
+            
+            self.present(ac, animated: true, completion: nil)
+            
         }
         
         wsSubscribe.event.message = { message in
@@ -349,6 +358,9 @@ class ClockController: UIViewController {
                 case "AWAY_TIMEOUT_CANCEL":
                     self.setTimeouts(false, data: Int(obj["val"].string!)!)
                     
+                case "GAME_STATE":
+                    print("set the timeouts, clock or whatever")
+                    
                 default:
                     print("Unknown message from websocket.")
                     
@@ -367,9 +379,7 @@ class ClockController: UIViewController {
         wsControl = WebSocket(url)
         
         wsControl.event.close = { code, reason, clean in
-        
-            self.wsControl.open()
-            
+            print("websocket connection closed")
         }
         
         wsControl.event.open = {
@@ -377,7 +387,19 @@ class ClockController: UIViewController {
         }
         
         wsControl.event.error = { error in
-            print(error)
+            
+            let ac = UIAlertController(title: "Websocket error",
+                                       message: error.localizedDescription,
+                                       preferredStyle: UIAlertControllerStyle.alert)
+            
+            let OK = UIAlertAction(title: "OK",
+                                   style: UIAlertActionStyle.default,
+                                   handler: nil)
+            
+            ac.addAction(OK)
+            
+            self.present(ac, animated: true, completion: nil)
+            
         }
         
         wsControl.event.message = { message in
