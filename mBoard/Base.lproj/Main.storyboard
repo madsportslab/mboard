@@ -277,7 +277,7 @@
                                                     <rect key="frame" x="0.0" y="0.0" width="365" height="72"/>
                                                     <autoresizingMask key="autoresizingMask"/>
                                                     <subviews>
-                                                        <stackView opaque="NO" contentMode="scaleToFill" ambiguous="YES" spacing="2" translatesAutoresizingMaskIntoConstraints="NO" id="YWs-KB-yVl">
+                                                        <stackView opaque="NO" contentMode="scaleToFill" ambiguous="YES" spacing="8" translatesAutoresizingMaskIntoConstraints="NO" id="YWs-KB-yVl">
                                                             <rect key="frame" x="0.0" y="11" width="365" height="50"/>
                                                             <subviews>
                                                                 <imageView userInteractionEnabled="NO" contentMode="center" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" translatesAutoresizingMaskIntoConstraints="NO" id="bGC-n1-zG5">
@@ -286,8 +286,8 @@
                                                                         <constraint firstAttribute="width" constant="72" id="7WY-0t-US4"/>
                                                                     </constraints>
                                                                 </imageView>
-                                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" text="Label" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ZGF-kW-gp3">
-                                                                    <rect key="frame" x="74" y="0.0" width="291" height="50"/>
+                                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" text="Label" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ZGF-kW-gp3">
+                                                                    <rect key="frame" x="80" y="0.0" width="285" height="50"/>
                                                                     <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="17"/>
                                                                     <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                                                     <nil key="highlightedColor"/>
@@ -3874,7 +3874,7 @@
     <inferredMetricsTieBreakers>
         <segue reference="7F6-2a-0cp"/>
         <segue reference="DhT-L2-OhP"/>
-        <segue reference="oKO-tJ-cNB"/>
+        <segue reference="t9B-cu-YOx"/>
         <segue reference="LvX-Gb-y12"/>
         <segue reference="UFc-4O-jWv"/>
         <segue reference="Fnx-6S-4mU"/>

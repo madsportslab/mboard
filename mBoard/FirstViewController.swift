@@ -61,6 +61,10 @@ class FirstViewController: UIViewController, UITableViewDelegate, UITableViewDat
         let cell = gamesTable.dequeueReusableCell(withIdentifier: "cell",
                 for: indexPath) as! GameViewCell
         
+        let bgColorView = UIView()
+        bgColorView.backgroundColor = Mboard.TealColor
+        cell.selectedBackgroundView = bgColorView
+        
         cell.awayTeam.text = gameInfo[indexPath.item][0]
         cell.awayLogo.setFAIcon(icon: FAType.FAPictureO, iconSize: 48)
         cell.awayScore.text = gameInfo[indexPath.item][1]

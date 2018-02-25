@@ -62,6 +62,10 @@ class SelectMboardController: UIViewController, UITableViewDelegate, UITableView
         let cell = self.boards.dequeueReusableCell(withIdentifier: "cell",
             for: indexPath) as! ServerViewCell
         
+        let bgColorView = UIView()
+        bgColorView.backgroundColor = Mboard.TealColor
+        cell.selectedBackgroundView = bgColorView
+        
         cell.board.text = servers[indexPath.item]
         
         return cell

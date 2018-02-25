@@ -81,6 +81,10 @@ UIImagePickerControllerDelegate, UINavigationControllerDelegate {
         let cell = mediaTable.dequeueReusableCell(withIdentifier: "cell",
                                                  for: indexPath) as! MediaCell
         
+        let bgColorView = UIView()
+        bgColorView.backgroundColor = Mboard.TealColor
+        cell.selectedBackgroundView = bgColorView
+        
         cell.timestamp.layer.cornerRadius = 5
         cell.timestamp.layer.masksToBounds = true
         cell.timestamp.text = media[indexPath.item][1]
@@ -90,48 +94,23 @@ UIImagePickerControllerDelegate, UINavigationControllerDelegate {
         return cell
         
     }
-    /*
-    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+
+    func supportedExtension(ext: String) -> Bool {
         
-        var cmd = Mboard.WS_VIDEO_PLAY
+        let up = ext.uppercased()
         
-        switch self.mediaSegment.selectedSegmentIndex {
-        case 0:
-            
-            if media[indexPath.item][3] == Mboard.PLAYING {
-                cmd = Mboard.WS_VIDEO_STOP
-            } else {
-                cmd = Mboard.WS_VIDEO_PLAY
-            }
-            
-        case 1:
-            
-            if media[indexPath.item][3] == Mboard.PLAYING {
-                cmd = Mboard.WS_PHOTO_STOP
-            } else {
-                cmd = Mboard.WS_PHOTO_PLAY
-            }
-            
-            
-        case 2:
-            
-            if media[indexPath.item][3] == Mboard.PLAYING {
-                cmd = Mboard.WS_AUDIO_STOP
-            } else {
-                cmd = Mboard.WS_AUDIO_PLAY
-            }
-            
-            
-        default:
-            return
+        if VIDEO_FORMATS.contains(up) {
+            return true
+        } else if AUDIO_FORMATS.contains(up) {
+            return true
+        } else if PHOTO_FORMATS.contains(up) {
+            return true
         }
-
-
         
-        self.mediaTable.reloadData()
+        return false
         
-    }
-*/
+    } // supportedExtension
+    
     func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [String : Any]) {
         
         //let chosenImage = info[UIImagePickerControllerOriginalImage] as! UIImage
@@ -159,7 +138,7 @@ UIImagePickerControllerDelegate, UINavigationControllerDelegate {
                     switch result {
                     case .success(let upload, _, _):
                         upload.response{ response in
-                            print(response)
+                            self.loadMedia()
                         }
                     case .failure(let encodingError):
                         print(encodingError)
@@ -183,114 +162,26 @@ UIImagePickerControllerDelegate, UINavigationControllerDelegate {
             }
 
             
-        } else if mediaType! == "public.image"{
+        } else if mediaType! == "public.image" {
 
             let name = info[UIImagePickerControllerImageURL] as? URL
             
-            let p = info[UIImagePickerControllerOriginalImage] as? UIImage
-
-            //let ext = name!.pathExtension
-            //let data = UIImageJPEGRepresentation(p!, 1.0)
-            
-            //if supportedExtension(ext: ext) {
-
-              /*  Alamofire.upload(
-                    multipartFormData: { multipartFormData in
-                        multipartFormData.append(data!, withName: "media",
-                        fileName: name!.lastPathComponent, mimeType: "image/jpg")
-                }, to: url, encodingCompletion: { (result) in
-                    switch result {
-                    case .success(let upload, _, _):
-                        upload.response{ response in
-                            print(response)
-                        }
-                    case .failure(let encodingError):
-                        print(encodingError)
-                    }
-                })*/
-            
-                Alamofire.upload(
-                    multipartFormData: { multipartFormData in
-                        multipartFormData.append(name!, withName: "media")
-                }, to: url, encodingCompletion: { (result) in
-                    switch result {
-                    case .success(let upload, _, _):
-                        upload.response{ response in
-                            print(response)
-                        }
-                    case .failure(let encodingError):
-                        print(encodingError)
-                    }
-                })
-                
-            //} else {
-                
-              //  let ac = UIAlertController(title: "Format Error",
-                  //                         message: "File format not supported: \(ext)",
-                //    preferredStyle: UIAlertControllerStyle.alert)
-                
-                //let OK = UIAlertAction(title: "OK",
-                  //                     style: UIAlertActionStyle.default,
-                    //                   handler: nil)
-                
-                //ac.addAction(OK)
-                
-                //self.present(ac, animated: true, completion: nil)
-                
-            //}
-            
-        }
-        
-        /*
-        Alamofire.upload(
-            multipartFormData: { multipartFormData in
-                multipartFormData.append(data!, withName: "media", fileName: "", mimeType: "image/jpg")
-        }, to: url, method: .post, header: [) { (result) in
-            switch result {
-            case .success(let upload, _, _):
-                upload.response{ response in
-                    print(response)
-                }
-            case .failure(let encodingError):
-                print(encodingError)
-            }
-        }
-        */
-        
-        /*Alamofire.upload(data!, to: url).uploadProgress{ progress in
-            print("uploaded \(progress.fractionCompleted)")
-        }*/
-        
-        /*Alamofire.upload(
-            multipartFormData: { multipartFormData in
-              multipartFormData.append("test text", withName: "media")
-        },
-        to: url,
-        encodingCompletion: { result in
-            switch result {
-            case .success(let upload, _, _):
-                upload.response { resp in
-                    debugPrint(resp)
-                }
-            case .failure(let encodingError):
-                print(encodingError)
-            }
-        })*/
-
-        /*Alamofire.upload(
-            multipartFormData: { multipartFormData in
-              multipartFormData.append(chosenImage, withName: "media")
-            },
-            to: url,
-            encodingCompletion: { result in
+            Alamofire.upload(
+                multipartFormData: { multipartFormData in
+                    multipartFormData.append(name!, withName: "media")
+            }, to: url, encodingCompletion: { (result) in
                 switch result {
                 case .success(let upload, _, _):
-                    print("fag")
-                case .failure:
-                    print("shit")
+                    upload.response{ response in
+                        print(response)
+                    }
+                case .failure(let encodingError):
+                    print(encodingError)
                 }
-            }
-        )*/
+            })
+            
+        }
+            
         
         dismiss(animated: true, completion: nil)
 
@@ -352,22 +243,6 @@ UIImagePickerControllerDelegate, UINavigationControllerDelegate {
         }
         
     } // initWS
-    
-    func supportedExtension(ext: String) -> Bool {
-    
-        let up = ext.uppercased()
-        
-        if VIDEO_FORMATS.contains(up) {
-            return true
-        } else if AUDIO_FORMATS.contains(up) {
-            return true
-        } else if PHOTO_FORMATS.contains(up) {
-            return true
-        }
-        
-        return false
-        
-    } // supportedExtension
     
     func loadMedia() {
         
