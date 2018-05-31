@@ -3815,6 +3815,7 @@
                                         <segments>
                                             <segment title="Default"/>
                                             <segment title="Orange"/>
+                                            <segment title="Teal"/>
                                         </segments>
                                         <connections>
                                             <action selector="changeTheme:" destination="HKn-5B-xlu" eventType="valueChanged" id="dSg-rs-tdS"/>

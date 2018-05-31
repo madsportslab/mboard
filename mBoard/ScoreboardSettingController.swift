@@ -17,6 +17,7 @@ class ScoreboardSettingController: UIViewController {
     let defaults = UserDefaults.standard
     
     var ws = WebSocket()
+    var wsSubscribe = WebSocket()
     
     // MARK: Properties
     @IBOutlet weak var themes: UISegmentedControl!
@@ -26,6 +27,7 @@ class ScoreboardSettingController: UIViewController {
         super.viewDidLoad()
         // Do any additional setup after loading the view, typically from a nib.
     
+        initSubscriber()
         initWS()
         
     }
@@ -34,6 +36,61 @@ class ScoreboardSettingController: UIViewController {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
     }
+    
+    func initSubscriber() {
+        
+        let ed = defaults.object(forKey: Mboard.SERVER) as? String
+        let url = "\(Mboard.WS)\(ed!)/ws/subscriber"
+        
+        wsSubscribe = WebSocket(url)
+        
+        wsSubscribe.event.close = { code, reason, clean in
+            print("close")
+        }
+        
+        wsSubscribe.event.open = {
+            print("websocket connected for subscriber")
+        }
+        
+        wsSubscribe.event.error = { error in
+            
+            let ac = UIAlertController(title: "Websocket error",
+                                       message: error.localizedDescription,
+                                       preferredStyle: UIAlertControllerStyle.alert)
+            
+            let OK = UIAlertAction(title: "OK",
+                                   style: UIAlertActionStyle.default,
+                                   handler: nil)
+            
+            ac.addAction(OK)
+            
+            self.present(ac, animated: true, completion: nil)
+            
+        }
+        
+        wsSubscribe.event.message = { message in
+            
+            if let txt = message as? String {
+                
+                var obj = JSON.init(parseJSON: txt)
+                
+                let o = JSON(obj["options"])
+                
+                print(o)
+                
+                if o["current-theme"] == "ORANGE" {
+                    self.themes.selectedSegmentIndex = 1
+                } else if o["current-theme"] == "DEFAULT" {
+                    self.themes.selectedSegmentIndex = 0
+                } else if o["current-theme"] == "TEAL" {
+                    self.themes.selectedSegmentIndex = 2
+                }
+                
+
+            }
+        }
+        
+    } // initSubscriber
     
     func initWS() {
         
@@ -47,7 +104,11 @@ class ScoreboardSettingController: UIViewController {
         }
         
         ws.event.open = {
-            print("websocket connected")
+            print("manager websocket connected")
+            
+            self.ws.send(JSON([
+                "cmd": Mboard.WS_THEME_CURRENT
+                ]))
             
         }
         
@@ -69,22 +130,10 @@ class ScoreboardSettingController: UIViewController {
         
         ws.event.message = { message in
             
-            if let txt = message as? String {
+            //if let txt = message as? String {
                 
-                let obj = JSON.init(parseJSON: txt)
                 
-                print(obj)
-                
-                /*switch obj["key"] {
-                 case Mboard.WS_VIDEO:
-                 
-                 case Mboard.WS_PHOTO:
-                 
-                 case Mboard.WS_AUDIO:
-                 
-                 }*/
-                
-            }
+            //}
         }
         
     } // initWS
@@ -102,12 +151,13 @@ class ScoreboardSettingController: UIViewController {
                 "cmd": Mboard.WS_THEME,
                 "options": ["theme": "orange","view": "scoreboard"]
                 ]))
+        } else if self.themes.selectedSegmentIndex == 2 {
+            ws.send(JSON([
+                "cmd": Mboard.WS_THEME,
+                "options": ["theme": "teal","view": "scoreboard"]
+                ]))
         }
         
-        self.ws.send(JSON([
-            "cmd": "GAME_STATE"
-            ]))
-        print("afag")
         
     }
     

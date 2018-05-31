@@ -75,6 +75,7 @@ class Mboard {
     static let WS_ADVERTISEMENT     = "ADVERTISEMENT"
     static let WS_SCREENSAVER       = "SCREENSAVER"
     static let WS_THEME             = "THEME"
+    static let WS_THEME_CURRENT     = "THEME_CURRENT"
     static let WS_VIDEO_PLAY        = "VIDEO_PLAY"
     static let WS_VIDEO_STOP        = "VIDEO_STOP"
     static let WS_PHOTO_PLAY        = "PHOTO_PLAY"
