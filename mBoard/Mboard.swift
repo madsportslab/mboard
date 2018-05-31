@@ -68,9 +68,13 @@ class Mboard {
     
     static let WS_LOGO              = "LOGO"
     static let WS_SETUP             = "SETUP"
+    static let WS_CLOCK             = "CLOCK"
+    static let WS_SCORE             = "SCORE"
     static let WS_SCOREBOARD        = "SCOREBOARD"
+    static let WS_SHOTCLOCK         = "SHOTCLOCK"
     static let WS_ADVERTISEMENT     = "ADVERTISEMENT"
     static let WS_SCREENSAVER       = "SCREENSAVER"
+    static let WS_THEME             = "THEME"
     static let WS_VIDEO_PLAY        = "VIDEO_PLAY"
     static let WS_VIDEO_STOP        = "VIDEO_STOP"
     static let WS_PHOTO_PLAY        = "PHOTO_PLAY"

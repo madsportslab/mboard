@@ -235,6 +235,10 @@ class GameController: UIViewController {
         
         wsSubscribe.event.open = {
             print("websocket connected for subscriber")
+            self.wsSubscribe.send(JSON([
+                "cmd": "GAME_STATE"
+                ]))
+
         }
         
         wsSubscribe.event.error = { error in
@@ -318,10 +322,6 @@ class GameController: UIViewController {
         
         wsControl.event.open = {
             print("websocket connected for control")
-            
-            self.wsControl.send(JSON([
-                "cmd": "GAME_STATE"
-                ]))
             
         }
         

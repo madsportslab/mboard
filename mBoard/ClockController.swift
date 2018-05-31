@@ -282,6 +282,11 @@ class ClockController: UIViewController {
         
         wsSubscribe.event.open = {
             print("websocket connected for subscriber")
+            
+            self.wsSubscribe.send(JSON([
+                "cmd": "GAME_STATE"
+                ]))
+
         }
         
         wsSubscribe.event.error = { error in

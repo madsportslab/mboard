@@ -38,6 +38,7 @@
 		8575F1381E8A4B2400EAC50D /* mBoardUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8575F1371E8A4B2400EAC50D /* mBoardUITests.swift */; };
 		85828DF51E9E703F006A7C17 /* ClockController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 85828DF41E9E703F006A7C17 /* ClockController.swift */; };
 		85828DF71EA5FCBC006A7C17 /* ScanController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 85828DF61EA5FCBC006A7C17 /* ScanController.swift */; };
+		85AC064920B7C49500D803EB /* ScoreboardSettingController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 85AC064820B7C49500D803EB /* ScoreboardSettingController.swift */; };
 		85B59EFE1EB8369100E72F72 /* SummaryController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 85B59EFD1EB8369100E72F72 /* SummaryController.swift */; };
 		85D2EBB01F3ECAED004D801A /* LogViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 85D2EBAF1F3ECAED004D801A /* LogViewCell.swift */; };
 		85D2EBB21F3EE94D004D801A /* LogViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 85D2EBB11F3EE94D004D801A /* LogViewController.swift */; };
@@ -103,6 +104,7 @@
 		8575F1391E8A4B2400EAC50D /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		85828DF41E9E703F006A7C17 /* ClockController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ClockController.swift; sourceTree = "<group>"; };
 		85828DF61EA5FCBC006A7C17 /* ScanController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ScanController.swift; sourceTree = "<group>"; };
+		85AC064820B7C49500D803EB /* ScoreboardSettingController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScoreboardSettingController.swift; sourceTree = "<group>"; };
 		85B59EFD1EB8369100E72F72 /* SummaryController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SummaryController.swift; sourceTree = "<group>"; };
 		85D2EBAF1F3ECAED004D801A /* LogViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LogViewCell.swift; sourceTree = "<group>"; };
 		85D2EBB11F3EE94D004D801A /* LogViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LogViewController.swift; sourceTree = "<group>"; };
@@ -214,6 +216,7 @@
 				855A0D741FC08D62007D3C2F /* UpdateController.swift */,
 				8512EBF8202581B300494C74 /* MediaManagerView.swift */,
 				8512EBFA202584C000494C74 /* MediaCell.swift */,
+				85AC064820B7C49500D803EB /* ScoreboardSettingController.swift */,
 			);
 			path = mBoard;
 			sourceTree = "<group>";
@@ -563,6 +566,7 @@
 				8512EBF9202581B300494C74 /* MediaManagerView.swift in Sources */,
 				8575F11A1E8A4B2400EAC50D /* SecondViewController.swift in Sources */,
 				851236761F0F2E3000532779 /* ServerViewCell.swift in Sources */,
+				85AC064920B7C49500D803EB /* ScoreboardSettingController.swift in Sources */,
 				852E6B4A1E8FE7A1002888FB /* MinutesController.swift in Sources */,
 				852E6B521E9147D6002888FB /* Mboard.swift in Sources */,
 				852E6B4E1E8FFF8B002888FB /* FoulsController.swift in Sources */,
